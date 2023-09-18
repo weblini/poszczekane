@@ -1,6 +1,7 @@
 import { supabaseAnon } from "../_utils/supabase-clients"
 import EventCard from "../_components/EventCard"
 import Link from "next/link"
+import { getTagParams } from "../_utils/url-query"
 
 type Props = {
     title: string,
@@ -25,7 +26,7 @@ export default async function MatchedEventsList({ title, matchedTags, children }
         throw error;
     }
 
-    const searchParamString = matchedTags.map(tag => `tag=${tag}`).join('&')
+    const searchParamString = getTagParams(matchedTags)
 
 
     return (

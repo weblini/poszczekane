@@ -9,6 +9,8 @@ import Loader from '../_components/Loader'
 import Image from 'next/image'
 import heroImg from '../images/focus1.jpg'
 import { metaTitle } from '../_utils/metadata'
+import Link from 'next/link'
+import { getTagParams } from '../_utils/url-query'
 
 // lazy load event map
 const LazyEventMap = dynamic(
@@ -57,11 +59,11 @@ export default async function Index() {
                     <div className="max-w-xl py-10 lg:py-20">
                         <h1 className="text-4xl md:text-5xl font-extrabold pb-8 lg:pb-10">Znajdź idealne wydarzenie dla Ciebie i Twojego psa!</h1>
                         <EventSearchBar fieldId='home-search-form' />
-                        <form action="/wydarzenia" className="flex flex-wrap justify-center gap-2 mt-4">
+                        <div className="flex flex-wrap justify-center gap-2 mt-4">
                             {tags?.map(tag => (
-                                <button className='badge hover:bg-accent border-none' name='tag' value={tag.name} key={tag.name}>{tag.name}</button>
+                                <Link href={`/wydarzenia?${getTagParams([tag.name])}`} className='badge hover:bg-accent border-none' key={tag.name}>{tag.name}</Link>
                             ))}
-                        </form>
+                        </div>
                         <p className="hidden md:block pt-6 lg:pt-8 text-sm">Jeśli jesteś pasjonatem psiego sportu, entuzjastą wystaw psów, chcesz doskonalić umiejętności swojego pupila lub po prostu szukasz fajnej imprezy <span className="font-semibold block">– mamy coś specjalnie dla Ciebie.</span></p>
                     </div>
                 </div>
