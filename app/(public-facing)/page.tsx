@@ -32,7 +32,7 @@ export default async function Index() {
     // events to plot on map that are in the future and not cancelled
     const { data: geoEvents, error } = await supabaseAnon
         .from('events')
-        .select('id, name, starts_at, latitude, longitude, organizers ( name, slug ), tags ( name )')
+        .select('id, name, starts_at, ends_at, latitude, longitude, organizers ( name, slug ), tags ( name )')
         .neq('is_cancelled', true)
         .gte('starts_at', (new Date).toISOString())
         .limit(12)

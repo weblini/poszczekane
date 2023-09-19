@@ -16,10 +16,10 @@ export default async function MatchedEventsList({ title, matchedTags, children }
     // grab future, not cancelled events that match tags
     const { data: events, error } = await supabaseAnon
         .from('events')
-        .select(`id, name, starts_at, location, tags!inner( name )`)
+        .select(`id, name, starts_at, location, tags( name ), filter_tags:tags!inner( name )`)
         .neq('is_cancelled', true)
         .gte('starts_at', (new Date).toISOString())
-        .in('tags.name', matchedTags)
+        .in('filter_tags.name', matchedTags)
         .limit(3)
 
     if (error) {
