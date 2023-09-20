@@ -7,5 +7,6 @@ declare global {
     type Organizer = DB['public']['Tables']['organizers']['Row'];
     type Tag = DB['public']['Tables']['tags']['Row'];
     type AppEvent = DB['public']['Tables']['events']['Row'] & {tags?: Partial<Tag>[] | null} & {organizers?: Partial<Organizer> | null};
+    type PartialAppEvent = Partial<AppEvent> & {name: string, id: number}
     type GeoPoint = [number, number];
 }
