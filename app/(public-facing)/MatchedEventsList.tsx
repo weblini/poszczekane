@@ -26,7 +26,7 @@ export default async function MatchedEventsList({ title, matchedTags, children }
         throw error;
     }
 
-    const searchParamString = getTagParams(matchedTags)
+    const searchParamString = getTagParams(matchedTags).toString()
 
 
     return (

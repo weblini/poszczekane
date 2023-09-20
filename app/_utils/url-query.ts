@@ -6,5 +6,5 @@ export function getTagParams(tags: string[]) {
     searchParams.append("tag", tag);
   })
   
-  return searchParams.toString()
+  return searchParams
 }

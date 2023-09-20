@@ -61,7 +61,7 @@ export default async function Index() {
                         <EventSearchBar fieldId='home-search-form' />
                         <div className="flex flex-wrap justify-center gap-2 mt-4">
                             {tags?.map(tag => (
-                                <Link href={`/wydarzenia?${getTagParams([tag.name])}`} className='badge hover:bg-accent border-none' key={tag.name}>{tag.name}</Link>
+                                <Link href={`/wydarzenia?${getTagParams([tag.name]).toString()}`} className='badge hover:bg-accent border-none' key={tag.name}>{tag.name}</Link>
                             ))}
                         </div>
                         <p className="hidden md:block pt-6 lg:pt-8 text-sm">Jeśli jesteś pasjonatem psiego sportu, entuzjastą wystaw psów, chcesz doskonalić umiejętności swojego pupila lub po prostu szukasz fajnej imprezy <span className="font-semibold block">– mamy coś specjalnie dla Ciebie.</span></p>

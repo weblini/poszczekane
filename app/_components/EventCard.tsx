@@ -87,7 +87,7 @@ export default function EventCard({
                 {children}
 
                 {event.organizers && (
-                    <p className="text-sm z-10">
+                    <p className="text-sm mt-auto grow-0">
                         Organizator:{" "}
                         <Link
                             href={`/organizatorzy/${event.organizers.slug}`}
