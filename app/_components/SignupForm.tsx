@@ -16,13 +16,13 @@ export default function SignupForm({ }: Props) {
                     <label className="label">
                         <span className="label-text">Hasło</span>
                     </label>
-                    <input type="password" name="password" placeholder="Twoje_haslo_:)" className="input input-bordered" />
+                    <input type="password" name="password" placeholder="Twoje_hasło_:)" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Potwierdź hasło</span>
                     </label>
-                    <input type="password" name="password" placeholder="Twoje_haslo_:)" className="input input-bordered" />
+                    <input type="password" name="password" placeholder="Twoje_hasło_:)" className="input input-bordered" />
                 </div>
                 <div className="form-control mt-6">
                     <button className="btn btn-primary">Zarejestruj się</button>

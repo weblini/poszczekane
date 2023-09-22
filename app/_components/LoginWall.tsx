@@ -28,7 +28,7 @@ export default function LoginWall({ alternate }: Props) {
                             <label className="label">
                                 <span className="label-text">Hasło</span>
                             </label>
-                            <input type="password" name="password" placeholder="Twoje_haslo_:)" className="input input-bordered" />
+                            <input type="password" name="password" placeholder="Twoje_hasło_:)" className="input input-bordered" />
                             <label className="label">
                                 <p className="label-text-alt">Nie pamiętasz hasła?</p>
                                 <p className="label-text-alt"><Link href='/resetuj_haslo' className="link link-hover">Kliknij tutaj, aby je zresetować.</Link></p>
