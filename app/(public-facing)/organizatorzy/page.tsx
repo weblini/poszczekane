@@ -18,7 +18,7 @@ export default async function Page() {
                 <div className="hero bg-base-200 w-full wrapper">
                     <div className="hero-content text-center">
                         <div className="max-w-xl">
-                            <h1 className="text-5xl font-black">Nasi organizatorzy</h1>
+                            <h1 className="text-4xl md:text-5xl font-extrabold pb-8 lg:pb-10">Nasi organizatorzy</h1>
                             <p>Tu znajdziesz listę organizatorów, którzy tworzą wyjątkowe wydarzenia dla miłośników psów i ich czworonożnych przyjaciół.</p>
                         </div>
                     </div>

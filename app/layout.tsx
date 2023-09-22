@@ -16,7 +16,7 @@ import { Noto_Sans } from 'next/font/google'
 const mainFont = Noto_Sans({
     subsets: ['latin-ext'],
     display: 'swap',
-    weight: ['400', '600', '700', '800'],
+    weight: ['400', '600', '800'],
 })
 
 

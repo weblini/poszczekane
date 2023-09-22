@@ -41,7 +41,7 @@ export default function Page({ searchParams }: Props) {
                 </div>
 
                 <div className="wrapper pt-10">
-                    <h1 className="font-black text-base-content/30 text-xl md:text-3xl">
+                    <h1 className="font-extrabold text-base-content/30 text-xl md:text-3xl">
                         Nadchodzące wydarzenia
                     </h1>
                     <p className="pb-6">
@@ -72,7 +72,7 @@ export default function Page({ searchParams }: Props) {
                     className="object-cover opacity-20 -z-10"
                 />
                 <h2>Nie możesz znaleźć tego, czego szukasz?</h2>
-                <p className="font-black text-xl md:text-3xl pb-4">
+                <p className="font-extrabold text-xl md:text-3xl pb-4">
                     Spróbuj wyszukać wydarzenie po nazwie
                 </p>
                 <div className="max-w-xl mx-auto">
