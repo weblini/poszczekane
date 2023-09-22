@@ -58,7 +58,7 @@ export default async function FilteredEventsList({ date, tags }: Props) {
     }
 
     return (
-        <div className="grid lg:grid-cols-3 gap-4">
+        <div className="grid grid-flow-row grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4">
             {events.map((event) => (
                 <EventCard event={event} key={event.id} />
             ))}
