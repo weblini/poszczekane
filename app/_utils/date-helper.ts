@@ -26,3 +26,9 @@ export const formatEventDate = (startStamp: string, endStamp?: string) => {
     
     return dateInfoString
 }
+
+export const getStartOfDayDate = (ISOString: string) => {
+    const date = new Date(ISOString)
+    date.setHours(0,0,0,0)
+    return date
+}

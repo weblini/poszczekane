@@ -34,7 +34,7 @@ export default async function Index() {
         .from('events')
         .select('id, name, starts_at, ends_at, latitude, longitude, organizers ( name, slug ), tags ( name )')
         .neq('is_cancelled', true)
-        .gte('starts_at', (new Date).toISOString())
+        .gte('ends_at', (new Date).toISOString())
         .limit(12)
 
     if (error) { throw error }
