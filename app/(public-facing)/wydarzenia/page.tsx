@@ -50,7 +50,7 @@ export default function Page({ searchParams }: Props) {
                         towarzyszem!
                     </p>
                     <Suspense
-                        fallback={<Loader wrapperClasses="h-[180px] items-start pt-8" />}
+                        fallback={<Loader wrapperClasses="h-[180px] items-start" />}
                         key={pageKey}
                     >
                         <FilteredEventsList

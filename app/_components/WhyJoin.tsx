@@ -36,8 +36,8 @@ export default function WhyJoin() {
                 </WhyCard>
             </ul>
             <div className="chat chat-start place-items-center">
-                <div className="chat-bubble chat-bubble-accent">
-                    <p className='py-1'>Nie czekaj!</p>
+                <div className="chat-bubble chat-bubble-accent py-4">
+                    <p className='title-base'>Nie czekaj!</p>
                     <p className='text-sm'><Link href='/wydarzenia' className="link link-hover font-semibold">Zapisz się na pierwsze wydarzenie</Link> i rozpocznij Waszą przygodę.</p>
                     <p className='text-sm'>Twój pies już nie może się doczekać nowych atrakcji!</p>
                 </div>
@@ -65,7 +65,7 @@ function WhyCard({ title, children, imgFile, imgAlt = '' }: Props) {
                     src={imgFile}
                     placeholder="blur"
                     quality={80}
-                    className='mask mask-star-2'
+                    className='mask mask-squircle max-w-xs'
                 />
                 <h3 className="title-base">{title}</h3>
                 {children}
