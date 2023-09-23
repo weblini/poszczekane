@@ -33,7 +33,7 @@ export default function Page({ searchParams }: Props) {
 
     return (
         <>
-            <main className="w-full">
+            <main className="w-full bg-base-300/20">
                 <div className="px-[5vw] py-6 rounded-b-box shadow bg-base-100">
                     <Suspense fallback={<FilterBar allTags={[]} />}>
                         <FilterBarLoader />

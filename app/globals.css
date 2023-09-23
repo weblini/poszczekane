@@ -14,33 +14,33 @@
     .title-ghost {
         @apply text-4xl md:text-5xl font-extrabold text-base-content/30;
     }
-}
 
-.btn {
-    text-transform: none;
-}
+    .btn {
+        text-transform: none;
+    }
+    
+    .prose {
+        @apply max-w-3xl w-[90vw]
+    }
+    
+    .prose.formal h2 {
+        counter-increment: heading;
+    }
+    
+    .prose.formal h2:before {
+        content: counter(heading, upper-roman)'. ';
+    }
+    
+    .prose.formal ul {
+        list-style-type: none;
+    }
+    
+    .prose.formal ol,
+    .prose ol ol {
+        list-style-type: lower-alpha;
+    }
 
-.prose {
-    @apply max-w-3xl w-[90vw]
 }
-
-.prose.formal h2 {
-    counter-increment: heading;
-}
-
-.prose.formal h2:before {
-    content: counter(heading, upper-roman)'. ';
-}
-
-.prose.formal ul {
-    list-style-type: none;
-}
-
-.prose.formal ol,
-.prose ol ol {
-    list-style-type: lower-alpha;
-}
-
 
 
 .schedulely {
@@ -108,24 +108,4 @@
 
 .schedulely .week-layout>div {
     @apply border-none md:border md:border-solid md:border-base-200 relative;
-}
-
-
-
-
-
-.animate-in {
-    animation: animateIn 0.3s ease 0.15s both;
-}
-
-@keyframes animateIn {
-    from {
-        opacity: 0;
-        transform: translateX(-10px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
 }

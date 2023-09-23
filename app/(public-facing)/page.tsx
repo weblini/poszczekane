@@ -100,7 +100,7 @@ export default function Index() {
                 </section>
             </div>
 
-            <section className="pb-12 md:pb-24">
+            <section className="py-12 md:py-24 bg-base-300/20">
                 <div className="px-[5vw] text-center lg:text-left pb-4 lg:pb-8">
                     <h2 className="title-ghost">
                         Mapa{" "}
