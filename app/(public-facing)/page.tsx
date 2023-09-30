@@ -57,7 +57,7 @@ export default async function Index() {
                     <div className="max-w-xl py-10 lg:py-20">
                         <h1 className="text-4xl md:text-5xl font-extrabold pb-8 lg:pb-10">Znajdź idealne wydarzenie dla Ciebie i Twojego psa!</h1>
                         <EventSearchBar fieldId='home-search-form' />
-                        <form action="/wydarzenia" className="flex flex-wrap justify-center gap-2 mt-4">
+                        <form action="/wydarzenia" className="flex flex-wrap justify-center gap-2 pt-4">
                             {tags?.map(tag => (
                                 <button className='badge hover:bg-accent border-none' name='tag' value={tag.name} key={tag.name}>{tag.name}</button>
                             ))}

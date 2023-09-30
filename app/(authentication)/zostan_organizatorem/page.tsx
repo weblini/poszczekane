@@ -16,9 +16,9 @@ export default function Page({ }: Props) {
                 <div className="text-center lg:text-left">
                     <h1 className="sr-only">Zarejestruj się jako organizator</h1>
                     <p className="text-5xl font-bold">Zostań organizatorem!</p>
-                    <p className="py-6">Dołącz jako organizator i twórz niesamowite wydarzenia dla miłośników psów i ich wiernych czworonogów. Przekonaj się jakie to proste!</p>
-                    <Link href="/wspolpraca" className="link link-hover text-sm block">Zobacz dlaczego warto korzystać z serwisu jako organizator.</Link>
-                    <Link href="/jak_dodac_wydarzenie" className="link link-hover text-sm block mt-2">Zobacz jak dodać wydarzenie.</Link>
+                    <p className="py-6">Dołącz jako organizator i twórz niesamowite wydarzenia dla miłośników psów i ich wiernych czworonogów.</p>
+                    <Link href="/wspolpraca" className="link link-hover text-sm block font-semibold py-1">Zobacz dlaczego warto korzystać z serwisu jako organizator.</Link>
+                    <Link href="/jak_dodac_wydarzenie" className="link link-hover text-sm block font-semibold py-1">Zobacz jak dodać wydarzenie.</Link>
                 </div>
                 <SignupForm />
             </div>
