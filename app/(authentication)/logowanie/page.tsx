@@ -1,5 +1,4 @@
 import LoginWall from "@/app/_components/LoginWall"
-import Link from "next/link"
 
 type Props = {}
 

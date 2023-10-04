@@ -42,8 +42,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <OnlyForUsers
             fallback={(
                 <>
-                    <Link href="/rejestracja" className='btn'>Załóż konto</Link>
-                    <Link href="/logowanie" className='btn btn-primary'>Zaloguj się</Link>
+                    <Link href="/rejestracja" className='btn btn-primary'>Załóż konto</Link>
+                    <Link href="/logowanie" className='btn'>Zaloguj się</Link>
                 </>
             )}>
             <OnlyForOrganizers>

@@ -85,7 +85,7 @@ export default async function Index() {
                     <p>Odkryj wydarzenia w swojej okolicy na interaktywnej mapie. Nie przegap szansy na wspaniałą przygodę z Twoim psem!</p>
                 </div>
                 <div className="lg:px-[5vw]">
-                    <LazyEventMap events={geoEvents} />
+                    <LazyEventMap events={geoEvents || []} />
                 </div>
             </section>
 

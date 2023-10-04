@@ -14,7 +14,7 @@ export default function LoginWall({ alternate }: Props) {
                     <h1 className="sr-only">Zaloguj się na konto</h1>
                     <p className="text-5xl font-bold">Miło Cię widzieć!</p>
                     <p className="py-6">Zaloguj się</p>
-                    {alternate || <p className="text-sm">Lub <Link className="link link-hover" href="/rejestracja">załóż konto</Link>, aby cieszyć się spersonalizowanymi treściami, zarządzać swoim kalendarzem i przeglądać zapisane wydarzenia.</p>}
+                    {alternate || <p className="text-sm">Lub <Link className="link link-hover font-semibold" href="/rejestracja">załóż konto</Link>, aby cieszyć się spersonalizowanymi treściami, zarządzać swoim kalendarzem i przeglądać zapisane wydarzenia.</p>}
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body">
@@ -29,14 +29,11 @@ export default function LoginWall({ alternate }: Props) {
                                 <span className="label-text">Hasło</span>
                             </label>
                             <input type="password" name="password" placeholder="Twoje_haslo_:)" className="input input-bordered" />
-                            <label className="label">
-                                <p className="label-text-alt">Nie pamiętasz hasła?</p>
-                                <p className="label-text-alt"><Link href='/resetuj_haslo' className="link link-hover">Kliknij tutaj, aby je zresetować.</Link></p>
-                            </label>
                         </div>
-                        <div className="form-control mt-6">
+                        <div className="form-control py-2">
                             <button className="btn btn-primary">Zaloguj się</button>
                         </div>
+                        <Link href='/resetuj_haslo' className="link link-hover text-xs text-right">Nie pamiętasz hasła?</Link>
                     </div>
                 </div>
             </div>
