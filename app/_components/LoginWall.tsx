@@ -6,6 +6,8 @@ type Props = {
 
 
 export default function LoginWall({ alternate }: Props) {
+
+    // how to handle user login? Should refresh the current page, if on anything other than the login-page. Otherwise should take to where?
     
     return (
         <main className="hero min-h-[calc(100vh-4rem)] bg-base-200">
@@ -17,7 +19,7 @@ export default function LoginWall({ alternate }: Props) {
                     {alternate || <p className="text-sm">Lub <Link className="link link-hover font-semibold" href="/rejestracja">załóż konto</Link>, aby cieszyć się spersonalizowanymi treściami, zarządzać swoim kalendarzem i przeglądać zapisane wydarzenia.</p>}
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <div className="card-body">
+                    <form className="card-body">
                         <div className="form-control">
                             <label className="label">
                                 <span className="label-text">Email</span>
@@ -34,7 +36,7 @@ export default function LoginWall({ alternate }: Props) {
                             <button className="btn btn-primary">Zaloguj się</button>
                         </div>
                         <Link href='/resetuj_haslo' className="link link-hover text-xs text-right">Nie pamiętasz hasła?</Link>
-                    </div>
+                    </form>
                 </div>
             </div>
         </main>

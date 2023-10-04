@@ -21,7 +21,7 @@ const LazyEventMap = dynamic(
 
 export const metadata = {
     title: metaTitle("Najlepsze wydarzenia dla miłośników psów"),
-    desciption: "Odkrywaj nowe możliwości, ucz się, baw się i rozwijaj razem z nami. Zaplanuj niezapomniane chwile ze swoim psem, wybierając spośród imponującej listy wydarzeń, takich jak szkolenia, zawody, wystawy i wiele innych."
+    desciption: "Odkrywaj nowe możliwości, ucz się, baw i rozwijaj razem z nami. Zaplanuj niezapomniane chwile ze swoim psem, wybierając spośród imponującej listy wydarzeń, takich jak szkolenia, zawody, wystawy i wiele innych."
 }
 
 
