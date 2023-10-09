@@ -17,7 +17,7 @@ export default function Page({ }: Props) {
                     <h1 className="sr-only">Stwórz nowe konto</h1>
                     <p className="text-5xl font-bold">Gotowi na przygodę?</p>
                     <p className="py-6">Zarejestruj się i zacznij planować Wasze wspólne przygody. Twój pies już nie może się doczekać nowych wyzwań i pasjonujących wydarzeń!</p>
-                    <Link href="/jak_to_dziala" className="link link-hover text-sm">Zobacz dlaczego warto do nas dołączyć.</Link>
+                    <Link href="/jak_to_dziala" className="link link-hover text-sm font-semibold py-1">Zobacz dlaczego warto do nas dołączyć.</Link>
                 </div>
                 <SignupForm />
             </div>
