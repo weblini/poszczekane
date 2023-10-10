@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 import Image from "next/image";
-import bgImg from "./images/join1.jpg";
+import bgImg from "./images/error1.jpg";
 import Link from "next/link";
 
 interface ErrorProps {
@@ -27,7 +27,7 @@ export default function Error({ error, reset }: ErrorProps) {
                 sizes="100vw"
                 className="object-cover opacity-20 -z-10"
             />
-            <div className="hero-content flex-col lg:flex-row px-[5vw] py-12 gap-2">
+            <div className="hero-content flex-col lg:flex-row px-[5vw] py-12 gap-8">
                 <div className="text-center lg:text-left">
                     <h1 className="text-5xl font-extrabold">
                         Ups: Coś poszło nie tak
@@ -57,28 +57,6 @@ export default function Error({ error, reset }: ErrorProps) {
                     </div>
                 </div>
             </div>
-        </div>
-    );
-
-    return (
-        <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center justify-center px-[5vw] py-12 relative w-full">
-            <Image
-                alt=""
-                src={bgImg}
-                placeholder="blur"
-                quality={80}
-                fill
-                sizes="100vw"
-                className="object-cover opacity-20 -z-10"
-            />
-            <h2 className="text-4xl md:text-5xl font-extrabold">
-                Coś poszło nie tak
-            </h2>
-            <p className="py-4">
-                Przepraszamy za utrudnienia. Wygląda na to, że wystąpił problem
-                podczas przetwarzania Twojej prośby. Nie martw się, jesteśmy tu,
-                aby pomóc!
-            </p>
         </div>
     );
 }

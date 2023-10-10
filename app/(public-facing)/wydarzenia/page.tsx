@@ -16,7 +16,7 @@ type SearchParam = string | string[];
 
 export const metadata = {
     title: metaTitle("Wydarzenia"),
-    desciption:
+    description:
         "Wybieraj spośród dziesiątek wydarzeń i doświadcz niezapomnianych chwil z Twoim pupilem. Niezależnie od tego, czy jesteś doświadczonym właścicielem psa czy dopiero zaczynasz swoją przygodę, nasza platforma ma coś dla każdego.",
 };
 
