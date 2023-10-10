@@ -1,6 +1,6 @@
 import Image, { StaticImageData } from 'next/image'
 import friendsImg from '../images/friends1.jpg'
-import memoriesImg from '../images/memories1.jpg'
+import memoriesImg from '../images/memories3.jpg'
 import skillsImg from '../images/skills1.jpg'
 import Link from 'next/link'
 
@@ -67,7 +67,7 @@ function WhyCard({ title, children, imgFile, imgAlt = '' }: Props) {
                     quality={80}
                     className='mask mask-squircle max-w-xs'
                 />
-                <h3 className="title-base">{title}</h3>
+                <h3 className="title-base pt-4">{title}</h3>
                 {children}
             </div>
         </li>

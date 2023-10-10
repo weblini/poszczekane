@@ -25,7 +25,7 @@ export default function Error({ error, reset }: ErrorProps) {
                 quality={80}
                 fill
                 sizes="100vw"
-                className="object-cover opacity-20 -z-10"
+                className="object-cover opacity-25 -z-10"
             />
             <div className="hero-content flex-col lg:flex-row px-[5vw] py-12 gap-8">
                 <div className="text-center lg:text-left">

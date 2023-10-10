@@ -1,7 +1,7 @@
 import EventSearchBar from "@/app/_components/EventSearchBar";
 import { metaTitle } from "@/app/_utils/metadata";
 import Image from "next/image";
-import searchImg from "@/app/images/search1.jpg";
+import searchImg from "@/app/images/ball1.jpg";
 import FilteredEventsList from "./FilteredEventsList";
 import { Suspense } from "react";
 import Loader from "@/app/_components/Loader";
@@ -71,7 +71,7 @@ export default function Page({ searchParams }: Props) {
                     sizes="100vw"
                     className="object-cover opacity-20 -z-10"
                 />
-                <h2>Nie możesz znaleźć tego, czego szukasz?</h2>
+                <h2 className="font-semibold text-base-content/75">Nie możesz znaleźć tego, czego szukasz?</h2>
                 <p className="font-extrabold text-xl md:text-3xl pb-4">
                     Spróbuj wyszukać wydarzenie po nazwie
                 </p>
