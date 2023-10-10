@@ -27,7 +27,7 @@ export default function BaseNotFound({}: Props) {
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <div className="card-body text-center gap-6">
-                        <h2 className="font-extrabold text-xl">
+                        <h2 className="title-base">
                             Co możesz teraz zrobić:
                         </h2>
                         <div className="flex flex-col w-full">

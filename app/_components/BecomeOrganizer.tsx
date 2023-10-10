@@ -18,7 +18,7 @@ export default function BecomeOrganizer({ }: Props) {
                 <div className="grid flex-grow items-center">
                     <p className="title-base pb-2">Dołącz do nas!</p>
                     <p className="pb-3">Razem tworzymy wyjątkowe chwile i wspieramy rozwój psów i ich opiekunów.</p>
-                    <Link href='/zostan_organizatorem' className="btn btn-primary">Zostań organizatorem</Link>
+                    <Link href='/zostan_organizatorem' className="btn btn-secondary">Zostań organizatorem</Link>
                 </div>
             </div>
 
