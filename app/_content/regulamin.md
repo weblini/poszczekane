@@ -1,6 +1,8 @@
 ---
 title: Regulamin serwisu poszczekane
+shortTitle: Regulamin
 lastUpdated: 28-08-2023
+classes: formal
 ---
 
 Niniejszy regulamin określa zasady korzystania z serwisu internetowego umożliwiającego zapisywanie się na różnego rodzaju wydarzenia. Korzystając z tego serwisu, użytkownik akceptuje poniższe postanowienia regulaminu.
@@ -44,5 +46,7 @@ Niniejszy regulamin określa zasady korzystania z serwisu internetowego umożliw
 
 ## Dane Kontaktowe
 1. W przypadku pytań dotyczących serwisu lub regulaminu, prosimy o kontakt na adres dostępny na stronie internetowej.
+
+---
 
 Niniejszy regulamin wchodzi w życie z dniem opublikowania i obowiązuje wszystkich użytkowników korzystających z serwisu. Korzystając z serwisu, użytkownik akceptuje i zobowiązuje się do przestrzegania wszystkich postanowień regulaminu.

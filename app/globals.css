@@ -40,6 +40,13 @@
         list-style-type: lower-alpha;
     }
 
+    .prose.bulleted h2 {
+        counter-increment: heading;
+    }
+    
+    .prose.bulleted h2:before {
+        content: counter(heading)'. ';
+    }
 }
 
 
