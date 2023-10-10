@@ -21,7 +21,7 @@ export default function BaseNotFound({}: Props) {
             <div className="hero-content flex-col lg:flex-row px-[5vw] py-12 gap-8">
                 <div className="text-center lg:text-left">
                     <h1 className="text-3xl lg:text-5xl font-extrabold text-base-100">
-                        Przepraszamy, ale nie udało się odnaleźć strony, której
+                        Przepraszamy, nie udało się odnaleźć strony, której
                         szukasz.
                     </h1>
                 </div>
@@ -41,7 +41,7 @@ export default function BaseNotFound({}: Props) {
                                     Wróć na stronę główną i kontynuuj
                                     przeglądanie.
                                 </p>
-                                <Link href="/" className="btn btn-primary">
+                                <Link href="/" className="btn btn-primary w-full">
                                     Strona główna
                                 </Link>
                             </div>
