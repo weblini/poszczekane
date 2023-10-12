@@ -5,6 +5,7 @@ import OrganizerList from "./OrganizerList";
 import Loader from "@/app/_components/Loader";
 import Image from "next/image";
 import bgImg from "@/app/images/organizers1.jpg";
+import InfoText from "@/app/_components/InfoText";
 
 export const metadata = {
     title: metaTitle("Organizatorzy"),
@@ -41,24 +42,11 @@ export default function Page() {
                 </div>
 
                 <div className="wrapper">
-                    <p className="flex items-center text-sm gap-2 text-neutral pb-6">
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            className="stroke-neutral/50 w-6 h-6 shrink-0"
-                        >
-                            <path
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path>
-                        </svg>
-                        Kliknij na profil organizatora, aby dowiedzieć się
+                    <InfoText className="pb-6">
+                    Kliknij na profil organizatora, aby dowiedzieć się
                         więcej o jego specjalizacji, doświadczeniu oraz
                         wydarzeniach, które prowadzi.
-                    </p>
+                    </InfoText>
                     <ul className="grid grid-flow-row grid-cols-[repeat(auto-fill,_minmax(350px,_1fr))] gap-4 w-full">
                         <Suspense fallback={<Loader />}>
                             <OrganizerList />

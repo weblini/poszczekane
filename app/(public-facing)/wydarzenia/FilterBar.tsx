@@ -1,5 +1,6 @@
 "use client";
 
+import InfoText from "@/app/_components/InfoText";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -55,23 +56,10 @@ export default function FilterBar({ allTags }: Props) {
 
     return (
         <form onSubmit={handleApplyFilters}>
-            <p className="flex items-center text-sm gap-2 text-neutral">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    className="stroke-neutral/50 w-6 h-6 shrink-0"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                </svg>
+            <InfoText>
                 Dzięki opcjom filtrowania, znajdziesz dokładnie to, czego
                 szukasz:
-            </p>
+            </InfoText>
 
             <div className="flex flex-wrap gap-2 py-4 pt-6 justify-center md:justify-normal">
                 {allTags?.length ? (
