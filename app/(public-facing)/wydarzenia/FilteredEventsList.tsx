@@ -8,7 +8,6 @@ type Props = {
     date?: string
 };
 
-type SearchParam = string | string[];
 
 export default async function FilteredEventsList({ date, tags }: Props) {
     // base query, grab all events without filters

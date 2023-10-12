@@ -71,7 +71,7 @@ export default function Page({ searchParams }: Props) {
                     sizes="100vw"
                     className="object-cover opacity-20 -z-10"
                 />
-                <h2 className="font-semibold text-base-content/75">Nie możesz znaleźć tego, czego szukasz?</h2>
+                <h2 className="text-base-content/80">Nie możesz znaleźć tego, czego szukasz?</h2>
                 <p className="font-extrabold text-xl md:text-3xl pb-4">
                     Spróbuj wyszukać wydarzenie po nazwie
                 </p>

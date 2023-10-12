@@ -15,7 +15,7 @@ export default function HowToStart() {
                 sizes="100vw"
                 className='object-cover -z-10'
             />
-            <h2 className="title-ghost pb-2">Jak zacząć?</h2>
+            <h2 className="title-ghost pb-4">Jak zacząć?</h2>
             <ol className="grid grid-cols-4 lg:grid-cols-9 gap-6">
                 <StepView title='Przeglądaj wydarzenia'>
                     <p>Sprawdź ofertę <Link href='/wydarzenia' className="link link-hover font-semibold">nadchodzących wydarzeń</Link>. Znajdziesz wśród nich szkolenia, wystawy i wiele innych.</p>
@@ -51,7 +51,7 @@ function StepView({ title, children, className ='' }: Props) {
         <li className={`rounded-box shadow glass border-none relative [counter-increment:step] max-w-md overflow-hidden col-span-3 ${className}`}>
             <span className="bg-neutral/20 text-base-100 absolute h-12 w-12 rounded-bl-box before:content-[counter(step)] before:font-extrabold before:text-2xl md:before:text-3xl flex items-center justify-center top-0 right-0"></span>
             <div className="p-6 text-sm md:text-base">
-                <h3 className="font-semibold pb-2 uppercase pr-6">{title}</h3>
+                <h3 className="title-base pb-2 pr-6">{title}</h3>
                 <div className="text-base-content/80">{children}</div>
             </div>
         </li>

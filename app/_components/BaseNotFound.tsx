@@ -46,9 +46,6 @@ export default function BaseNotFound({}: Props) {
                                 </Link>
                             </div>
                         </div>
-                        <p className="text-sm">
-                            Dziękujemy za cierpliwość i wyrozumiałość.
-                        </p>
                     </div>
                 </div>
             </div>

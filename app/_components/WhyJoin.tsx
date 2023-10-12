@@ -16,7 +16,7 @@ export default function WhyJoin() {
                     imgFile={friendsImg}
                     imgAlt="Two happy dog friends running at the viewer"
                 >
-                    <p>
+                    <p className="text-base-content/80">
                         Poznasz innych miłośników psów, którzy podzielają Twoje
                         zainteresowania i pasje.
                     </p>
@@ -27,7 +27,7 @@ export default function WhyJoin() {
                     imgFile={skillsImg}
                     imgAlt="Two happy dog friends running at the viewer"
                 >
-                    <p>
+                    <p className="text-base-content/80">
                         Wydarzenia oferują wiele możliwości nauki i doskonalenia
                         umiejętności Twojego psa.
                     </p>
@@ -38,7 +38,7 @@ export default function WhyJoin() {
                     imgFile={memoriesImg}
                     imgAlt="Two happy dog friends running at the viewer"
                 >
-                    <p>
+                    <p className="text-base-content/80">
                         Każde wydarzenie to niepowtarzalna szansa na przeżycie
                         wspaniałych chwil z Twoim wiernym przyjacielem.
                     </p>
