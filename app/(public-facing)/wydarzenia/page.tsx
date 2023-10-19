@@ -40,7 +40,7 @@ export default function Page({ searchParams }: Props) {
                     </Suspense>
                 </div>
 
-                <div className="wrapper pt-10">
+                <div className="wrapper pt-6 lg:pt-12">
                     <h1 className="font-extrabold text-base-content/30 text-xl md:text-3xl">
                         Nadchodzące wydarzenia
                     </h1>

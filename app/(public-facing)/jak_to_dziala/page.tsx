@@ -1,6 +1,6 @@
 import { metaTitle } from "@/app/_utils/metadata";
 import Link from "next/link";
-import UpcomingEvents from "./UpcomingEvents";
+import UpcomingEvents from "@/app/_components/UpcomingEvents";
 import { Suspense } from "react";
 import Loader from "@/app/_components/Loader";
 import Image from "next/image";

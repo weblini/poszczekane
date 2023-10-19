@@ -1,13 +1,13 @@
 import EventCard from "@/app/_components/EventCard";
+import InfoDiv from "@/app/_components/InfoDiv";
 import { getStartOfDayDate } from "@/app/_utils/date-helper";
 import { supabaseAnon } from "@/app/_utils/supabase-clients";
 import Link from "next/link";
 
 type Props = {
-    tags: string[], 
-    date?: string
+    tags: string[];
+    date?: string;
 };
-
 
 export default async function FilteredEventsList({ date, tags }: Props) {
     // base query, grab all events without filters
@@ -23,28 +23,14 @@ export default async function FilteredEventsList({ date, tags }: Props) {
     }
 
     // filter by end date (if none provided compare to now)
-    const filterDate = date ? getStartOfDayDate(date) : new Date
-    supaQuery = supaQuery.gte('ends_at', filterDate.toISOString())
+    const filterDate = date ? getStartOfDayDate(date) : new Date();
+    supaQuery = supaQuery.gte("ends_at", filterDate.toISOString());
 
     const { data: events, error } = await supaQuery;
 
-
     if (!events?.length) {
         return (
-            <div className="text-center p-6 flex flex-col gap-4 justify-center items-center w-full rounded-box bg-base-200 border border-base-300">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    className="stroke-neutral/80 w-8 h-8"
-                >
-                    <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    ></path>
-                </svg>
+            <InfoDiv>
                 <p>
                     Bardzo nam przykro, ale wygląda na to, że nie ma wydarzeń
                     spełniających Twoje kryteria.
@@ -52,7 +38,7 @@ export default async function FilteredEventsList({ date, tags }: Props) {
                 <Link href="/wydarzenia" className="btn btn-neutral">
                     Pokaż wszystkie wydarzenia
                 </Link>
-            </div>
+            </InfoDiv>
         );
     }
 

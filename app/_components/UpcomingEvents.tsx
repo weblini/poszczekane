@@ -1,5 +1,5 @@
-import EventCard from "@/app/_components/EventCard";
 import { supabaseAnon } from "@/app/_utils/supabase-clients";
+import EventCardDisplay from "./EventCardDisplay";
 
 
 export default async function UpcomingEvents() {
@@ -8,7 +8,7 @@ export default async function UpcomingEvents() {
     const { data: events, error } = await supabaseAnon
         .from("events")
         .select(
-            "id, name, starts_at, ends_at, tags ( name )"
+            "id, name, starts_at, ends_at, location, tags ( name )"
         )
         .neq("is_cancelled", true)
         .gte("ends_at", new Date().toISOString())
@@ -18,11 +18,11 @@ export default async function UpcomingEvents() {
         console.log(error)
     }
 
+    if (!events?.length) {
+        return null
+    }
+
     return (
-        <>
-            {events?.map(event => (
-                <EventCard event={event} key={event.id}/>
-            ))}
-        </>
+        <EventCardDisplay events={events} />
     )
 }

@@ -9,7 +9,7 @@ import heroImg from "../images/focus1.jpg";
 import { metaTitle } from "../_utils/metadata";
 import { Suspense } from "react";
 import GeoEventsLoader from "./GeoEventsLoader";
-import TagLinks from "./TagLinks";
+import TagLinks from "../_components/TagLinks";
 
 export const metadata = {
     title: metaTitle("Najlepsze wydarzenia dla miłośników psów"),
@@ -36,7 +36,7 @@ export default function Index() {
                             Znajdź idealne wydarzenie dla Ciebie i Twojego psa!
                         </h1>
                         <EventSearchBar fieldId="home-search-form" />
-                        <div className="flex flex-wrap justify-center gap-2 mt-4">
+                        <div className="flex flex-wrap justify-center gap-2 pt-4">
                             <Suspense fallback={<span className="badge animate-pulse"><span className="invisible">ładuję</span></span>}>
                                 <TagLinks />
                             </Suspense>

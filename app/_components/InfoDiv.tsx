@@ -1,16 +1,15 @@
 type Props = {
     children: React.ReactNode;
-    className?: string
 };
 
-export default function InfoText({ children, className }: Props) {
+export default function InfoDiv({ children }: Props) {
     return (
-        <div className={`flex items-center text-sm gap-2 text-neutral ${className || ''}`}>
+        <div className="text-center p-6 flex flex-col gap-4 justify-center items-center w-full rounded-box bg-base-200 border border-base-300">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="stroke-neutral/50 w-6 h-6 shrink-0"
+                className="stroke-neutral/80 w-8 h-8"
             >
                 <path
                     strokeLinecap="round"
@@ -19,7 +18,7 @@ export default function InfoText({ children, className }: Props) {
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                 ></path>
             </svg>
-            <p>{children}</p>
+            {children}
         </div>
     );
 }
