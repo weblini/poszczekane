@@ -11,17 +11,12 @@ export default function NavBarDynamic({ children, fallback }: { children: React.
     const userDetails = useContext(UserContext)
 
     if (!userDetails.userId) {
-        return (
-            fallback ?
-            <>{fallback}</>
-            :
-            null
-        )
+        if(fallback) {
+            return fallback
+        } else {
+            return null
+        }
     }
 
-    return (
-        <>
-            {children}
-        </>
-    )
+    return children
 }

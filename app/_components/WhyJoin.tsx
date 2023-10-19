@@ -46,13 +46,16 @@ export default function WhyJoin() {
             </ul>
             <div className="text-center py-6 border border-primary/40 rounded-box bg-primary/20 p-4 mt-4">
                 <p className="">
-                    Zapisz się na pierwsze wydarzenie i rozpocznij
-                    Waszą przygodę.
+                    Zapisz się na pierwsze wydarzenie i rozpocznij Waszą
+                    przygodę.
                 </p>
                 <p className="font-extrabold pb-3 text-base-content/75 text-lg">
                     Twój pies już nie może się doczekać nowych atrakcji!
                 </p>
-                <Link href="/wydarzenia" className="btn btn-primary w-full max-w-xs">
+                <Link
+                    href="/wydarzenia"
+                    className="btn btn-primary w-full max-w-xs"
+                >
                     Przeglądaj wydarzenia
                 </Link>
             </div>
@@ -71,13 +74,16 @@ function WhyCard({ title, children, imgFile, imgAlt = "" }: Props) {
     return (
         <li className="card">
             <div className="card-body p-6 items-center text-center">
-                <Image
-                    alt={imgAlt}
-                    src={imgFile}
-                    placeholder="blur"
-                    quality={80}
-                    className="mask mask-squircle max-w-xs"
-                />
+                <div className="max-w-xs">
+                    <Image
+                        alt={imgAlt}
+                        src={imgFile}
+                        placeholder="blur"
+                        quality={80}
+                        className="mask mask-squircle"
+                    />
+                </div>
+
                 <h3 className="title-base pt-4">{title}</h3>
                 {children}
             </div>

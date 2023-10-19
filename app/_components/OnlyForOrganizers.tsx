@@ -6,17 +6,17 @@ import { UserContext } from "../UserProvider"
 
 
 
-export default function NavBarDynamic({ children }: {children: React.ReactNode}) {
+export default function NavBarDynamic({ children, fallback }: { children: React.ReactNode, fallback?: React.ReactNode}) {
 
     const userDetails = useContext(UserContext)
 
     if (!userDetails.isOrganizer) {
-        return null
+        if(fallback) {
+            return fallback
+        } else {
+            return null
+        }
     }
 
-    return (
-        <>
-            {children}
-        </>
-    )
+    return children
 }

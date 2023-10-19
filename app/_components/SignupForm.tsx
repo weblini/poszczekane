@@ -10,7 +10,7 @@ export default function SignupForm({ }: Props) {
                     <label className="label">
                         <span className="label-text">Email</span>
                     </label>
-                    <input type="text" name="email" placeholder="twójmail@poczta.pl" className="input input-bordered" />
+                    <input type="email" name="email" placeholder="twójmail@poczta.pl" className="input input-bordered" />
                 </div>
                 <div className="form-control">
                     <label className="label">
@@ -24,7 +24,7 @@ export default function SignupForm({ }: Props) {
                     </label>
                     <input type="password" name="password" placeholder="Twoje_hasło_:)" className="input input-bordered" />
                 </div>
-                <div className="form-control mt-6">
+                <div className="form-control pt-6">
                     <button className="btn btn-primary">Zarejestruj się</button>
                 </div>
             </div>

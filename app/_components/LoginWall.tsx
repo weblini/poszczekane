@@ -11,7 +11,7 @@ export default function LoginWall({ alternate }: Props) {
     
     return (
         <main className="hero min-h-[calc(100vh-4rem)] bg-base-200">
-            <div className="hero-content flex-col lg:flex-row-reverse max-w-4xl lg:gap-8">
+            <div className="hero-content flex-col lg:flex-row-reverse max-w-4xl gap-6 lg:gap-12">
                 <div className="text-center lg:text-left">
                     <h1 className="sr-only">Zaloguj się na konto</h1>
                     <p className="text-5xl font-bold">Miło Cię widzieć!</p>

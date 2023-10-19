@@ -1,15 +1,20 @@
-import LoginWall from "@/app/_components/LoginWall"
+import LoginWall from "@/app/_components/LoginWall";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
-type Props = {}
+type Props = {};
 
+export default async function Page({}: Props) {
+    // redirect logged in user to calendar
+    const supabase = createServerComponentClient<Database>({ cookies });
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
 
-export default function Page({ }: Props) {
+    if (user) {
+        redirect("/kalendarz");
+    }
 
-    // login should be FE -> quick and nice
-
-    // how to handle a user that is already logged in? -> redirect to /konto ? or display a page that says they are already logged in and a button to go to /konto or homepage?
-
-    return (
-        <LoginWall />
-    )
+    return <LoginWall />;
 }
