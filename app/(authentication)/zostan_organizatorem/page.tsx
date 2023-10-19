@@ -2,7 +2,6 @@ import SignupForm from "@/app/_components/SignupForm";
 import Link from "next/link";
 import Image from "next/image";
 import bgImg from "@/app/images/jointeam1.jpg";
-import OnlyForUsers from "@/app/_components/OnlyForUsers";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
@@ -10,10 +9,6 @@ import { redirect } from "next/navigation";
 type Props = {};
 
 export default async function Page({}: Props) {
-    // handle check on BE
-
-    // ! if already logged in but not organizer display different!
-    // ! if already organizer ?
 
     // check for logged in user
     const supabase = createServerComponentClient<Database>({ cookies });
@@ -32,6 +27,8 @@ export default async function Page({}: Props) {
             redirect("/konto/dane_organizatorskie");
         }
     }
+
+    // ! add form functionality!
 
     return (
         <main className="hero min-h-[calc(100vh-4rem)] relative">
