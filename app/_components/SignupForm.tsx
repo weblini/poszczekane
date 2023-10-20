@@ -5,7 +5,8 @@ export default function SignupForm({ }: Props) {
 
     return (
         <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <div className="card-body">
+            <form className="card-body">
+                <p className="text-center title-base">Stwórz nowe konto</p>
                 <div className="form-control">
                     <label className="label">
                         <span className="label-text">Email</span>
@@ -27,7 +28,7 @@ export default function SignupForm({ }: Props) {
                 <div className="form-control pt-6">
                     <button className="btn btn-primary">Zarejestruj się</button>
                 </div>
-            </div>
+            </form>
         </div>
     )
 }
