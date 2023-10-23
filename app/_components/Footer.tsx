@@ -10,7 +10,7 @@ export default function Footer() {
                 <div className="md:order-last">
                     <span className="footer-title">Newsletter</span>
                     {/* ! make this a Client Component */}
-                    <form className="form-control max-w-80">
+                    <form className="form-control max-w-xs">
                         <label className="label">
                             <span className="label-text">
                                 Otrzymuj wiadomości na temat nadchodzących wydarzeń
@@ -20,7 +20,7 @@ export default function Footer() {
                             <input
                                 type="email"
                                 placeholder="twójmail@poczta.pl"
-                                className="input input-bordered w-full pr-16"
+                                className="input input-bordered w-full pr-24"
                             />
                             <button className="btn btn-neutral absolute top-0 right-0 rounded-l-none">
                                 Zapisz się

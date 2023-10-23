@@ -1,4 +1,4 @@
-import LoginWall from "@/app/_components/LoginWall";
+import LoginWall from "@/app/_components/LoginWall/LoginWall";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 

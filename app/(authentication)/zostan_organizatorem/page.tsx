@@ -5,11 +5,9 @@ import bgImg from "@/app/images/jointeam1.jpg";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
+import ActivateOrgForm from "./ActivateOrgForm";
 
-type Props = {};
-
-export default async function Page({}: Props) {
-
+export default async function Page() {
     // check for logged in user
     const supabase = createServerComponentClient<Database>({ cookies });
     const {
@@ -28,9 +26,6 @@ export default async function Page({}: Props) {
         }
     }
 
-    // ! add form functionality!
-    // ! extract activate organizer account?
-
     return (
         <main className="hero min-h-[calc(100vh-4rem)] relative">
             <Image
@@ -44,51 +39,36 @@ export default async function Page({}: Props) {
             />
             <div className="hero-content flex-col lg:flex-row-reverse gap-6 lg:gap-12">
                 <div className="text-center lg:text-left">
-                    <h1 className="text-4xl md:text-5xl font-bold">Zostań organizatorem!</h1>
+                    <h1 className="text-4xl md:text-5xl font-bold">
+                        Zostań organizatorem!
+                    </h1>
                     <p className="py-4 lg:py-6">
                         Dołącz jako organizator i twórz niesamowite wydarzenia
                         dla miłośników psów i ich wiernych czworonogów.
                     </p>
-                    <Link
-                        href="/wspolpraca"
-                        className="link link-hover text-sm block font-semibold py-1"
-                    >
-                        Zobacz dlaczego warto korzystać z serwisu jako
-                        organizator.
-                    </Link>
-                    <Link
-                        href="/jak_dodac_wydarzenie"
-                        className="link link-hover text-sm block font-semibold py-1"
-                    >
-                        Zobacz jak dodać wydarzenie.
-                    </Link>
+                    <p>
+                        <Link
+                            href="/wspolpraca"
+                            className="link link-hover text-sm font-semibold"
+                        >
+                            Zobacz dlaczego warto korzystać z serwisu jako
+                            organizator.
+                        </Link>
+                    </p>
+                    <p className="pt-2">
+                        <Link
+                            href="/jak_dodac_wydarzenie"
+                            className="link link-hover text-sm font-semibold"
+                        >
+                            Zobacz jak dodać wydarzenie.
+                        </Link>
+                    </p>
                 </div>
 
-                {user ? (
-                    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                        <form className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">
-                                        Nazwa
-                                    </span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="imie"
-                                    className="input input-bordered"
-                                />
-                            </div>
-                            <div className="form-control pt-6">
-                                <button className="btn btn-primary">
-                                    Aktywuj konto organizatora
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                ) : (
-                    <SignupForm />
-                )}
+                <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+                <ActivateOrgForm /> 
+                    {/* {user ? <ActivateOrgForm /> : <SignupForm returnBack/>} */}
+                </div>
             </div>
         </main>
     );

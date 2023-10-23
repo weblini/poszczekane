@@ -9,6 +9,7 @@ import OnlyForOrganizers from './_components/OnlyForOrganizers'
 import EventSearchBar from './_components/EventSearchBar'
 import NavBarController from './NavBarController'
 import { Noto_Sans } from 'next/font/google'
+import LogoutButton from './LogoutButton'
 
 // Readex Pro is nice! But maybe too loose
 
@@ -49,9 +50,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
             <OnlyForOrganizers>
                 <Link href="/konto/moje_wydarzenia/dodaj_nowe" className='btn btn-secondary max-lg:w-full'>Dodaj wydarzenie</Link>
             </OnlyForOrganizers>
-            <form action="/auth/sign-out" method="post">
-                <button className='btn max-lg:w-full'>Wyloguj</button>
-            </form>
+            <LogoutButton />
         </OnlyForUsers>
     )
 
