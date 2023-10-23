@@ -1,11 +1,12 @@
 type Props = {
     children: React.ReactNode;
+    isUpdating?: boolean;
     isError?: boolean;
 };
 
-export default function InfoDiv({ children, isError }: Props) {
+export default function InfoDiv({ children, isError, isUpdating }: Props) {
     return (
-        <div className={`text-center p-4 flex flex-col gap-3 justify-center items-center w-full rounded-box border ${isError ? "bg-error/20 border-error" : "bg-base-200 border-base-300"}`}>
+        <div className={`text-center p-4 flex flex-col gap-3 justify-center items-center w-full rounded-box border transition-opacity ${isError ? "bg-error/20 border-error" : "bg-base-200 border-base-300"} ${isUpdating ? "opacity-30" : ""}`}>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 -960 960 960"

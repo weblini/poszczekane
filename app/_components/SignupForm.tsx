@@ -54,7 +54,7 @@ export default function SignupForm({returnBack}:Props) {
     if (isDone) {
         return (
             <div className="card-body text-center gap-0">
-                <p className="title-base">Gratulacje!</p>
+                <p className="title-base pb-2">Gratulacje!</p>
                 <p className="pb-6">
                     Teraz sprawdź swoją skrzynkę pocztową i kliknij{" "}
                     <span className="text-primary-focus font-semibold">

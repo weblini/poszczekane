@@ -1,40 +1,85 @@
 "use client";
 
-import { useState } from "react";
+import InfoDiv from "@/app/_components/InfoDiv";
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { upgradeToOrganizer } from "@/app/_utils/actions";
+// @ts-ignore
+import { experimental_useFormState as useFormState } from "react-dom";
+// @ts-ignore
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
+
+const initialState = {
+    message: null,
+};
+
+function Button() {
+    const { pending } = useFormStatus();
+
+    return (
+        <SubmitButton label="Aktywuj konto organizatora" isLoading={pending} />
+    );
+}
+
+function ErrorBox({ children }: { children: React.ReactNode }) {
+    const { pending } = useFormStatus();
+
+    return (
+        <InfoDiv isError isUpdating={pending}>
+            {children}
+        </InfoDiv>
+    );
+}
 
 export default function ActivateOrgForm() {
-    const [isDone, setIsDone] = useState(false)
+    const [state, formAction] = useFormState(upgradeToOrganizer, initialState);
 
-    // ! server action
-    // ! show response msg
-    // ! show loading state
-    // ! needs to check if there isn't already one with this name, but postgreSQL I think handles this?
-
-    // 
-    if (isDone) {
-        <div className="card-body">
-            <p>Twoje konto musi teraz zostać zaakceptowane przez administratora.</p>
-        </div>
+    if (state.message === "success") {
+        return (
+            <div className="card-body gap-0">
+                <p className="title-base">
+                    Twoje konto uzyskało status organizatora.
+                </p>
+                <p className="py-6">
+                    Otrzymasz powiadomienie, gdy Twoje konto zostanie
+                    zatwierdzone przez administratora.
+                </p>
+                <p className="text-sm">
+                    Postaramy się, aby ten proces przebiegł jak najszybciej.
+                </p>
+            </div>
+        );
     }
 
     return (
-        <form className="card-body">
-            <p className="title-base">Podaj swoje imię lub nazwę, pod którą będziesz tworzyć wydarzenia</p>
+        <form className="card-body" action={formAction}>
+            {state.message && (
+                <ErrorBox>
+                    <p className="text-sm">
+                        Nie udało się aktywować konta
+                        organizatora.
+                    </p>
+                    <p className="font-semibold">{state.message}</p>
+                </ErrorBox>
+            )}
+
+            <p>
+                Podaj swoje imię lub nazwę, pod którą będziesz tworzyć
+                wydarzenia:
+            </p>
             <div className="form-control">
                 <label className="label">
                     <span className="label-text">Nazwa</span>
                 </label>
                 <input
                     type="text"
-                    name="imie"
-                    placeholder="np. Super Organizator"
+                    name="name"
+                    placeholder="np. Psiantastyczne Imprezy"
                     className="input input-bordered"
                 />
             </div>
+
             <div className="form-control pt-4">
-                <button className="btn btn-primary">
-                    Aktywuj konto organizatora
-                </button>
+                <Button />
             </div>
         </form>
     );

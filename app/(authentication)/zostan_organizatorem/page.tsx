@@ -66,8 +66,7 @@ export default async function Page() {
                 </div>
 
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                <ActivateOrgForm /> 
-                    {/* {user ? <ActivateOrgForm /> : <SignupForm returnBack/>} */}
+                    {user ? <ActivateOrgForm /> : <SignupForm returnBack/>}
                 </div>
             </div>
         </main>
