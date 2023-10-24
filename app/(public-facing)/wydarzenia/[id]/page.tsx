@@ -1,67 +1,109 @@
-import { supabaseAdmin } from "@/app/_utils/supabase-clients"
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
-import { notFound } from "next/navigation"
-import SignUpButton from "./SignUpButton"
-import { contactEmail } from "@/app/_utils/page_info"
-import Link from "next/link"
+import { supabaseAdmin } from "@/app/_utils/supabase-clients";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { notFound } from "next/navigation";
+import SignUpButton from "./SignUpButton";
+import Link from "next/link";
+import { Suspense } from "react";
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { formatEventDate } from "@/app/_utils/date-helper";
+import PrintLocalTime from "@/app/_components/time-components/PrintLocalTime";
 
+type Props = {
+    params: { id: string };
+    searchParams: { shcode?: string };
+};
 
-export default async function Page({ params, searchParams }: { params: { id: string }, searchParams: { shcode?: string } }) {
+// How to handle fetching and stuff?
 
-    // inaczej to rozegrać, bo tak czy siak potrzebuję sprawdzić czy są miejsca na zapisy, czyli szczegóły dot. eventu biorę zawsze od supabaseAdmin
+export default async function Page({ params, searchParams }: Props) {
+    const supabase = createServerComponentClient<Database>({ cookies });
 
-    const supabase = createServerComponentClient<Database>({ cookies })
+    const { data: { user } } = await supabase.auth.getUser()
 
-    let { data: event } = await supabase.from('events').select('*, signups ( id ), organizers ( name, slug )').eq('id', params.id).maybeSingle()
+    let { data: event } = await supabase
+        .from("events")
+        .select("*, signups ( id ), organizers ( name, slug )")
+        .eq("id", params.id)
+        .maybeSingle();
 
-    // event is private or doesn't exist
     if (!event) {
         // user has no special link
         if (!searchParams.shcode) {
-            notFound()
+            notFound();
         }
 
         // try to find the event using admin
-        const { data: privateEvent } = await supabaseAdmin.from('events').select('*, signups ( id ), organizers ( name, slug )').eq('id', params.id).maybeSingle()
+        const { data: privateEvent } = await supabaseAdmin
+            .from("events")
+            .select("*, signups ( id ), organizers ( name, slug )")
+            .eq("id", params.id)
+            .maybeSingle();
 
         // event doesn't exist
         if (!privateEvent) {
-            notFound()
+            notFound();
         }
 
         // special link is invalid
         if (!(searchParams.shcode === privateEvent.share_code)) {
-            notFound()
+            notFound();
         }
 
-        event = privateEvent
+        event = privateEvent;
     }
 
     return (
         <>
             <main>
+                {event.share_code && <p>To wydarzenie jest prywatne</p>}
                 <h1>{event.name}</h1>
-                {event.organizers && <p>Organizator: <Link href={`/organizatorzy/${event.organizers.slug}`}>{event.organizers.name}</Link></p>}
+                {event.organizers && (
+                    <p>
+                        Organizator:{" "}
+                        <Link href={`/organizatorzy/${event.organizers.slug}`}>
+                            {event.organizers.name}
+                        </Link>
+                    </p>
+                )}
                 <p>{event.description}</p>
-                <p>Gotowi na przygodę? Zapisz się już dziś i weź udział w wyjątkowym wydarzeniu. Czekamy na Ciebie i Twojego pupila!</p>
+                <p>
+                    Gotowi na przygodę? Zapisz się i weź udział w wyjątkowym
+                    wydarzeniu. Czekamy na Ciebie i Twojego pupila!
+                </p>
 
                 <div className="card shadow-lg shadow-slate-700/10">
                     <div className="card-body">
-                        <p>Data: {event.starts_at}</p>
+                        <p>
+                            {/* make sure this is client side localized! adjust according to interval */}
+                            Termin:{" "}
+                            {formatEventDate(event.starts_at, event.ends_at)}
+                        </p>
                         <p>Miejsce: {event.location}</p>
-                        <p>Koszt uczestnictwa: {event.fee_pln ? event.fee_pln / 10 : 0} zł</p>
-                        <p>Termin rejestracji: {event.signups_end_at}</p>
-                    </div>
-                    <div className="card-actions">
-                        <p>Płatność tylko przez internet?</p>
-                        <SignUpButton isSignedUp={!!event.signups.length} eventId={params.id} />
+                        <p>
+                            Cena: {event.fee_pln ? event.fee_pln / 100 : 0} zł
+                        </p>
+                        <p>Termin rejestracji: <PrintLocalTime isoString={event.signups_end_at}/></p>
+                        <div className="card-actions">
+                            <Suspense fallback={<SubmitButton isLoading />}>
+                                <SignUpButton
+                                    isSignedUp={!!user && (event.signups.findIndex(signup => signup.id === user.id) !== -1)}
+                                    eventId={params.id}
+                                />
+                            </Suspense>
+                        </div>
                     </div>
                 </div>
             </main>
             <div>
-                <p>Jeśli masz pytania lub potrzebujesz dodatkowych informacji, skontaktuj się z organizatorem pod adresem <a href={`mailto:`} className="link link-secondary">mailorganizatora@gdzies.pl</a></p>
+                <p>
+                    Jeśli masz pytania lub potrzebujesz dodatkowych informacji,
+                    skontaktuj się bezpośrednio z organizatorem pod adresem{" "}
+                    <a href={`mailto:`} className="link link-secondary">
+                        mailorganizatora@gdzies.pl
+                    </a>
+                </p>
             </div>
         </>
-    )
+    );
 }

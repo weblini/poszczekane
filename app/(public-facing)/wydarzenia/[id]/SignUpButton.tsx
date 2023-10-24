@@ -1,4 +1,5 @@
 import { supabaseAdmin } from "@/app/_utils/supabase-clients"
+import Link from "next/link"
 
 type Props = {
     isSignedUp: boolean
@@ -8,11 +9,13 @@ type Props = {
 
 export default async function SignUpButton({ isSignedUp, eventId }: Props) {
 
+    // ! check if isExternal -> return link to original page and button to save to calendar
+
     if(isSignedUp) {
         return (
             <div>
-                <span className="text-sm">Już zapisano</span>
-                <button className="btn btn-success">Szczegóły</button>
+                <span className="text-sm">Jesteś już zapisany/a</span>
+                <Link href="/kalendarz" className="btn btn-success">Zobacz w kalendarzu</Link>
             </div>
             
           )
@@ -27,10 +30,16 @@ export default async function SignUpButton({ isSignedUp, eventId }: Props) {
 
     const availableSpots = event.max_attendees - event.signups.length
 
+    if (availableSpots > 0) {
+        <div>
+        <button className="btn btn-primary">Zapisz się</button>
+        {availableSpots < 3 && <span className="text-sm">Ostatnie wolne miejsca!</span>}
+    </div>
+    }
+
   return (
     <div>
-        <button className="btn btn-primary">{availableSpots ? "Zapisz się" : "Brak miejsc"}</button>
-        {availableSpots < 3 && <span className="text-sm">Ostatnie wolne miejsca!</span>}
+        <button className="btn btn-disabled" aria-disabled>Brak miejsc</button>
     </div>
   )
 }
