@@ -34,17 +34,17 @@ export default function UserProvider({
         }
 
         const { data } = supabase.auth.onAuthStateChange((event, session) => {
-            if (event === "SIGNED_IN") {
-                if (session) {
+            if (session) {
+                if(userId !== session.user.id) {
                     setUserId(session.user.id);
-                    // try to find organizer matching user.id
                     checkForOrganizer(session.user.id);
                 }
-            } else if (event === "SIGNED_OUT") {
+            } else {
                 setUserId(null);
                 setIsOrganizer(false);
             }
         });
+
         return () => {
             data.subscription.unsubscribe();
         };
