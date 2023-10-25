@@ -5,8 +5,8 @@ export default function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="px-8 py-12 bg-base-200 w-full md:px-12 md:py-16 mt-auto">
-            <div className="footer max-w-screen-2xl mx-auto">
+        <footer className="px-[5vw] py-12 bg-base-200 w-full md:py-16 mt-auto">
+            <div className="footer max-w-screen-2xl mx-auto md:justify-items-center">
                 <div className="md:order-last">
                     <span className="footer-title">Newsletter</span>
                     {/* ! make this a Client Component */}
