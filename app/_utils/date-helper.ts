@@ -32,3 +32,7 @@ export const getStartOfDayDate = (ISOString: string) => {
     date.setHours(0,0,0,0)
     return date
 }
+
+export const isDatePast = (targetDate: Date) => {
+    return targetDate <= new Date();
+};

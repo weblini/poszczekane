@@ -18,3 +18,7 @@ export const SignupDataSchema = LoginDataSchema.extend({
 export const OrgNameSchema = z.object({
     name: z.string().min(2, "Nazwa musi składać się z co najmniej 2 znaków").max(40, "Nazwa nie może być dłuższa niż 40 znaków"),
 })
+
+export const EventSignupSchema = z.object({
+    id: z.number().int().positive(),
+})

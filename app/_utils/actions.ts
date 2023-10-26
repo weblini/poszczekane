@@ -2,8 +2,10 @@
 
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { OrgNameSchema } from "./zod-schemas";
+import { EventSignupSchema, OrgNameSchema } from "./zod-schemas";
 import { supabaseAdmin } from "./supabase-clients";
+import { isDatePast } from "./date-helper";
+import { revalidatePath } from "next/cache";
 
 export async function upgradeToOrganizer(prevState: any, formData: FormData) {
     const parsed = OrgNameSchema.parse({
@@ -41,13 +43,81 @@ export async function upgradeToOrganizer(prevState: any, formData: FormData) {
         ])
         .select();
 
-    if (error?.code === '23505') {
-        return { message: "Ta nazwa jest już zajęta."}
+    if (error?.code === "23505") {
+        return { message: "Ta nazwa jest już zajęta." };
     }
 
     if (error) {
-        return { message: "Wystąpił błąd"}
+        return { message: "Wystąpił błąd" };
     }
+
+    return { message: "success" };
+}
+
+export async function signupUser(prevState: any, formData: FormData) {
+    const parsed = EventSignupSchema.parse({
+        id: Number(formData.get("id")),
+    });
+
+    const supabase = createServerActionClient<Database>({ cookies });
+
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+        throw "No user detected";
+    }
+
+    // get info about the event
+    const { data: event, error: eventError } = await supabaseAdmin
+        .from("events")
+        .select(
+            "id, external_url, fee_pln, max_attendees, signups ( id ), signups_end_at"
+        )
+        .eq("id", parsed.id)
+        .maybeSingle();
+
+    if (eventError || !event) {
+        throw eventError || Error("Can't retrieve event details");
+    }
+
+    // signups closed
+    if (event.signups_end_at && isDatePast(new Date(event.signups_end_at))) {
+        return { message: "Zapisy zamknięte" };
+    }
+
+    // no spots available
+    if (event.max_attendees && event.max_attendees <= event.signups.length) {
+        return { message: "Brak wolnych miejsc" };
+    }
+
+    // requires fee and is not external
+    if (!event.external_url && !!event.fee_pln) {
+        // ! handle payment
+        throw Error("Payed internal events are not yet supported")
+    }
+
+    // try to create signup
+    const { data, error } = await supabaseAdmin
+        .from("signups")
+        .insert([
+            {
+                event_id: parsed.id,
+                attendee_id: user.id,
+            },
+        ])
+        .select();
+
+    if (error?.code === 'P0001') {
+        return { message: "To wydarzenie jest już w Twoim kalendarzu" };
+    }
+
+    if (error) {
+        return { message: "Coś poszło nie tak" };
+    }
+    
+    // revalidatePath(`/wydarzenia/${parsed.id}`)
 
     return { message: "success" };
 }

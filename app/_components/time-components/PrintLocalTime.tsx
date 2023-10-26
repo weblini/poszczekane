@@ -1,5 +1,7 @@
 "use client";
 
+import { timeFormatter } from "@/app/_utils/date-helper";
+
 type Props = {
     isoString: string;
     withTime?: boolean;
@@ -8,5 +10,5 @@ type Props = {
 export default function PrintLocalTime({ isoString, withTime }: Props) {
     const date = new Date(isoString);
 
-    return <span>{withTime ? date.toLocaleString() : date.toLocaleDateString()}</span>;
+    return <>{withTime && `${timeFormatter.format(date)} `}{date.toLocaleDateString()}</>;
 }

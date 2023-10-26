@@ -6,6 +6,7 @@ export default function Page() {
 
     return (
         <>
+        <p className="text-red-700 font-extrabold">Musi mieć przynajmniej jeden tag!</p>
             <AddEventAction />
             <section>
                 <h2>Masz pytania? Potrzebujesz pomocy?</h2>

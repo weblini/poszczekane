@@ -1,48 +1,65 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
-import Link from "next/link"
-import { notFound } from "next/navigation"
-
+import EventCard from "@/app/_components/EventCard";
+import EventCardDisplay from "@/app/_components/EventCardDisplay";
+import InfoDiv from "@/app/_components/InfoDiv";
+import OnlyForOrganizers from "@/app/_components/OnlyForOrganizers";
+import { supabaseAnon } from "@/app/_utils/supabase-clients";
+import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function Page({ params }: { params: { slug: string } }) {
+    const { data: organizer } = await supabaseAnon
+        .from("organizers")
+        .select("name, description, id, events (name, id, location, starts_at, ends_at, tags (name))")
+        .eq("slug", params.slug)
+        .maybeSingle();
 
-    const supabase = createServerComponentClient<Database>({ cookies })
-
-    const { data: { user } } = await supabase.auth.getUser()
-
-    const { data: organizer } = await supabase.from('organizers').select('name, description, id').eq('slug', params.slug).maybeSingle()
-
-    // if no such organizer
     if (!organizer) {
-        notFound()
+        notFound();
     }
 
-    const { data: events } = await supabase.from('events').select('id, name').eq('organizer_id', organizer.id)
-
     return (
-        <main>
-            <h1>{organizer.name}</h1>
-            {organizer.id == user?.id && <Link href="/konto/dane_organizatorskie">Edytuj dane</Link>}
-            <section>
-                <h2>O organizatorze</h2>
+        <main className="wrapper w-full max-w-7xl">
+            <h1 className="text-3xl md:text-4xl font-extrabold">
+                {organizer.name}
+            </h1>
+
+            <OnlyForOrganizers matchingId={organizer.id}>
+                <Link href="/konto/dane_organizatorskie" className="btn btn-sm">
+                    Edytuj dane
+                </Link>
+            </OnlyForOrganizers>
+
+            <div className="pt-8 lg:pt-12">
+                <h2 className="title-base pb-2">O organizatorze</h2>
                 <p>{organizer.description}</p>
-            </section>
+            </div>
 
-            {events &&
+            <div className="pt-8 lg:pt-12">
+                <h2 className="pb-4">
+                    Nadchodzące wydarzenia organizowane przez {organizer.name}:
+                </h2>
                 <div>
-                    <h2>Nadchodzące wydarzenia organizowane przez {organizer.name}:</h2>
-                    <ul>
-                        {events.map(event => (
-                            <li key={event.id}>{event.name}</li>
-                        ))}
-                    </ul>
+                    {organizer.events?.length ? (
+                        <EventCardDisplay events={organizer.events} />
+                    ) : (
+                        <InfoDiv>
+                            <p>
+                                Ten organizator jeszcze nie opublikował wydarzeń
+                            </p>
+                        </InfoDiv>
+                    )}
                 </div>
-            }
+            </div>
 
-            <section>
-                <h2>Kontakt z organizatorem</h2>
-                <p>Jeśli masz pytania dotyczące wydarzeń organizowanych przez {organizer.name}, skontaktuj się pod numerem 123, mailowo pod adresem xxx lub odwiedź stronę internetową abc, aby poznać więcej szczegółów.</p>
-            </section>
+            {/* <div className="pt-8 lg:pt-12">
+                <h2 className="title-base pb-2">Kontakt z organizatorem</h2>
+                <p>
+                    Jeśli masz pytania dotyczące wydarzeń organizowanych przez{" "}
+                    {organizer.name}, skontaktuj się pod numerem 123, mailowo
+                    pod adresem xxx lub odwiedź stronę internetową abc, aby
+                    poznać więcej szczegółów.
+                </p>
+            </div> */}
         </main>
-    )
+    );
 }

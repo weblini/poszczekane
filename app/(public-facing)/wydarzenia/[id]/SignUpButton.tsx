@@ -1,45 +1,58 @@
-import { supabaseAdmin } from "@/app/_utils/supabase-clients"
-import Link from "next/link"
+"use client";
+
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { signupUser } from "@/app/_utils/actions";
+// @ts-ignore
+import { experimental_useFormState as useFormState } from "react-dom";
+// @ts-ignore
+import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import AlreadySignedupButton from "./AlreadySignedupButton";
+
+const initialState = {
+    message: null,
+};
 
 type Props = {
-    isSignedUp: boolean
-    eventId: string
+    eventId: number;
+    wrapperClasses: string;
+    btnText: string;
+    topHint?: React.ReactNode;
+    bottomHint?: React.ReactNode;
+};
+
+// ! show modal on click for not-logged in users, to help with seamless signups
+
+export default function SignUpButton({
+    eventId,
+    wrapperClasses,
+    topHint,
+    bottomHint,
+    btnText,
+}: Props) {
+    const [state, formAction] = useFormState(signupUser, initialState);
+
+    // once it succeeds return a disabled button with the info
+    if (state.message === "success") {
+        return <AlreadySignedupButton className={wrapperClasses} />;
+    }
+
+    return (
+        <form className={wrapperClasses} action={formAction}>
+            <input hidden name="id" value={eventId} readOnly/>
+
+            {topHint && <p className="text-sm pb-2">{topHint}</p>}
+            <AddButton label={btnText} />
+            {bottomHint && <p className="text-sm pb-2">{bottomHint}</p>}
+        </form>
+    );
 }
 
+type BtnProps = {
+    label: string;
+};
 
-export default async function SignUpButton({ isSignedUp, eventId }: Props) {
+function AddButton({ label }: BtnProps) {
+    const { pending } = useFormStatus();
 
-    // ! check if isExternal -> return link to original page and button to save to calendar
-
-    if(isSignedUp) {
-        return (
-            <div>
-                <span className="text-sm">Jesteś już zapisany/a</span>
-                <Link href="/kalendarz" className="btn btn-success">Zobacz w kalendarzu</Link>
-            </div>
-            
-          )
-    }
-
-    // grab total spots and current number of signups
-    const { data: event, error } = await supabaseAdmin.from('events').select('max_attendees, signups ( id )').eq('id', eventId).maybeSingle()
-
-    if (!event || error) {
-        throw error || new Error("Failed to fetch event info")
-    }
-
-    const availableSpots = event.max_attendees - event.signups.length
-
-    if (availableSpots > 0) {
-        <div>
-        <button className="btn btn-primary">Zapisz się</button>
-        {availableSpots < 3 && <span className="text-sm">Ostatnie wolne miejsca!</span>}
-    </div>
-    }
-
-  return (
-    <div>
-        <button className="btn btn-disabled" aria-disabled>Brak miejsc</button>
-    </div>
-  )
+    return <SubmitButton label={label} isLoading={pending} />;
 }

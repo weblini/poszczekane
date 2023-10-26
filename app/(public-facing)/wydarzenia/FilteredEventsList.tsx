@@ -17,6 +17,7 @@ export default async function FilteredEventsList({ date, tags }: Props) {
             "name, starts_at, ends_at, id, organizers( name, slug ), tags( name ), filter_tags:tags!inner(name)"
         );
 
+
     // filter by tags if provided
     if (tags.length) {
         supaQuery = supaQuery.in("filter_tags.name", tags);
@@ -28,6 +29,7 @@ export default async function FilteredEventsList({ date, tags }: Props) {
 
     const { data: events, error } = await supaQuery;
 
+    
     if (!events?.length) {
         return (
             <InfoDiv>

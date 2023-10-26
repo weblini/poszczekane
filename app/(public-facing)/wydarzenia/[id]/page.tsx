@@ -2,108 +2,169 @@ import { supabaseAdmin } from "@/app/_utils/supabase-clients";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
-import SignUpButton from "./SignUpButton";
 import Link from "next/link";
-import { Suspense } from "react";
-import SubmitButton from "@/app/_components/form-components/SubmitButton";
-import { formatEventDate } from "@/app/_utils/date-helper";
-import PrintLocalTime from "@/app/_components/time-components/PrintLocalTime";
+import InfoText from "@/app/_components/InfoText";
+import PrintDuration from "@/app/_components/time-components/PrintDuration";
+import InteractionButton from "./InteractionButton";
 
 type Props = {
     params: { id: string };
     searchParams: { shcode?: string };
 };
 
-// How to handle fetching and stuff?
+// Build a loading skeleton?
 
 export default async function Page({ params, searchParams }: Props) {
     const supabase = createServerComponentClient<Database>({ cookies });
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
 
-    const { data: { user } } = await supabase.auth.getUser()
-
-    let { data: event } = await supabase
+    // try to get the event using admin
+    const { data: event, error } = await supabaseAdmin
         .from("events")
-        .select("*, signups ( id ), organizers ( name, slug )")
+        .select(
+            "*, signups ( attendee_id ), organizers ( name, slug, id ), tags( name )"
+        )
         .eq("id", params.id)
         .maybeSingle();
 
     if (!event) {
-        // user has no special link
-        if (!searchParams.shcode) {
+        if (error) {
+            throw error;
+        }
+        notFound();
+    }
+
+    const isSignedUp = !!event.signups.find((signup) => signup.attendee_id === user?.id);
+    const isOrganizer = event.organizers?.id === user?.id;
+
+    //  handle private event check
+    if (event.share_code) {
+        // user has no special link or it doesn't match AND user is not signed up for this event nor its organizer
+        if (
+            searchParams.shcode !== event.share_code &&
+            !isSignedUp &&
+            !isOrganizer
+        ) {
             notFound();
         }
-
-        // try to find the event using admin
-        const { data: privateEvent } = await supabaseAdmin
-            .from("events")
-            .select("*, signups ( id ), organizers ( name, slug )")
-            .eq("id", params.id)
-            .maybeSingle();
-
-        // event doesn't exist
-        if (!privateEvent) {
-            notFound();
-        }
-
-        // special link is invalid
-        if (!(searchParams.shcode === privateEvent.share_code)) {
-            notFound();
-        }
-
-        event = privateEvent;
     }
 
     return (
-        <>
-            <main>
-                {event.share_code && <p>To wydarzenie jest prywatne</p>}
-                <h1>{event.name}</h1>
-                {event.organizers && (
-                    <p>
+        <main className="wrapper w-full grid gap-8 lg:gap-12 md:grid-cols-[1fr_360px] max-w-7xl">
+            <div>
+                <div className="flex flex-wrap gap-2 pb-2">
+                    {event.tags.map((tag) => (
+                        <span className="badge badge-accent" key={tag.name}>
+                            {tag.name}
+                        </span>
+                    ))}
+                </div>
+
+                <h1 className="font-extrabold text-3xl md:text-4xl">
+                    {event.name}
+                </h1>
+
+                {event.organizers && !event.external_url && (
+                    <p className="pt-2">
                         Organizator:{" "}
-                        <Link href={`/organizatorzy/${event.organizers.slug}`}>
+                        <Link
+                            href={`/organizatorzy/${event.organizers.slug}`}
+                            className="link link-hover font-semibold"
+                        >
                             {event.organizers.name}
                         </Link>
                     </p>
                 )}
-                <p>{event.description}</p>
-                <p>
-                    Gotowi na przygodę? Zapisz się i weź udział w wyjątkowym
-                    wydarzeniu. Czekamy na Ciebie i Twojego pupila!
-                </p>
-
-                <div className="card shadow-lg shadow-slate-700/10">
-                    <div className="card-body">
-                        <p>
-                            {/* make sure this is client side localized! adjust according to interval */}
-                            Termin:{" "}
-                            {formatEventDate(event.starts_at, event.ends_at)}
-                        </p>
-                        <p>Miejsce: {event.location}</p>
-                        <p>
-                            Cena: {event.fee_pln ? event.fee_pln / 100 : 0} zł
-                        </p>
-                        <p>Termin rejestracji: <PrintLocalTime isoString={event.signups_end_at}/></p>
-                        <div className="card-actions">
-                            <Suspense fallback={<SubmitButton isLoading />}>
-                                <SignUpButton
-                                    isSignedUp={!!user && (event.signups.findIndex(signup => signup.id === user.id) !== -1)}
-                                    eventId={params.id}
-                                />
-                            </Suspense>
-                        </div>
-                    </div>
-                </div>
-            </main>
-            <div>
-                <p>
-                    Jeśli masz pytania lub potrzebujesz dodatkowych informacji,
-                    skontaktuj się bezpośrednio z organizatorem pod adresem{" "}
-                    <a href={`mailto:`} className="link link-secondary">
-                        mailorganizatora@gdzies.pl
-                    </a>
-                </p>
             </div>
-        </>
+
+            <div
+                className={`card shadow ${
+                    event.is_cancelled ? "bg-error/10" : "bg-base-200/50"
+                } max-w-sm justify-self-center w-full`}
+            >
+                <div className="card-body">
+                    {event.share_code && (
+                        <InfoText>To wydarzenie jest prywatne</InfoText>
+                    )}
+
+                    {event.is_cancelled && (
+                        <InfoText isError>
+                            To wydarzenie zostało odwołane!
+                        </InfoText>
+                    )}
+
+                    <EventDetail label="Termin:" dim={event.is_cancelled}>
+                        <PrintDuration
+                            startStamp={event.starts_at}
+                            endStamp={event.ends_at}
+                        />
+                    </EventDetail>
+
+                    <EventDetail label="Miejsce:" dim={event.is_cancelled}>
+                        {event.location}
+                    </EventDetail>
+
+                    {!event.external_url && (
+                        <EventDetail label="Koszt:" dim={event.is_cancelled}>
+                            {event.fee_pln
+                                ? `${event.fee_pln / 100} zł`
+                                : "za darmo"}
+                        </EventDetail>
+                    )}
+
+                    {event.external_url && (
+                        <EventDetail label="Zapisy:" dim={event.is_cancelled}>
+                            <Link
+                                href={event.external_url}
+                                className="link link-hover font-semibold"
+                            >
+                                Przejdź do oficjalnej strony
+                            </Link>
+                        </EventDetail>
+                    )}
+
+                    <InteractionButton
+                        eventId={event.id}
+                        isExternal={!!event.external_url}
+                        freeSpots={
+                            event.max_attendees
+                                ? event.max_attendees - event.signups.length
+                                : null
+                        }
+                        isSignedUp={isSignedUp}
+                        signupCloseDate={event.signups_end_at}
+                        tags={event.tags}
+                        isCanceled={event.is_cancelled}
+                    />
+                </div>
+            </div>
+
+            <div className="md:col-span-2">
+                <h2 className="title-base pb-2">Szczegóły</h2>
+                <p>{event.description}</p>
+            </div>
+        </main>
+    );
+}
+
+
+type DetailProp = {
+    label: string;
+    children: React.ReactNode;
+    dim: boolean;
+};
+
+function EventDetail({ label, children, dim }: DetailProp) {
+    return (
+        <p
+            className={`grid grid-cols-[65px_1fr] items-center ${
+                dim ? "opacity-50" : ""
+            }`}
+        >
+            <span className="text-sm">{label}</span>{" "}
+            <span className="font-semibold">{children}</span>
+        </p>
     );
 }

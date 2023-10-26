@@ -1,22 +1,24 @@
-'use client'
+"use client";
 
+import { useContext } from "react";
+import { UserContext } from "../UserProvider";
 
-import { useContext } from "react"
-import { UserContext } from "../UserProvider"
+type Props = {
+    children: React.ReactNode;
+    fallback?: React.ReactNode;
+    matchingId?: string;
+};
 
+export default function OnlyForOrganizers({ children, fallback, matchingId }: Props) {
+    const userDetails = useContext(UserContext);
 
-
-export default function OnlyForOrganizers({ children, fallback }: { children: React.ReactNode, fallback?: React.ReactNode}) {
-
-    const userDetails = useContext(UserContext)
-
-    if (!userDetails.isOrganizer) {
-        if(fallback) {
-            return fallback
+    if (!userDetails.isOrganizer || (matchingId && userDetails.userId !== matchingId)) {
+        if (fallback) {
+            return fallback;
         } else {
-            return null
+            return null;
         }
     }
 
-    return children
+    return children;
 }
