@@ -16,12 +16,12 @@ export default function CalendarDay({ isCurrentMonth, isToday, events, isOverflo
     return (
         <div
             role={'cell'}
-            className={`grid h-full cursor-pointer group ${isCurrentMonth ? 'bg-base-100' : 'bg-base-200 text-neutral'
+            className={`grid h-full cursor-pointer group ${isCurrentMonth ? 'bg-base-100' : 'bg-base-200 text-base-content/30'
                 }`}
             onClick={() => onDayClick(date)}
         >
             <div role={'heading'} aria-level={2} className="text-center md:text-right w-full mt-1 px-1">
-                <span className={`leading-none inline-flex rounded-full h-7 w-7 items-center justify-center transition-colors ${isToday ? 'font-bold' : ''} ${isSelected ? 'bg-base-300' : 'group-hover:bg-base-200'}`}>{date.getDate()}</span>
+                <span className={`leading-none inline-flex rounded-full h-7 w-7 items-center justify-center transition-colors ${isToday ? 'font-bold' : ''} ${isSelected ? 'bg-primary text-primary-content' : 'group-hover:bg-primary/50'}`}>{date.getDate()}</span>
             </div>
             {isOverflowed && (
                 <div

@@ -59,7 +59,7 @@
 .schedulely .day-of-week-layout {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    @apply rounded-none text-center md:text-left py-1 pb-3 md:pb-1 bg-base-200 border-b border-base-300 md:border-none;
+    @apply rounded-none text-center md:text-left py-1 pb-3 md:pb-1 bg-base-200 border-b border-base-300;
 }
 
 .schedulely .default-day-of-week {
@@ -104,7 +104,7 @@
 .schedulely .week-container {
     display: grid;
     position: relative;
-    @apply min-h-16 md:min-h-[6rem]
+    @apply min-h-[4.1rem] md:min-h-[6rem]
 }
 
 .schedulely .week-layout {
