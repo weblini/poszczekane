@@ -84,16 +84,15 @@ export default function EventsCalendar() {
     );
 
     const dayView = useMemo(
-        () =>
-            !!events?.length && (
-                <div>
-                    <DayList
-                        events={events}
-                        dateAdapter={dateAdapter}
-                        selectedDate={selectedDay}
-                    />
-                </div>
-            ),
+        () => (
+            <div>
+                <DayList
+                    events={events}
+                    dateAdapter={dateAdapter}
+                    selectedDate={selectedDay}
+                />
+            </div>
+        ),
         [selectedDay, events, dateAdapter]
     );
 
