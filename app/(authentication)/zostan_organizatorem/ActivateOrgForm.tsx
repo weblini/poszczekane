@@ -3,10 +3,8 @@
 import InfoDiv from "@/app/_components/InfoDiv";
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
 import { upgradeToOrganizer } from "@/app/_utils/actions";
-// @ts-ignore
-import { experimental_useFormState as useFormState } from "react-dom";
-// @ts-ignore
-import { experimental_useFormStatus as useFormStatus } from "react-dom";
+import { useFormState } from "react-dom";
+import { useFormStatus } from "react-dom";
 
 const initialState = {
     message: null,
