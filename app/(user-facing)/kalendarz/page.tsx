@@ -16,8 +16,14 @@ const Calendar = dynamic(
 export default function Page() {
 
     return (
-        <main className="wrapper w-full">
-            <h1 className="title-base pb-1">Twój kalendarz</h1>
+        <main className="wrapper w-full max-w-[1600px]">
+            <div className="text-sm breadcrumbs">
+                <ul>
+                    <li>
+                        <h1>Twój kalendarz</h1>
+                    </li>
+                </ul>
+            </div>
             <p>To miejsce, gdzie Twoje plany z psem stają się rzeczywistością!</p>
             
             <Calendar />
