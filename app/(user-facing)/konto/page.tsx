@@ -3,7 +3,7 @@ import OnlyForOrganizers from "@/app/_components/OnlyForOrganizers";
 import Link from "next/link";
 import SettingWrapper from "./SettingWrapper";
 
-// grab the user data on FE ?
+
 export default function Page() {
     return (
         <main>

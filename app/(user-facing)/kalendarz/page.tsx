@@ -16,7 +16,7 @@ const Calendar = dynamic(
 export default function Page() {
 
     return (
-        <main className="wrapper w-full max-w-[1600px]">
+        <main className="wrapper w-full">
             <div className="text-sm breadcrumbs">
                 <ul>
                     <li>

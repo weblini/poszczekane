@@ -1,3 +1,4 @@
+import AccountBreadcrumb from "./AccountBreadcrumb";
 
 export default async function Layout({
     children,
@@ -6,17 +7,8 @@ export default async function Layout({
 }) {
     return (
         <div className="wrapper max-w-5xl w-full">
-            <div className="text-sm breadcrumbs">
-                <ul>
-                    <li>
-                        <h1>Twoje konto</h1>
-                    </li>
-                    <li>
-                        Gdzieś dalej
-                    </li>
-                </ul>
-            </div>
-
+            <AccountBreadcrumb/>
+            
             {children}
         </div>
     );
