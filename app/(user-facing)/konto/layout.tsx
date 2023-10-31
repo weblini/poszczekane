@@ -1,4 +1,3 @@
-import Link from "next/link";
 
 export default async function Layout({
     children,
@@ -6,24 +5,17 @@ export default async function Layout({
     children: React.ReactNode;
 }) {
     return (
-        <div className="grow w-5/6">
-            <nav aria-labelledby="zarządzanie kontem">
-                <ul className="menu menu-vertical lg:menu-horizontal bg-base-200 rounded-box">
+        <div className="wrapper max-w-5xl w-full">
+            <div className="text-sm breadcrumbs">
+                <ul>
                     <li>
-                        <Link href="/konto">dane uczestnika</Link>
+                        <h1>Twoje konto</h1>
                     </li>
                     <li>
-                        <Link href="/konto/dane_organizatorskie">
-                            dane organizatora
-                        </Link>
-                    </li>
-                    <li>
-                        <Link href="/konto/moje_wydarzenia">
-                            przegląd wydarzeń
-                        </Link>
+                        Gdzieś dalej
                     </li>
                 </ul>
-            </nav>
+            </div>
 
             {children}
         </div>

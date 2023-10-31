@@ -1,55 +1,115 @@
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs"
-import { cookies } from "next/headers"
+import InfoText from "@/app/_components/InfoText";
+import OnlyForOrganizers from "@/app/_components/OnlyForOrganizers";
+import Link from "next/link";
+import SettingWrapper from "./SettingWrapper";
 
-
-export default async function Page() {
-
-    const supabase = createServerComponentClient<Database>({ cookies })
-
-    const { data: { user } } = await supabase.auth.getUser()
-
-    const { data: userProfile } = await supabase.from('user_profiles').select().maybeSingle()
-
+// grab the user data on FE ?
+export default function Page() {
     return (
-        <div>
-            <h2>Twoje dane do szybkich zapisów na wydarzenia:</h2>
-            <div className="card bg-base-100 shadow-lg shadow-slate-700/10">
-                <div className="card-body">
-                    <p>Hasło: zmien hasło</p>
-                    <p>Email: {user?.email}</p>
-                    <div>
-                        {userProfile ?
-                            <>
-                                <div>
-                                    <p>Imie: {userProfile.name || ""}</p>
-                                    <p>Nazwisko: {userProfile.last_name || ""}</p>
-                                    <p>Numer tel: {userProfile.phone || ""}</p>
-                                </div>
+        <main>
+            <InfoText className="pb-6 lg:pb-12">
+                Witaj w panelu zarządzania kontem. Tutaj możesz dostosować
+                ustawienia swojego konta oraz uzyskać dostęp do dodatkowych
+                funkcji.
+            </InfoText>
 
-                                <div>
-                                    <h3>Dane do faktur</h3>
-                                    <p>Nazwa firmy: {userProfile.company_name || ""}</p>
-                                    <p>NIP: {userProfile.company_nip || ""}</p>
-                                    <p>Ulica: {userProfile.company_street || ""}</p>
-                                    <p>Kod pocztowy: {userProfile.company_postal_code || ""}</p>
-                                    <p>Miejscowość: {userProfile.company_city || ""}</p>
-                                </div>
-                            </>
-                            :
-                            <>
-                                <p>Nie masz jeszcze dodanych danych do szybkich zapisów</p>
-                            </>
+            <div className="grid gap-6 lg:gap-8">
+                <SettingWrapper
+                    title="Dane"
+                    desc="Edytuj swoje podstawowe informacje, takie jak imię,
+                        nazwisko, adres e-mail i numer telefonu."
+                    action={<button className="btn">Edytuj dane</button>}
+                ></SettingWrapper>
+
+                <OnlyForOrganizers>
+                    <SettingWrapper
+                        title="Dane organizatora"
+                        desc="Edytuj informacje organizatorskie, takie jak dane kontaktowe, opis czy numer konta bankowego do rozliczeń"
+                        action={<button className="btn">Edytuj dane</button>}
+                    />
+                    <SettingWrapper
+                        title="Organizacja wydarzeń"
+                        desc="Zarządzaj organizowanymi przez Ciebie wydarzeniami."
+                        action={
+                            <Link
+                                href="/konto/edytuj_wydarzenia"
+                                className="btn"
+                            >
+                                Przejdź do listy wydarzeń
+                            </Link>
                         }
+                    />
+                </OnlyForOrganizers>
+
+                <SettingWrapper
+                    title="Hasło"
+                    desc="Zaktualizuj swoje hasło, aby zapewnić bezpieczeństwo
+                    Twojego konta."
+                    action={<button className="btn">Zmień hasło</button>}
+                />
+
+                <SettingWrapper
+                    title="Zapisane wydarzenia"
+                    desc="Przejdź do kalendarza, aby przeglądać zapisane
+                    wydarzenia."
+                    action={
+                        <Link href="/kalendarz" className="btn">
+                            Pokaż kalendarz
+                        </Link>
+                    }
+                />
+
+                <SettingWrapper
+                    title="Prywatność i bezpieczeństwo"
+                    desc="Zadbaj o ochronę swoich danych i przeczytaj naszą
+                    politykę prywatności oraz zasady korzystania z serwisu."
+                >
+                    <div className="flex max-md:flex-col gap-2">
+                        <Link
+                            href="/prywatnosc"
+                            className="link link-hover font-semibold"
+                        >
+                            Polityka prywatności
+                        </Link>
+                        <Link
+                            href="/regulamin"
+                            className="link link-hover font-semibold"
+                        >
+                            Regulamin serwisu
+                        </Link>
+                        <OnlyForOrganizers>
+                            <Link
+                                href="/wspolpraca"
+                                className="link link-hover font-semibold"
+                            >
+                                Regulamin współpracy
+                            </Link>
+                        </OnlyForOrganizers>
                     </div>
-                    <div className="card-actions justify-end">
-                        <button className="btn btn-primary">{userProfile ? "Edytuj dane" : "Dodaj dane"}</button>
+                </SettingWrapper>
+
+                <SettingWrapper
+                    title="Usuwanie konta"
+                    desc="Wszystkie informacje przypisane do tego konta zostaną trwale usuniętę."
+                >
+                    <div className="max-md:flex-col flex gap-2 md:gap-12 justify-between">
+                        <div>
+                            <p>
+                                Pamiętaj, że usunięcie konta jest nieodwracalne.
+                            </p>
+                            <p>
+                                Nie można usunąć konta, które ma przypisane
+                                wydarzenia lub oczekuje na rozliczenie środków
+                                płatniczych.
+                            </p>
+                        </div>
+
+                        <button className="btn btn-link max-md:self-start md:shrink-0 text-base-content">
+                            Usuń konto
+                        </button>
                     </div>
-                </div>
+                </SettingWrapper>
             </div>
-            <div>Preferencje powiadomień?</div>
-            <div>Twoje wydarzenia: liczba wydarzeń jako uczestnik/ jako organizator</div>
-            <div>historia aktywności: ostatnie logowanie?</div>
-            <div>zarządzaj kontem? : usuń / zostań organizatorem ?</div>
-        </div>
-    )
+        </main>
+    );
 }

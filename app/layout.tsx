@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </>
             )}>
             <OnlyForOrganizers>
-                <Link href="/konto/moje_wydarzenia/dodaj_nowe" className='btn btn-secondary max-lg:w-full'>Dodaj wydarzenie</Link>
+                <Link href="/konto/dodaj_wydarzenie" className='btn btn-secondary max-lg:w-full'>Dodaj wydarzenie</Link>
             </OnlyForOrganizers>
             <LogoutButton />
         </OnlyForUsers>

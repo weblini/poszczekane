@@ -13,6 +13,10 @@ export default async function Page() {
 
 	const { data: { user } } = await supabase.auth.getUser()
 
+    if(!user) {
+        throw "No user detected"
+    }
+
 	const { data: events } = await supabaseAdmin.from('events').select('*, tags ( name ), signups ( id )').eq('organizer_id', user?.id)
 
 	if (!events || !events[0]) {
@@ -26,7 +30,7 @@ export default async function Page() {
 
 	return (
 		<>
-			<Link href='/konto/moje_wydarzenia/dodaj_nowe' className="btn btn-square">+</Link>
+			<Link href='/konto/dodaj_wydarzenie' className="btn btn-square">+</Link>
 			<ol>
 				{events.map(event => (
 					<li key={event.id}>
