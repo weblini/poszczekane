@@ -36,3 +36,5 @@ export const getStartOfDayDate = (ISOString: string) => {
 export const isDatePast = (targetDate: Date) => {
     return targetDate <= new Date();
 };
+
+export const todayDateString = new Date().toISOString().split("T")[0];

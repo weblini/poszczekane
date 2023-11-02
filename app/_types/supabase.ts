@@ -26,12 +26,14 @@ export interface Database {
           {
             foreignKeyName: "event_tags_event_id_fkey"
             columns: ["event_id"]
+            isOneToOne: false
             referencedRelation: "events"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "event_tags_tag_id_fkey"
             columns: ["tag_id"]
+            isOneToOne: false
             referencedRelation: "tags"
             referencedColumns: ["id"]
           }
@@ -96,6 +98,7 @@ export interface Database {
           {
             foreignKeyName: "events_organizer_id_fkey"
             columns: ["organizer_id"]
+            isOneToOne: false
             referencedRelation: "organizers"
             referencedColumns: ["id"]
           }
@@ -130,6 +133,7 @@ export interface Database {
           {
             foreignKeyName: "organizers_id_fkey"
             columns: ["id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           }
@@ -137,21 +141,22 @@ export interface Database {
       }
       organizers_protected: {
         Row: {
-          account_number: string
+          account_number: string | null
           id: string
         }
         Insert: {
-          account_number: string
+          account_number?: string | null
           id: string
         }
         Update: {
-          account_number?: string
+          account_number?: string | null
           id?: string
         }
         Relationships: [
           {
             foreignKeyName: "organizers_protected_id_fkey"
             columns: ["id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           }
@@ -189,12 +194,14 @@ export interface Database {
           {
             foreignKeyName: "signups_attendee_id_fkey"
             columns: ["attendee_id"]
+            isOneToOne: false
             referencedRelation: "users"
             referencedColumns: ["id"]
           },
           {
             foreignKeyName: "signups_event_id_fkey"
             columns: ["event_id"]
+            isOneToOne: false
             referencedRelation: "events"
             referencedColumns: ["id"]
           }
@@ -253,6 +260,7 @@ export interface Database {
           {
             foreignKeyName: "user_profiles_id_fkey"
             columns: ["id"]
+            isOneToOne: true
             referencedRelation: "users"
             referencedColumns: ["id"]
           }

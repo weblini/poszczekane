@@ -3,8 +3,7 @@
 import dynamic from 'next/dynamic'
 import Loader from '../Loader'
 import { useState } from 'react'
-import InputField from '../InputField'
-import { Point } from 'pigeon-maps'
+import Input from '../form-components/Input'
 
 type Props = {
     tags: Tag[] | null,
@@ -24,7 +23,7 @@ const ClientOnlyLocationPicker = dynamic(
 export default function AddEventForm({ tags, formAction }: Props) {
 
     const [location, setLocation] = useState('')
-    const [geoPoint, setGeoPoint] = useState<Point | null>(null)
+    const [geoPoint, setGeoPoint] = useState<GeoPoint | null>(null)
 
     return (
         <form action={formAction} className='flex flex-col gap-2'>
@@ -39,7 +38,7 @@ export default function AddEventForm({ tags, formAction }: Props) {
             <input name='ends' type="date" placeholder="Event end date" className="input input-bordered w-full max-w-xs" required />
             <input name='spots' type="number" placeholder="Event max attendees" className="input input-bordered w-full max-w-xs" required />
 
-            <InputField label='Miejsce' name='location' value={location} onChange={(e) => setLocation(e.target.value)} required placeholder='ul. Wielkiej Łapy 10, Psiakowo'/>
+            <Input label='Miejsce' name='location' value={location} onChange={(e) => setLocation(e.target.value)} required placeholder='ul. Wielkiej Łapy 10, Psiakowo'/>
 
             <ClientOnlyLocationPicker location={location} geoPoint={geoPoint} setGeoPoint={setGeoPoint}/>
 

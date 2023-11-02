@@ -15,8 +15,9 @@ export default function SettingWrapper({
     return (
         <section className={className}>
             <h2 className="title-base pb-1">{title}</h2>
-            <div className="pb-2 lg:pb-3 flex max-md:flex-col gap-2 justify-between md:items-center">
-                <p className="text-sm">{desc}</p>
+
+            <div className="grid gap-2 md:gap-4 md:grid-cols-[auto_200px]">
+                <p className="text-sm min-h-12">{desc}</p>
                 {action}
             </div>
 

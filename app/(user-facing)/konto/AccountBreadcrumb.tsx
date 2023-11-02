@@ -6,7 +6,9 @@ import { useSelectedLayoutSegments } from "next/navigation";
 export default function AccountBreadcrumb() {
     const segments = useSelectedLayoutSegments();
 
-    if (!segments.length) {
+    const lastPart = segments.at(-1)
+
+    if (!lastPart) {
         return (
             <div className="text-sm breadcrumbs">
                 <ul>
@@ -18,7 +20,13 @@ export default function AccountBreadcrumb() {
         );
     }
 
-    const pageTitle = (segments[1].charAt(0).toUpperCase() + segments[1].slice(1)).replace("_", " ");
+    let pageTitle = ''
+
+    if (lastPart === "zmien_haslo") {
+        pageTitle = "Zmień hasło"
+    } else {
+        pageTitle = (lastPart.charAt(0).toUpperCase() + lastPart.slice(1)).replace("_", " ");
+    }
 
     return (
         <div className="text-sm breadcrumbs">

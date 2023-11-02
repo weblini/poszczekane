@@ -9,4 +9,5 @@ declare global {
     type AppEvent = DB['public']['Tables']['events']['Row'] & {tags?: Partial<Tag>[] | null} & {organizers?: Partial<Organizer> | null};
     type PartialAppEvent = Partial<AppEvent> & {name: string, id: number}
     type GeoPoint = [number, number];
+    type UserInfo = Partial<DB['public']['Tables']['user_profiles']['Row']>;
 }

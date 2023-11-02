@@ -1,10 +1,10 @@
 import { UseFormRegisterReturn } from "react-hook-form";
 
 type Props = {
+    wrapperStyles?: string,
     label: string,
     register?: UseFormRegisterReturn,
     error?: string,
-    wrapperStyles?: string,
     [key: string]: any,
 };
 
@@ -14,8 +14,8 @@ export default function Input({label, register, error, wrapperStyles, ...other}:
             <label className="label">
                 <span className="label-text">{label}</span>
             </label>
-            <input
-                className={`input input-bordered disabled:opacity-70 disabled:cursor-text ${error ? "input-error" : ""}`}
+            <textarea
+                className={`textarea textarea-bordered disabled:opacity-70 disabled:cursor-text ${error ? "input-error" : ""}`}
                 {...register}
                 {...other}
             />

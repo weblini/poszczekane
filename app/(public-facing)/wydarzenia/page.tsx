@@ -9,7 +9,7 @@ import FilterBarLoader from "./FilterBarLoader";
 import FilterBar from "./FilterBar";
 
 type Props = {
-    searchParams: { tag?: SearchParam; data?: string };
+    searchParams: { tag?: SearchParam; data?: string; strona?: string };
 };
 
 type SearchParam = string | string[];
@@ -29,7 +29,9 @@ export default function Page({ searchParams }: Props) {
         tags = [searchParams.tag];
     }
 
-    const pageKey = `tags=${tags.join(",")}&date=${searchParams.data || ""}`;
+    const pageNumber = Number(searchParams.strona) || 1
+
+    const pageKey = `tag=${tags.join("&tag=")}&data=${searchParams.data || ""}&strona=${pageNumber}`;
 
     return (
         <>
@@ -50,12 +52,15 @@ export default function Page({ searchParams }: Props) {
                         towarzyszem!
                     </p>
                     <Suspense
-                        fallback={<Loader wrapperClasses="h-[180px] items-start" />}
+                        fallback={
+                            <Loader wrapperClasses="h-[180px] items-start" />
+                        }
                         key={pageKey}
                     >
                         <FilteredEventsList
                             tags={tags}
                             date={searchParams.data}
+                            page={pageNumber}
                         />
                     </Suspense>
                 </div>
@@ -71,7 +76,9 @@ export default function Page({ searchParams }: Props) {
                     sizes="100vw"
                     className="object-cover opacity-20 -z-10"
                 />
-                <h2 className="text-base-content/80">Nie możesz znaleźć tego, czego szukasz?</h2>
+                <h2 className="text-base-content/80">
+                    Nie możesz znaleźć tego, czego szukasz?
+                </h2>
                 <p className="font-extrabold text-xl md:text-3xl pb-4">
                     Spróbuj wyszukać wydarzenie po nazwie
                 </p>

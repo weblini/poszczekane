@@ -1,6 +1,8 @@
 "use client";
 
 import InfoText from "@/app/_components/InfoText";
+import { todayDateString } from "@/app/_utils/date-helper";
+import { getEventsUrl } from "@/app/_utils/url-query";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";
@@ -12,8 +14,6 @@ type Props = {
 export default function FilterBar({ allTags }: Props) {
     const searchParams = useSearchParams();
     const router = useRouter();
-
-    const todayDateString = new Date().toISOString().split("T")[0];
 
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [selectedDate, setSelectedDate] = useState(todayDateString);
@@ -41,7 +41,7 @@ export default function FilterBar({ allTags }: Props) {
             newSearchParams.append("data", selectedDate);
         }
 
-        router.push(`/wydarzenia?${newSearchParams.toString()}`);
+        router.push(getEventsUrl({tags:selectedTags, date: selectedDate}));
     }
 
     const updateTags = (e: ChangeEvent<HTMLInputElement>) => {
