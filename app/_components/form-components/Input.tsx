@@ -8,7 +8,7 @@ type Props = {
     [key: string]: any,
 };
 
-export default function Input({label, register, error, wrapperStyles, ...other}: Props) {
+export default function Input({label, register, error, wrapperStyles = "", ...other}: Props) {
     return (
         <div className={`form-control ${wrapperStyles}`}>
             <label className="label">

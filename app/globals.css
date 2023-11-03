@@ -116,3 +116,22 @@
 .schedulely .week-layout>div {
     @apply border-none md:border md:border-solid md:border-base-200 relative;
 }
+
+.btn:is(input[type="checkbox"]), .btn:is(input[type="radio"]) {
+    border-radius: 9999px;
+    min-height: 1.5rem;
+    height: 1.5rem;
+}
+
+.btn:is(input[type="checkbox"]:checked), .btn:is(input[type="radio"]:checked) {
+    border-color: hsl(var(--a) / var(--tw-border-opacity));
+    background-color: hsl(var(--a) / var(--tw-bg-opacity));
+    color: hsl(var(--ac) / var(--tw-text-opacity));
+}
+
+@media (hover: hover){
+    .btn:is(input[type="checkbox"]:checked):hover, .btn:is(input[type="radio"]:checked):hover {
+        border-color: hsl(var(--af) / var(--tw-border-opacity));
+        background-color: hsl(var(--af) / var(--tw-bg-opacity));
+    }
+}

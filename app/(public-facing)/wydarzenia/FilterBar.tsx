@@ -70,7 +70,7 @@ export default function FilterBar({ allTags }: Props) {
                             name="tag"
                             value={tag.name}
                             aria-label={tag.name}
-                            className="btn font-normal rounded-full h-6 min-h-6"
+                            className="btn"
                             checked={selectedTags?.includes(tag.name)}
                             onChange={updateTags}
                         />

@@ -19,7 +19,7 @@ export default function Footer() {
                         <div className="relative">
                             <input
                                 type="email"
-                                placeholder="twójmail@poczta.pl"
+                                placeholder="np. twójmail@poczta.pl"
                                 className="input input-bordered w-full pr-24"
                             />
                             <button className="btn btn-neutral absolute top-0 right-0 rounded-l-none">

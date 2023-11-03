@@ -1,5 +1,7 @@
 import { z } from "zod";
 
+const now = new Date();
+
 export function toAccountNumber(value: string): string {
     const onlyNums = value.replace(/[^\d]/g, "");
 
@@ -62,3 +64,55 @@ export const OrgInfoSchema = OrgNameSchema.extend({
         .optional()
         .or(z.literal("")),
 });
+
+export const NewEventSchema = z
+    .object({
+        name: z
+            .string()
+            .min(4, "Nazwa musi składać się z co najmniej 4 znaków")
+            .max(60, "Nazwa nie może być dłuższa niż 60 znaków"),
+        starts_at: z.string().min(1, "Termin wymagany"),
+        ends_at: z.string().min(1, "Termin wymagany"),
+        signups_end_at: z.string().min(1, "Termin wymagany"),
+        max_attendees: z
+            .number()
+            .min(1, "Minimalna wartość to 1 uczestnik")
+            .max(499, "Maksymalny limit to 499 uczestników"),
+        location: z.string().min(4, "Adres nie może być krótszy niż 4 znaki"),
+        latitude: z.number(),
+        longitude: z.number(),
+        description: z.string().max(3000, "Za długi opis"),
+        tags: z
+            .number()
+            .array()
+            .nonempty("Musisz wybrać przynajmniej jeden tag"),
+        timezoneOffset: z.string(),
+    })
+    .refine(
+        (data) =>
+            new Date(`${data.signups_end_at}${data.timezoneOffset}`) > now,
+        {
+            message: "Zapisy muszą być otwarte w momencie tworzenia wydarzenia",
+            path: ["signups_end_at"],
+        }
+    )
+    .refine(
+        (data) =>
+            new Date(`${data.starts_at}${data.timezoneOffset}`) >=
+            new Date(`${data.signups_end_at}${data.timezoneOffset}`),
+        {
+            message:
+                "Wydarzenie musi zaczynać się najwcześniej po zamknięciu zapisów",
+            path: ["starts_at"],
+        }
+    )
+    .refine(
+        (data) =>
+            new Date(`${data.ends_at}${data.timezoneOffset}`) >=
+            new Date(`${data.starts_at}${data.timezoneOffset}`),
+        {
+            message:
+                "Termin zakończenia musi następować po terminie rozpoczęcia",
+            path: ["ends_at"],
+        }
+    );

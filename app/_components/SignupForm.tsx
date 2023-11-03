@@ -110,21 +110,21 @@ export default function SignupForm({returnBack}:Props) {
                 label="Email"
                 error={errors.email?.message}
                 register={register("email")}
-                placeholder="twójmail@poczta.pl"
+                placeholder="np. twójmail@poczta.pl"
             />
             <Input
                 label="Hasło"
                 error={errors.password?.message}
                 register={register("password")}
                 type="password"
-                placeholder="Twoje_hasło_:)"
+                placeholder="np. Twoje_hasło_:)"
             />
             <Input
                 label="Potwierdź hasło"
                 error={errors.confirmPassword?.message}
                 register={register("confirmPassword")}
                 type="password"
-                placeholder="Twoje_hasło_:)"
+                placeholder="np. Twoje_hasło_:)"
             />
 
             <div className="form-control pt-4">

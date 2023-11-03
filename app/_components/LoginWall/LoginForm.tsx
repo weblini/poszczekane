@@ -62,14 +62,14 @@ export default function LoginForm() {
                 label="Email"
                 error={errors.email?.message}
                 register={register("email")}
-                placeholder="twójmail@poczta.pl"
+                placeholder="np. twójmail@poczta.pl"
             />
             <Input
                 label="Hasło"
                 error={errors.password?.message}
                 register={register("password")}
                 type="password"
-                placeholder="Twoje_hasło_:)"
+                placeholder="np. Twoje_hasło_:)"
             />
             <div className="form-control py-2 pt-4">
                 <SubmitButton isLoading={isSubmitting} label="Zaloguj się"/>

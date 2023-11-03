@@ -4,10 +4,9 @@ import Loader from "../_components/Loader";
 
 type Props = {};
 
-
 // lazy load event map
 const ClientOnlyMap = dynamic(() => import("./EventsMap"), {
-    loading: (() => <Loader/>),
+    loading: () => <Loader />,
     ssr: false,
 });
 

@@ -1,19 +1,55 @@
-import AddEventAction from "@/app/_components/AddEvent/AddEventAction";
-import { contactEmail } from "@/app/_utils/metadata";
+import AddEventForm from "@/app/(user-facing)/konto/(organizer-details)/dodaj_wydarzenie/AddEventForm";
+import InfoDiv from "@/app/_components/InfoDiv";
+import { supabaseAnon } from "@/app/_utils/supabase-clients";
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
 
+export default async function Page() {
+    const { data: tags } = await supabaseAnon.from("tags").select();
 
-export default function Page() {
+    if (!tags?.length) {
+        throw "Failed to get available tags";
+    }
 
-    return (
-        <>
-        <p className="text-red-700 font-extrabold">Musi mieć przynajmniej jeden tag!</p>
-            <AddEventAction />
-            <section>
-                <h2>Masz pytania? Potrzebujesz pomocy?</h2>
-                <p>Jeśli masz pytania lub potrzebujesz wsparcia przy tworzeniu wydarzenia, napisz do nas na adres <a href={`mailto:${contactEmail}`} className="link link-hover">{contactEmail}</a>.</p>
-                <p>Mamy nadzieję, że organizacja wydarzeń z naszą pomocą będzie prosta i przyjemna.</p>
-            </section>
-        </>
+    // ! check if user has active account, if not show different screen
 
-    )
+    const supabase = createServerComponentClient<Database>({ cookies });
+
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+        redirect("/");
+    }
+
+    const { data: organizer } = await supabase
+        .from("organizers")
+        .select("id, is_approved")
+        .eq("id", user?.id)
+        .maybeSingle();
+
+    if (!organizer) {
+        redirect("/");
+    }
+
+    if (!organizer.is_approved) {
+        return (
+            <InfoDiv>
+                <h2 className="title-base">
+                    Twoje konto obecnie przechodzi proces zatwierdzania przez
+                    administratora.
+                </h2>
+                <p>
+                    Prosimy o cierpliwość. Nasz zespół dokłada wszelkich starań,
+                    aby sprawdzić Twoje konto jak najszybciej. Gdy tylko
+                    zostanie zatwierdzone, uzyskasz dostęp do publikacji nowych
+                    wydarzeń.
+                </p>
+            </InfoDiv>
+        );
+    }
+
+    return <AddEventForm tags={tags} />;
 }

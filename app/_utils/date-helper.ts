@@ -38,3 +38,21 @@ export const isDatePast = (targetDate: Date) => {
 };
 
 export const todayDateString = new Date().toISOString().split("T")[0];
+
+export function getTimezoneOffset(): string {
+    const offset = new Date().getTimezoneOffset();
+
+    const sign = (offset > 0) ? "-" : "+"
+
+    const absoluteOffset = Math.abs(offset)
+
+    const hours = adjustToISO(Math.floor(absoluteOffset/60))
+
+    const minutes = adjustToISO(absoluteOffset % 60)
+
+    return `${sign}${hours}:${minutes}`
+}
+
+function adjustToISO(value: number): string {
+    return `${value < 10 ? "0" : ""}${value}`
+}

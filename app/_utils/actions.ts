@@ -2,22 +2,17 @@
 
 import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import { EventSignupSchema, OrgInfoSchema, OrgNameSchema } from "./zod-schemas";
+import {
+    EventSignupSchema,
+    NewEventSchema,
+    OrgInfoSchema,
+    OrgNameSchema,
+} from "./zod-schemas";
 import { supabaseAdmin } from "./supabase-clients";
 import { isDatePast } from "./date-helper";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
-
-function createSlug(name: string): string {
-    return name
-        .trim()
-        .toLowerCase()
-        .replace(/ł/gi, "l") // replace ł with l (ł cannot be decomposed)
-        .normalize("NFD") // decompose accented letters into base letters and acents
-        .replace(/[^a-z0-9 ]/g, "") // remove all chars other than (base)letters, numbers and spaces
-        .replace(/\s+/g, "-"); // change spaces to hyphens
-}
 
 export async function upgradeToOrganizer(prevState: any, formData: FormData) {
     const parsed = OrgNameSchema.parse({
@@ -183,19 +178,88 @@ export async function updateOrganizer(formData: z.infer<typeof OrgInfoSchema>) {
         .select();
 
     if (publicError) {
-        return {message: "failed"}
+        return { message: "failed" };
     }
 
     const { error: privateError } = await supabaseAdmin
         .from("organizers_protected")
         .upsert({ account_number: parsed.account_number, id: user.id })
-        .select()
+        .select();
 
     if (privateError) {
-        return {message: "failed"}
+        return { message: "failed" };
     }
 
     revalidatePath("/");
 
-    return {message:"ok"}
+    return { message: "ok" };
+}
+
+export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
+    const supabase = createServerActionClient<Database>({ cookies });
+
+    const {
+        data: { user },
+    } = await supabase.auth.getUser();
+
+    if (!user) {
+        return { message: "Nie masz odpowiednich uprawnień." };
+    }
+
+    // ! check that user is organizer & is active
+    const { data: organizer } = await supabase
+        .from("organizers")
+        .select("id, is_approved")
+        .eq("id", user?.id)
+        .maybeSingle();
+
+    if (!organizer?.is_approved) {
+        return { message: "Nie masz odpowiednich uprawnień." };
+    }
+
+    // parse formData
+    const { tags, ...event } = NewEventSchema.parse(formData);
+
+    //  try to add the event
+    const { data: newEvent } = await supabaseAdmin
+        .from("events")
+        .insert([{ ...event, organizer_id: user.id }])
+        .select()
+        .maybeSingle();
+
+    if (!newEvent) {
+        return { message: "Nie udało się dodać wydarzenia." };
+    }
+
+    // try to add tags
+    const { error: tagError } = await supabaseAdmin
+        .from("event_tags")
+        .insert(
+            tags.map((tag) => ({
+                event_id: newEvent.id,
+                tag_id: tag,
+            }))
+        )
+        .select();
+
+    if (tagError) {
+        const { error } = await supabaseAdmin
+            .from("events")
+            .delete()
+            .eq("id", newEvent.id);
+
+        return { message: "Nie udało się dodać wydarzenia." };
+    }
+
+    return { message: "success" };
+}
+
+function createSlug(name: string): string {
+    return name
+        .trim()
+        .toLowerCase()
+        .replace(/ł/gi, "l") // replace ł with l (ł cannot be decomposed)
+        .normalize("NFD") // decompose accented letters into base letters and acents
+        .replace(/[^a-z0-9 ]/g, "") // remove all chars other than (base)letters, numbers and spaces
+        .replace(/\s+/g, "-"); // change spaces to hyphens
 }
