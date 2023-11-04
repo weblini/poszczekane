@@ -218,16 +218,25 @@ export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
     }
 
     // parse formData
-    const { tags, ...event } = NewEventSchema.parse(formData);
+    const { tags, starts, ends, signupsClose, ...event } =
+        NewEventSchema.parse(formData);
+
+    const newEvent = {
+        ...event,
+        organizer_id: user.id,
+        starts_at: starts.toISOString(),
+        ends_at: ends.toISOString(),
+        signups_end_at: signupsClose.toISOString(),
+    };
 
     //  try to add the event
-    const { data: newEvent } = await supabaseAdmin
+    const { data: createdEvent } = await supabaseAdmin
         .from("events")
-        .insert([{ ...event, organizer_id: user.id }])
+        .insert([newEvent])
         .select()
         .maybeSingle();
 
-    if (!newEvent) {
+    if (!createdEvent) {
         return { message: "Nie udało się dodać wydarzenia." };
     }
 
@@ -236,7 +245,7 @@ export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
         .from("event_tags")
         .insert(
             tags.map((tag) => ({
-                event_id: newEvent.id,
+                event_id: createdEvent.id,
                 tag_id: tag,
             }))
         )
@@ -246,7 +255,7 @@ export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
         const { error } = await supabaseAdmin
             .from("events")
             .delete()
-            .eq("id", newEvent.id);
+            .eq("id", createdEvent.id);
 
         return { message: "Nie udało się dodać wydarzenia." };
     }

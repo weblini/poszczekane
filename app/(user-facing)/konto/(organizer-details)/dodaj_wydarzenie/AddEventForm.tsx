@@ -7,7 +7,6 @@ import Input from "@/app/_components/form-components/Input";
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
 import TextAreaInput from "@/app/_components/form-components/TextAreaInput";
 import { addEvent } from "@/app/_utils/actions";
-import { getTimezoneOffset } from "@/app/_utils/date-helper";
 import { NewEventSchema } from "@/app/_utils/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
@@ -19,13 +18,17 @@ type Props = {
     tags: Tag[];
 };
 
-type Inputs = z.infer<typeof NewEventSchema>;
+export type GeoLocation = {
+    long: number;
+    lat: number;
+};
+
+export type NewEventInputs = z.infer<typeof NewEventSchema>;
 
 const initalData = {
     max_attendees: 1,
-    timezoneOffset: getTimezoneOffset(),
-    tags: []
-}
+    tags: [],
+};
 
 // seperate event map
 const ClientOnlyLocationPicker = dynamic(() => import("./LocationPicker"), {
@@ -34,34 +37,33 @@ const ClientOnlyLocationPicker = dynamic(() => import("./LocationPicker"), {
 });
 
 export default function AddEventForm({ tags }: Props) {
-    const [location, setLocation] = useState("");
-    const [geoPoint, setGeoPoint] = useState<GeoPoint | null>(null);
-
     const [response, setResponse] = useState("");
 
     const {
         register,
         reset,
+        trigger,
         handleSubmit,
         setValue,
-        watch,
+        control,
         formState: { isSubmitting, errors },
-    } = useForm<Inputs>({
+    } = useForm<NewEventInputs>({
         defaultValues: initalData,
         resolver: zodResolver(NewEventSchema),
     });
 
-    const jajo = new Date(watch("starts_at"))
-    console.log({jajo})
-
-    const onSubmit: SubmitHandler<Inputs> = async (data) => {
-        console.log({data})
-
+    const onSubmit: SubmitHandler<NewEventInputs> = async (data) => {
         const result = await addEvent(data);
 
         setResponse(result.message);
         reset();
     };
+
+    const updateGeoLocation = ({ long, lat }: GeoLocation) => {
+        setValue("longitude", long);
+        setValue("latitude", lat);
+    };
+
 
     return (
         <form
@@ -94,24 +96,23 @@ export default function AddEventForm({ tags }: Props) {
                         register={register("name")}
                         error={errors.name?.message}
                     />
-                    <p>{watch('starts_at')}</p>
                     <Input
                         label="Termin rozpoczęcia"
                         type="datetime-local"
-                        register={register("starts_at")}
-                        error={errors.starts_at?.message}
+                        register={register("starts")}
+                        error={errors.starts?.message}
                     />
                     <Input
                         label="Termin zakończenia"
                         type="datetime-local"
-                        register={register("ends_at")}
-                        error={errors.ends_at?.message}
+                        register={register("ends")}
+                        error={errors.ends?.message}
                     />
                     <Input
                         label="Termin zamknięcia zapisów"
                         type="datetime-local"
-                        register={register("signups_end_at")}
-                        error={errors.signups_end_at?.message}
+                        register={register("signupsClose")}
+                        error={errors.signupsClose?.message}
                     />
                 </div>
             </div>
@@ -139,9 +140,12 @@ export default function AddEventForm({ tags }: Props) {
             <div>
                 <h2 className="title-base">Określ lokalizację</h2>
 
-                {/* debounce this and call API for geolocation automatically */}
                 <div className="grid lg:grid-cols-2 gap-2 gap-x-4">
-                    <div className="flex flex-col gap-2">
+                    <ClientOnlyLocationPicker
+                        control={control}
+                        updateGeoLocation={updateGeoLocation}
+                        checkLocation={() => trigger('location')}
+                    >
                         <p>
                             Wprowadź adres miejsca, w którym odbędzie się
                             wydarzenie.
@@ -158,26 +162,7 @@ export default function AddEventForm({ tags }: Props) {
                         >
                             Wyszukiwanie dzięki usłudze CAPAP
                         </a>
-                        {geoPoint && (
-                            <div className="p-4 mt-auto rounded-box bg-base-300/20 border border-base-200">
-                                <MapMarkerDiv>
-                                    <p>
-                                        Jeśli chcesz dostosować dokładną
-                                        lokalizację swojego wydarzenia, złap
-                                        pinezkę i przesuń ją na właściwe miejsce
-                                        na mapie.
-                                    </p>
-                                </MapMarkerDiv>
-                            </div>
-                        )}
-                    </div>
-                    <div className="overflow-hidden rounded-box">
-                        <ClientOnlyLocationPicker
-                            location={location}
-                            geoPoint={geoPoint}
-                            setGeoPoint={setGeoPoint}
-                        />
-                    </div>
+                    </ClientOnlyLocationPicker>
                 </div>
             </div>
 
@@ -188,8 +173,11 @@ export default function AddEventForm({ tags }: Props) {
                     wydarzenie, tym bardziej przyciągniesz uwagę potencjalnych
                     uczestników.
                 </p>
-                <TextAreaInput label="Opis" register={register("description")}
-                            error={errors.description?.message}/>
+                <TextAreaInput
+                    label="Opis"
+                    register={register("description")}
+                    error={errors.description?.message}
+                />
             </div>
 
             <div>
@@ -211,7 +199,9 @@ export default function AddEventForm({ tags }: Props) {
                             />
                         ))}
                 </div>
-                {errors.tags?.message && <p className="text-error text-sm">{errors.tags?.message}</p>}
+                {errors.tags?.message && (
+                    <p className="text-error text-sm">{errors.tags?.message}</p>
+                )}
             </div>
 
             <div className="flex flex-col md:max-w-[200px] md:ml-auto">

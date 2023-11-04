@@ -71,48 +71,42 @@ export const NewEventSchema = z
             .string()
             .min(4, "Nazwa musi składać się z co najmniej 4 znaków")
             .max(60, "Nazwa nie może być dłuższa niż 60 znaków"),
-        starts_at: z.string().min(1, "Termin wymagany"),
-        ends_at: z.string().min(1, "Termin wymagany"),
-        signups_end_at: z.string().min(1, "Termin wymagany"),
+        starts: z.coerce.date({
+            required_error: "Podaj termin rozpoczęcia",
+            invalid_type_error: "Nieprawidłowy format daty",
+        }),
+        ends: z.coerce.date({
+            required_error: "Podaj termin rozpoczęcia",
+            invalid_type_error: "Nieprawidłowy format daty",
+        }),
+        signupsClose: z.coerce.date({
+            required_error: "Podaj termin rozpoczęcia",
+            invalid_type_error: "Nieprawidłowy format daty",
+        }),
         max_attendees: z
             .number()
             .min(1, "Minimalna wartość to 1 uczestnik")
             .max(499, "Maksymalny limit to 499 uczestników"),
-        location: z.string().min(4, "Adres nie może być krótszy niż 4 znaki"),
+        location: z.string().min(6, "Adres nie może być krótszy niż 6 znaków"),
         latitude: z.number(),
         longitude: z.number(),
         description: z.string().max(3000, "Za długi opis"),
-        tags: z
+        tags: z.coerce
             .number()
             .array()
             .nonempty("Musisz wybrać przynajmniej jeden tag"),
-        timezoneOffset: z.string(),
     })
-    .refine(
-        (data) =>
-            new Date(`${data.signups_end_at}${data.timezoneOffset}`) > now,
-        {
-            message: "Zapisy muszą być otwarte w momencie tworzenia wydarzenia",
-            path: ["signups_end_at"],
-        }
-    )
-    .refine(
-        (data) =>
-            new Date(`${data.starts_at}${data.timezoneOffset}`) >=
-            new Date(`${data.signups_end_at}${data.timezoneOffset}`),
-        {
-            message:
-                "Wydarzenie musi zaczynać się najwcześniej po zamknięciu zapisów",
-            path: ["starts_at"],
-        }
-    )
-    .refine(
-        (data) =>
-            new Date(`${data.ends_at}${data.timezoneOffset}`) >=
-            new Date(`${data.starts_at}${data.timezoneOffset}`),
-        {
-            message:
-                "Termin zakończenia musi następować po terminie rozpoczęcia",
-            path: ["ends_at"],
-        }
-    );
+    .refine((data) => data.starts >= data.signupsClose, {
+        message:
+            "Zapisy muszą być zamkniętę najpóźniej z początkiem wydarzenia",
+        path: ["signupsClose"],
+    })
+    .refine((data) => data.ends > data.starts, {
+        message: "Wydarzenie nie może kończyć się wcześniej niż się zaczyna",
+        path: ["ends"],
+    });
+
+export const CapapPointSchema = z.object({
+    type: z.literal("Point"),
+    coordinates: z.number().array().length(2),
+});
