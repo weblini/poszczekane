@@ -6,6 +6,7 @@ import Link from "next/link";
 import InfoText from "@/app/_components/InfoText";
 import PrintDuration from "@/app/_components/time-components/PrintDuration";
 import InteractionButton from "./InteractionButton";
+import EventDescription from "./EventDescription";
 
 type Props = {
     params: { id: string };
@@ -143,7 +144,7 @@ export default async function Page({ params, searchParams }: Props) {
 
             <div className="md:col-span-2">
                 <h2 className="title-base pb-2">Szczegóły</h2>
-                <p>{event.description}</p>
+                {event.description && <EventDescription text={event.description} />}
             </div>
         </main>
     );
