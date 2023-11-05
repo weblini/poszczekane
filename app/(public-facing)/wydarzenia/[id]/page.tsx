@@ -12,7 +12,7 @@ type Props = {
     searchParams: { shcode?: string };
 };
 
-// Build a loading skeleton?
+export const dynamic = 'force-dynamic'
 
 export default async function Page({ params, searchParams }: Props) {
     const supabase = createServerComponentClient<Database>({ cookies });
@@ -78,7 +78,7 @@ export default async function Page({ params, searchParams }: Props) {
                     </p>
                 )}
             </div>
-
+            
             <div
                 className={`card shadow ${
                     event.is_cancelled ? "bg-error/10" : "bg-base-200/50"
@@ -90,7 +90,7 @@ export default async function Page({ params, searchParams }: Props) {
                     )}
 
                     {event.is_cancelled && (
-                        <InfoText isError>
+                        <InfoText category="error">
                             To wydarzenie zostało odwołane!
                         </InfoText>
                     )}

@@ -5,6 +5,12 @@ import { signupUser } from "@/app/_utils/actions";
 import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
 import AlreadySignedupButton from "./AlreadySignedupButton";
+import OnlyForUsers from "@/app/_components/OnlyForUsers";
+import { useRef, useState } from "react";
+import Link from "next/link";
+import Modal from "@/app/_components/Modal";
+import LoginForm from "@/app/_components/login-components/LoginForm";
+import InfoText from "@/app/_components/InfoText";
 
 const initialState = {
     message: null,
@@ -18,8 +24,6 @@ type Props = {
     bottomHint?: React.ReactNode;
 };
 
-// ! show modal on click for not-logged in users, to help with seamless signups
-
 export default function SignUpButton({
     eventId,
     wrapperClasses,
@@ -28,20 +32,52 @@ export default function SignUpButton({
     btnText,
 }: Props) {
     const [state, formAction] = useFormState(signupUser, initialState);
-
-    // once it succeeds return a disabled button with the info
-    if (state.message === "success") {
-        return <AlreadySignedupButton className={wrapperClasses} />;
-    }
+    const loginModal = useRef<HTMLDialogElement | null>(null);
 
     return (
-        <form className={wrapperClasses} action={formAction}>
-            <input hidden name="id" value={eventId} readOnly/>
+        <>
+            <Modal ref={loginModal}>
+                <h3 className="font-bold text-2xl">Zaloguj się</h3>
+                <p className="py-4">
+                    lub{" "}
+                    <Link
+                        href="/rejestracja"
+                        className="link link-hover font-semibold"
+                    >
+                        stwórz nowe konto
+                    </Link>
+                </p>
+                <LoginForm
+                    className="flex flex-col gap-2 max-w-sm mx-auto"
+                    onSuccess={() => loginModal.current?.close()}
+                />
+            </Modal>
 
-            {topHint && <p className="text-sm pb-2">{topHint}</p>}
-            <AddButton label={btnText} />
-            {bottomHint && <p className="text-sm pb-2">{bottomHint}</p>}
-        </form>
+            <form className={wrapperClasses} action={formAction}>
+                {state.message && (
+                    <InfoText category="error" className="pb-2">{state.message}</InfoText>
+                )}
+                <input hidden name="id" value={eventId} readOnly />
+
+                {topHint && <p className="text-sm pb-2">{topHint}</p>}
+
+                <OnlyForUsers
+                    fallback={
+                        <button
+                            className="btn btn-primary"
+                            type="button"
+                            onClick={() => loginModal.current?.showModal()}
+                        >
+                            {btnText}
+                        </button>
+                    }
+                >
+                    <AddButton label={btnText} />
+                </OnlyForUsers>
+
+                {bottomHint && <p className="text-sm pb-2">{bottomHint}</p>}
+            </form>
+        </>
     );
 }
 

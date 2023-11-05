@@ -1,7 +1,6 @@
 "use client";
 
 import FailedUpdateText from "@/app/_components/FailedUpdateText";
-import InfoDiv from "@/app/_components/InfoDiv";
 import Input from "@/app/_components/form-components/Input";
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
 import TextAreaInput from "@/app/_components/form-components/TextAreaInput";

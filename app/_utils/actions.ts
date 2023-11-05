@@ -118,9 +118,7 @@ export async function signupUser(prevState: any, formData: FormData) {
         return { message: "Coś poszło nie tak" };
     }
 
-    // revalidatePath(`/wydarzenia/${parsed.id}`)
-
-    return { message: "success" };
+    revalidatePath(`/wydarzenia/${parsed.id}`)
 }
 
 export async function deleteUser() {

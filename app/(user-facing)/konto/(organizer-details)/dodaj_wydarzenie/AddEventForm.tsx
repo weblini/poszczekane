@@ -73,13 +73,13 @@ export default function AddEventForm({ tags }: Props) {
             {!isSubmitting &&
                 response &&
                 (response === "success" ? (
-                    <InfoDiv>
+                    <InfoDiv category="confirm">
                         <p className="title-base">
                             Twoje wydarzenie zostało dodane!
                         </p>
                     </InfoDiv>
                 ) : (
-                    <InfoDiv isError>
+                    <InfoDiv category="error">
                         <p className="title-base">
                             Przepraszamy, wystąpił błąd:
                         </p>{" "}

@@ -12,7 +12,7 @@ export default function DeleteUser() {
     if (deleteMode) {
         return (
             <div className="pt-2 lg:pt-3">
-                <InfoDiv isError>
+                <InfoDiv category="error">
                     <div>
                         <p className="font-semibold">
                             Czy na pewno chcesz usunąć Twoje konto?

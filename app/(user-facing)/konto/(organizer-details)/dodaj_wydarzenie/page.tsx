@@ -36,7 +36,7 @@ export default async function Page() {
 
     if (!organizer.is_approved) {
         return (
-            <InfoDiv>
+            <InfoDiv category="confirm">
                 <h2 className="title-base">
                     Twoje konto obecnie przechodzi proces zatwierdzania przez
                     administratora.

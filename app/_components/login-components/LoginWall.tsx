@@ -35,7 +35,7 @@ export default function LoginWall() {
                     </p>
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-                    <LoginForm />
+                    <LoginForm className="card-body"/>
                 </div>
             </div>
         </main>

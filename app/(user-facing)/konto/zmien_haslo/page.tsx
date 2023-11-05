@@ -52,7 +52,7 @@ export default function page() {
     return (
         <>
             {hasUpdated && !isSubmitting && (
-                <InfoDiv>
+                <InfoDiv category="confirm">
                     <p>Twoje hasło zostało zmienione.</p>
                 </InfoDiv>
             )}

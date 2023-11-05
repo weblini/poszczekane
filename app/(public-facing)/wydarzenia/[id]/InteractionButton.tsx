@@ -42,8 +42,6 @@ export default async function InteractionButton({
         return <AlreadySignedupButton className={wrapperClasses} />;
     }
 
-    // ! handle signup...
-
     if (isExternal) {
         return (
             <SignUpButton

@@ -12,10 +12,14 @@ import Input from "../form-components/Input";
 import { LoginDataSchema } from "@/app/_utils/zod-schemas";
 import SubmitButton from "../form-components/SubmitButton";
 
+type Props = {
+    className?: string;
+    onSuccess?: () => void;
+};
 
 type Inputs = z.infer<typeof LoginDataSchema>;
 
-export default function LoginForm() {
+export default function LoginForm({ className = "", onSuccess }: Props) {
     const router = useRouter();
     const supabase = createClientComponentClient();
 
@@ -24,6 +28,7 @@ export default function LoginForm() {
     const {
         register,
         handleSubmit,
+        reset,
         formState: { errors, isSubmitting },
     } = useForm<Inputs>({
         resolver: zodResolver(LoginDataSchema),
@@ -38,25 +43,31 @@ export default function LoginForm() {
         if (error) {
             setAuthFailed(true);
         } else {
+            if(onSuccess) {
+                onSuccess();
+            }
             router.refresh();
+            reset();
         }
     };
 
     return (
-        <form className="card-body" onSubmit={handleSubmit(onSubmit)}>
-            {authFailed && <InfoDiv isError>
-                <p className="text-sm">
-                    Niestety, podane dane logowania są niepoprawne. Spróbuj
-                    ponownie lub skorzystaj z{" "}
-                    <Link
-                        href="/resetuj_haslo"
-                        className="link link-hover font-semibold"
-                    >
-                        opcji resetowania hasła
-                    </Link>
-                    .
-                </p>
-            </InfoDiv>}
+        <form className={className} onSubmit={handleSubmit(onSubmit)}>
+            {authFailed && (
+                <InfoDiv category="error">
+                    <p className="text-sm">
+                        Niestety, podane dane logowania są błędne. Spróbuj
+                        ponownie lub skorzystaj z{" "}
+                        <Link
+                            href="/resetuj_haslo"
+                            className="link link-hover font-semibold"
+                        >
+                            opcji resetowania hasła
+                        </Link>
+                        .
+                    </p>
+                </InfoDiv>
+            )}
 
             <Input
                 label="Email"
@@ -72,7 +83,7 @@ export default function LoginForm() {
                 placeholder="np. Twoje_hasło_:)"
             />
             <div className="form-control py-2 pt-4">
-                <SubmitButton isLoading={isSubmitting} label="Zaloguj się"/>
+                <SubmitButton isLoading={isSubmitting} label="Zaloguj się" />
             </div>
 
             <Link

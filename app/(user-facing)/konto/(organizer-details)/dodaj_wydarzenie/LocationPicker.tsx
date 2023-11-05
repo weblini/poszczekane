@@ -72,7 +72,7 @@ export default function LocationPicker({
             <div className="flex flex-col gap-2">
                 {children}
 
-                {error && <InfoText isError>{error}</InfoText>}
+                {error && <InfoText category="error">{error}</InfoText>}
 
                 {!!latitude && !!longitude && (
                     <div className="p-4 mt-auto rounded-box bg-base-300/20 border border-base-200">

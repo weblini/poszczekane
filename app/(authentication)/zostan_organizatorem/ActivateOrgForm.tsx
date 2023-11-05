@@ -22,7 +22,7 @@ function ErrorBox({ children }: { children: React.ReactNode }) {
     const { pending } = useFormStatus();
 
     return (
-        <InfoDiv isError isUpdating={pending}>
+        <InfoDiv category="error" isUpdating={pending}>
             {children}
         </InfoDiv>
     );
