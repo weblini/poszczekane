@@ -15,6 +15,7 @@ import { z } from "zod";
 
 type Props = {
     tags: Tag[];
+    mapKey: string;
 };
 
 export type GeoLocation = {
@@ -35,7 +36,7 @@ const ClientOnlyLocationPicker = dynamic(() => import("./LocationPicker"), {
     ssr: false,
 });
 
-export default function AddEventForm({ tags }: Props) {
+export default function AddEventForm({ tags, mapKey }: Props) {
     const [response, setResponse] = useState("");
 
     const {
@@ -126,6 +127,7 @@ export default function AddEventForm({ tags }: Props) {
                         control={control}
                         updateGeoLocation={updateGeoLocation}
                         checkLocation={() => trigger("location")}
+                        mapKey={mapKey}
                     >
                         <p>
                             Wprowadź adres miejsca, w którym odbędzie się

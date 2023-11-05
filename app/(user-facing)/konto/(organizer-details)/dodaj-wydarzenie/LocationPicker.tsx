@@ -15,6 +15,7 @@ type Props = {
     updateGeoLocation: (point: GeoLocation) => void;
     checkLocation: () => Promise<boolean>;
     children: React.ReactNode;
+    mapKey: string;
 };
 
 export default function LocationPicker({
@@ -22,6 +23,7 @@ export default function LocationPicker({
     updateGeoLocation,
     checkLocation,
     children,
+    mapKey
 }: Props) {
    
     const {latitude, longitude, isUpdating, error, updatePin} = useLocationSearch({control, updateGeoLocation, checkLocation})
@@ -91,7 +93,7 @@ export default function LocationPicker({
             <div
                 className="overflow-hidden rounded-box"
             >
-                <BaseMap>{marker}</BaseMap>
+                <BaseMap mapKey={mapKey}>{marker}</BaseMap>
             </div>
         </>
     );

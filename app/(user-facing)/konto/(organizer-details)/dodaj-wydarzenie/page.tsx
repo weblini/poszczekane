@@ -62,7 +62,7 @@ export default async function Page() {
                     Pokaż opublikowane wydarzenia
                 </Link>
             </div>
-            <AddEventForm tags={tags} />
+            <AddEventForm tags={tags} mapKey={process.env.NEXT_PUBLIC_MAPTILER_KEY || ""} />
         </>
     );
 }

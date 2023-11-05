@@ -7,6 +7,7 @@ import { MaptilerLogoControl } from "@maptiler/sdk";
 type Props = {
     children: React.ReactNode;
     height?: string | number;
+    mapKey: string
 };
 
 const mapTilerMapId = "30d1bbf8-6e86-4004-96db-52701a6efe5d";
@@ -14,7 +15,7 @@ const mapTilerMapId = "30d1bbf8-6e86-4004-96db-52701a6efe5d";
 // GeoPoint is [longitude, latitude], same as CAPAP
 const plCenter: GeoPoint = [19.424, 52.114];
 
-export default function BaseMap({ children, height = 400 }: Props) {
+export default function BaseMap({ children, height = 400, mapKey }: Props) {
     return (
         <Map
             initialViewState={{
@@ -23,7 +24,7 @@ export default function BaseMap({ children, height = 400 }: Props) {
                 zoom: 4.8,
             }}
             style={{ width: "100%", height: height }}
-            mapStyle={`https://api.maptiler.com/maps/${mapTilerMapId}/style.json?key=${process.env.NEXT_PUBLIC_MAPTILER_KEY}`}
+            mapStyle={`https://api.maptiler.com/maps/${mapTilerMapId}/style.json?key=${mapKey}`}
             minZoom={4}
             maxPitch={0}
             touchPitch={false}

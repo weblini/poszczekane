@@ -13,9 +13,10 @@ type Props = {
         longitude: number;
         latitude: number;
     })[];
+    mapKey: string;
 };
 
-export default function EventsMap({ events }: Props) {
+export default function EventsMap({ events, mapKey }: Props) {
     if (!events?.length) {
         return null;
     }
@@ -73,7 +74,9 @@ export default function EventsMap({ events }: Props) {
     return (
         <div className="grid lg:grid-cols-5 gap-4">
             <div className="lg:col-span-3 h-[400px] lg:h-full lg:rounded-box overflow-hidden">
-                <BaseMap height="100%">{markers}</BaseMap>
+                <BaseMap height="100%" mapKey={mapKey}>
+                    {markers}
+                </BaseMap>
             </div>
 
             <div className="lg:col-span-2 lg:h-[500px] px-[5vw] lg:p-0">

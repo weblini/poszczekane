@@ -25,5 +25,10 @@ export default async function GeoEventsLoader({}: Props) {
         return null;
     }
 
-    return <ClientOnlyMap events={geoEvents} />;
+    return (
+        <ClientOnlyMap
+            events={geoEvents}
+            mapKey={process.env.NEXT_PUBLIC_MAPTILER_KEY || ""}
+        />
+    );
 }
