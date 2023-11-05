@@ -30,7 +30,7 @@ export default function Footer() {
                 </div>
                 <div>
                     <span className="footer-title">Informacje</span>
-                    <Link href="/jak_to_dziala" className="link link-hover">
+                    <Link href="/jak-to-dziala" className="link link-hover">
                         Jak to działa
                     </Link>
                     <Link href="/regulamin" className="link link-hover">
@@ -45,9 +45,9 @@ export default function Footer() {
                 </div>
                 <div>
                     <span className="footer-title">Dla organizatorów</span>
-                    <OnlyForOrganizers fallback={<Link href="/zostan_organizatorem" className="link link-hover">Zostań organizatorem</Link>}>
+                    <OnlyForOrganizers fallback={<Link href="/zostan-organizatorem" className="link link-hover">Zostań organizatorem</Link>}>
                         <Link
-                            href="/konto/dane_organizatorskie"
+                            href="/konto/dane-organizatorskie"
                             className="link link-hover"
                         >
                             Zarządzaj danymi
@@ -57,7 +57,7 @@ export default function Footer() {
                         Współpraca
                     </Link>
                     <Link
-                        href="/jak_dodac_wydarzenie"
+                        href="/jak-dodac-wydarzenie"
                         className="link link-hover"
                     >
                         Jak dodać wydarzenie

@@ -96,7 +96,7 @@ export async function signupUser(prevState: any, formData: FormData) {
     // requires fee and is not external
     if (!event.external_url && !!event.fee_pln) {
         // ! handle payment
-        throw Error("Payed internal events are not yet supported");
+        throw Error("Zapisy na płatne wydarzenia są aktualnie niedostępne");
     }
 
     // try to create signup

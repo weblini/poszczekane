@@ -9,7 +9,7 @@ Cieszymy się, że chcesz dodać wydarzenie na naszej platformie! Oto kroki, kt�
 
 Zacznij od zalogowania się na swoje konto. 
 
-Jeśli nie masz jeszcze aktywnego konta organizatora, [stwórz je teraz](/zostan_organizatorem). To niezbędny krok, aby dodać nowe wydarzenie.
+Jeśli nie masz jeszcze aktywnego konta organizatora, [stwórz je teraz](/zostan-organizatorem). To niezbędny krok, aby dodać nowe wydarzenie.
 
 ## Krok 2: Rozpocznij tworzenie wydarzenia
 

@@ -24,7 +24,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
             </h1>
 
             <OnlyForOrganizers matchingId={organizer.id}>
-                <Link href="/konto/dane_organizatorskie" className="btn btn-sm">
+                <Link href="/konto/dane-organizatorskie" className="btn btn-sm">
                     Edytuj dane
                 </Link>
             </OnlyForOrganizers>

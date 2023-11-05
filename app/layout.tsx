@@ -48,7 +48,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                 </>
             )}>
             <OnlyForOrganizers>
-                <Link href="/konto/dodaj_wydarzenie" className='btn btn-secondary max-lg:w-full'>Dodaj wydarzenie</Link>
+                <Link href="/konto/dodaj-wydarzenie" className='btn btn-secondary max-lg:w-full'>Dodaj wydarzenie</Link>
             </OnlyForOrganizers>
             <LogoutButton />
         </OnlyForUsers>
@@ -92,7 +92,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                                         <div className="mb-6"><EventSearchBar fieldId='main-search-form' /></div>
                                         <div className='mt-auto flex flex-col gap-3'>
                                             <ul className="menu p-0">
-                                                <li><Link href="/jak_to_dziala">Jak to działa</Link></li>
+                                                <li><Link href="/jak-to-dziala">Jak to działa</Link></li>
                                                 <li><Link href="/wspolpraca">Współpraca</Link></li>
                                                 <li><Link href="/kontakt">Kontakt</Link></li>
                                             </ul>

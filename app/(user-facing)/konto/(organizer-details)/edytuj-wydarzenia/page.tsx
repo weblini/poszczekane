@@ -28,7 +28,7 @@ export default async function Page() {
                 wydarzeniami w prosty i wygodny sposób.
             </p>
 
-            <Link href="/konto/dodaj_wydarzenie" className="btn btn-square">
+            <Link href="/konto/dodaj-wydarzenie" className="btn btn-square">
                 <svg
                     className="v-6 h-6 fill-base-content/80"
                     viewBox="0 -960 960 960"

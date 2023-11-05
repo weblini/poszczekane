@@ -1,8 +1,9 @@
-import AddEventForm from "@/app/(user-facing)/konto/(organizer-details)/dodaj_wydarzenie/AddEventForm";
+import AddEventForm from "@/app/(user-facing)/konto/(organizer-details)/dodaj-wydarzenie/AddEventForm";
 import InfoDiv from "@/app/_components/InfoDiv";
 import { supabaseAnon } from "@/app/_utils/supabase-clients";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
 export default async function Page() {
@@ -51,5 +52,10 @@ export default async function Page() {
         );
     }
 
-    return <AddEventForm tags={tags} />;
+    return (
+        <>
+        <div className="flex"><Link href="/konto/edytuj-wydarzenia" className="btn btn-link text-base-content">Przejdź do listy wydarzeń</Link></div>
+        <AddEventForm tags={tags} />
+        </>
+    );
 }

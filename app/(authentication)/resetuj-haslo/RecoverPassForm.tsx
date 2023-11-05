@@ -30,7 +30,7 @@ export default function RecoverPassForm() {
 
     const onSubmit: SubmitHandler<Inputs> = async (data) => {
         await supabase.auth.resetPasswordForEmail(data.email, {
-            redirectTo: `${location.origin}/auth/callback?next=/konto/zmien_haslo`,
+            redirectTo: `${location.origin}/auth/callback?next=/konto/zmien-haslo`,
         });
 
         setIsSent(true);

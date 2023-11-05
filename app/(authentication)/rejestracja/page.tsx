@@ -23,7 +23,7 @@ export default function Page() {
                         przygody.
                     </h1>
                     <Link
-                        href="/jak_to_dziala"
+                        href="/jak-to-dziala"
                         className="link link-hover text-sm font-semibold py-1"
                     >
                         Zobacz dlaczego warto do nas dołączyć!

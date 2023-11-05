@@ -22,7 +22,7 @@ export default async function Page() {
             .eq("id", user.id)
             .maybeSingle();
         if (organizer) {
-            redirect("/konto/dane_organizatorskie");
+            redirect("/konto/dane-organizatorskie");
         }
     }
 
@@ -57,7 +57,7 @@ export default async function Page() {
                     </p>
                     <p className="pt-2">
                         <Link
-                            href="/jak_dodac_wydarzenie"
+                            href="/jak-dodac-wydarzenie"
                             className="link link-hover text-sm font-semibold"
                         >
                             Zobacz jak dodać wydarzenie.

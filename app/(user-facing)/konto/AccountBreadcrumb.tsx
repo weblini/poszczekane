@@ -22,7 +22,7 @@ export default function AccountBreadcrumb() {
 
     let pageTitle = ''
 
-    if (lastPart === "zmien_haslo") {
+    if (lastPart === "zmien-haslo") {
         pageTitle = "Zmień hasło"
     } else {
         pageTitle = (lastPart.charAt(0).toUpperCase() + lastPart.slice(1)).replace("_", " ");

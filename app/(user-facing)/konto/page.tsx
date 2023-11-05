@@ -20,7 +20,7 @@ export default function Page() {
                     desc="Zaktualizuj swoje hasło, aby zapewnić bezpieczeństwo
                     Twojego konta."
                     action={
-                        <Link href="/konto/zmien_haslo" className="btn">
+                        <Link href="/konto/zmien-haslo" className="btn">
                             Zmień hasło
                         </Link>
                     }
@@ -45,7 +45,7 @@ export default function Page() {
                         desc="Edytuj informacje organizatorskie, takie jak dane kontaktowe, opis czy numer konta bankowego do rozliczeń"
                         action={
                             <Link
-                                href="/konto/dane_organizatorskie"
+                                href="/konto/dane-organizatorskie"
                                 className="btn"
                             >
                                 Edytuj dane organizatorskie
@@ -58,7 +58,7 @@ export default function Page() {
                         desc="Zarządzaj organizowanymi przez Ciebie wydarzeniami."
                         action={
                             <Link
-                                href="/konto/edytuj_wydarzenia"
+                                href="/konto/edytuj-wydarzenia"
                                 className="btn"
                             >
                                 Przejdź do listy wydarzeń
