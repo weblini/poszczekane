@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { formatEventDate } from "../_utils/date-helper";
 import PrintSimpleDuration from "./time-components/PrintSimpleDuration";
 import InfoText from "./InfoText";
 
@@ -84,7 +83,7 @@ export default function EventCard({
 
                 {children}
 
-                {event.organizers && (
+                {event.organizers && !event.external_url && (
                     <p className="text-sm mt-auto grow-0">
                         Organizator:{" "}
                         <Link

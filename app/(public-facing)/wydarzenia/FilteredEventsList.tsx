@@ -17,7 +17,7 @@ export default async function FilteredEventsList({ date, tags, page }: Props) {
     let supaQuery = supabaseAnon
         .from("events")
         .select(
-            "name, starts_at, ends_at, id, organizers( name, slug ), tags( name ), filter_tags:tags!inner(name)",
+            "name, starts_at, ends_at, id, external_url, organizers( name, slug ), tags( name ), filter_tags:tags!inner(name)",
             { count: "exact" }
         );
 
