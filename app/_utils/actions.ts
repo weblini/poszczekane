@@ -88,8 +88,8 @@ export async function signupUser(prevState: any, formData: FormData) {
         return { message: "Zapisy zamknięte" };
     }
 
-    // no spots available
-    if (event.max_attendees && event.max_attendees <= event.signups.length) {
+    // no spots available and is not external
+    if (!event.external_url && event.max_attendees && event.max_attendees <= event.signups.length) {
         return { message: "Brak wolnych miejsc" };
     }
 
