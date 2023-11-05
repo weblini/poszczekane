@@ -207,6 +207,7 @@ export default function AddEventForm({ tags }: Props) {
                 <SubmitButton
                     label="Opublikuj wydarzenie"
                     isLoading={isSubmitting}
+                    isSecondary
                 />
             </div>
         </form>
