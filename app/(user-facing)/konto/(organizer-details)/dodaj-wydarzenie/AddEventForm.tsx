@@ -63,29 +63,11 @@ export default function AddEventForm({ tags }: Props) {
         setValue("latitude", lat);
     };
 
-
     return (
         <form
             className="flex gap-8 lg:gap-16 flex-col"
             onSubmit={handleSubmit(onSubmit)}
         >
-            {!isSubmitting &&
-                response &&
-                (response === "success" ? (
-                    <InfoDiv category="confirm">
-                        <p className="title-base">
-                            Twoje wydarzenie zostało dodane!
-                        </p>
-                    </InfoDiv>
-                ) : (
-                    <InfoDiv category="error">
-                        <p className="title-base">
-                            Przepraszamy, wystąpił błąd:
-                        </p>{" "}
-                        <p>{response}</p>
-                    </InfoDiv>
-                ))}
-
             <div>
                 <h2 className="title-base">Wypełnij podstawowe informacje</h2>
                 <div className="grid gap-2 md:grid-cols-2 gap-x-4">
@@ -143,7 +125,7 @@ export default function AddEventForm({ tags }: Props) {
                     <ClientOnlyLocationPicker
                         control={control}
                         updateGeoLocation={updateGeoLocation}
-                        checkLocation={() => trigger('location')}
+                        checkLocation={() => trigger("location")}
                     >
                         <p>
                             Wprowadź adres miejsca, w którym odbędzie się
@@ -210,6 +192,23 @@ export default function AddEventForm({ tags }: Props) {
                     isSecondary
                 />
             </div>
+            
+            {!isSubmitting &&
+                response &&
+                (response === "success" ? (
+                    <InfoDiv category="confirm">
+                        <p className="title-base">
+                            Twoje wydarzenie zostało dodane!
+                        </p>
+                    </InfoDiv>
+                ) : (
+                    <InfoDiv category="error">
+                        <p className="title-base">
+                            Przepraszamy, wystąpił błąd:
+                        </p>{" "}
+                        <p>{response}</p>
+                    </InfoDiv>
+                ))}
         </form>
     );
 }
