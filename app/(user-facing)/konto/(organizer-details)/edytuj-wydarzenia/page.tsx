@@ -46,9 +46,12 @@ export default async function Page() {
                                 event={event}
                                 buttons={
                                     <>
-                                        <button className="btn btn-error btn-outline">
-                                            Odwołaj
-                                        </button>
+                                        {!event.is_cancelled && (
+                                            <button className="btn btn-error btn-outline mr-auto">
+                                                Odwołaj
+                                            </button>
+                                        )}
+
                                         <button className="btn">
                                             Dane uczestników
                                         </button>

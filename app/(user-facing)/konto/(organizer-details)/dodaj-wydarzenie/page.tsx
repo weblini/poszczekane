@@ -54,8 +54,15 @@ export default async function Page() {
 
     return (
         <>
-        <div className="flex"><Link href="/konto/edytuj-wydarzenia" className="btn btn-link text-base-content">Przejdź do listy wydarzeń</Link></div>
-        <AddEventForm tags={tags} />
+            <div className="flex">
+                <Link
+                    href="/konto/edytuj-wydarzenia"
+                    className="btn max-sm:btn-ghost max-sm:text-right max-w-[200px] ml-auto"
+                >
+                    Pokaż opublikowane wydarzenia
+                </Link>
+            </div>
+            <AddEventForm tags={tags} />
         </>
     );
 }

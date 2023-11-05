@@ -25,7 +25,7 @@ export default function AccountBreadcrumb() {
     if (lastPart === "zmien-haslo") {
         pageTitle = "Zmień hasło"
     } else {
-        pageTitle = (lastPart.charAt(0).toUpperCase() + lastPart.slice(1)).replace("_", " ");
+        pageTitle = (lastPart.charAt(0).toUpperCase() + lastPart.slice(1)).replace("-", " ");
     }
 
     return (

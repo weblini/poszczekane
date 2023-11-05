@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { formatEventDate } from "../_utils/date-helper";
 import PrintSimpleDuration from "./time-components/PrintSimpleDuration";
+import InfoText from "./InfoText";
 
 interface EventCardProps {
     event: Partial<AppEvent> & { name: string; id: number };
@@ -19,11 +20,9 @@ export default function EventCard({
         <div
             className={`card bg-base-100 shadow w-full relative ${extraClasses}`}
         >
-            <div
-                className={`card-body ${
-                    event.is_cancelled ? "opacity-70" : ""
-                }`}
-            >
+            <div className="card-body">
+                {event.is_cancelled && <InfoText category="error">Odwołane</InfoText>}
+
                 {!!event.tags?.length && (
                     <div className="flex flex-wrap gap-2">
                         {event.tags.map((tag) => (
@@ -60,7 +59,10 @@ export default function EventCard({
                                 >
                                     <path d="M16 13h-3c-.55 0-1 .45-1 1v3c0 .55.45 1 1 1h3c.55 0 1-.45 1-1v-3c0-.55-.45-1-1-1zm0-10v1H8V3c0-.55-.45-1-1-1s-1 .45-1 1v1H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2h-1V3c0-.55-.45-1-1-1s-1 .45-1 1zm2 17H6c-.55 0-1-.45-1-1V9h14v10c0 .55-.45 1-1 1z" />
                                 </svg>
-                                <PrintSimpleDuration startStamp={event.starts_at} endStamp={event.ends_at} />
+                                <PrintSimpleDuration
+                                    startStamp={event.starts_at}
+                                    endStamp={event.ends_at}
+                                />
                             </p>
                         )}
                         {event.location && (
@@ -95,7 +97,7 @@ export default function EventCard({
                 )}
 
                 {buttons && (
-                    <div className="card-actions justify-between">
+                    <div className="card-actions justify-end">
                         {buttons}
                     </div>
                 )}
