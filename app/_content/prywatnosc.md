@@ -45,7 +45,7 @@ Masz prawo do dostępu, poprawiania i usuwania swoich danych osobowych. Możesz 
 
 ## Kontakt z Nami
 
-Jeśli masz jakiekolwiek pytania dotyczące naszej Polityki Prywatności lub sposobu przetwarzania danych osobowych, prosimy o kontakt na adres [prywatnosc@poszczekane.pl](mailto:prywatnosc@poszczekane.pl) .
+Jeśli masz jakiekolwiek pytania dotyczące naszej Polityki Prywatności lub sposobu przetwarzania danych osobowych, prosimy o kontakt na adres [kontakt@poszczekane.pl](mailto:kontakt@poszczekane.pl) .
 
 ---
 
