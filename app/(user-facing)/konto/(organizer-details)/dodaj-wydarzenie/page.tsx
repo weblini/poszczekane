@@ -54,7 +54,7 @@ export default async function Page() {
 
     return (
         <>
-            <div className="flex">
+            <div className="flex pb-2">
                 <Link
                     href="/konto/edytuj-wydarzenia"
                     className="btn max-sm:btn-ghost max-sm:text-right max-w-[200px] ml-auto"
