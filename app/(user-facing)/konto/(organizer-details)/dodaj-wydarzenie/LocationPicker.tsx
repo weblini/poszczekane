@@ -24,7 +24,7 @@ export default function LocationPicker({
     children,
 }: Props) {
    
-    const {latitude, longitude, isUpdating, error} = useLocationSearch({control, updateGeoLocation, checkLocation})
+    const {latitude, longitude, isUpdating, error, updatePin} = useLocationSearch({control, updateGeoLocation, checkLocation})
 
     const marker = useMemo(() => {
         if (!latitude || !longitude) {
@@ -72,6 +72,8 @@ export default function LocationPicker({
             <div className="flex flex-col gap-2">
                 {children}
 
+                <button type="button" className={`btn ${isUpdating ? "btn-disabled" : "btn-primary"}`} aria-disabled={isUpdating} onClick={updatePin}>{isUpdating && <span className="loading loading-spinner"></span>}Znajdź na mapie</button>
+
                 {error && <InfoText category="error">{error}</InfoText>}
 
                 {!!latitude && !!longitude && (
@@ -87,9 +89,7 @@ export default function LocationPicker({
                 )}
             </div>
             <div
-                className={`overflow-hidden rounded-box ${
-                    isUpdating ? "animate-pulse" : ""
-                }`}
+                className="overflow-hidden rounded-box"
             >
                 <BaseMap>{marker}</BaseMap>
             </div>
