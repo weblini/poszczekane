@@ -1,4 +1,4 @@
-import { CapapPointSchema } from "@/app/_utils/zod-schemas";
+import { CapapPointSchema } from "app/_utils/zod-schemas";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { useWatch, useFormState, Control } from "react-hook-form";
 import { GeoLocation, NewEventInputs } from "./AddEventForm";

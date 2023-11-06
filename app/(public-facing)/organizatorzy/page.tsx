@@ -1,11 +1,11 @@
-import BecomeOrganizer from "@/app/_components/BecomeOrganizer";
-import { metaTitle } from "@/app/_utils/metadata";
+import BecomeOrganizer from "app/_components/BecomeOrganizer";
+import { metaTitle } from "app/_utils/metadata";
 import { Suspense } from "react";
 import OrganizerList from "./OrganizerList";
-import Loader from "@/app/_components/Loader";
+import Loader from "app/_components/Loader";
 import Image from "next/image";
-import bgImg from "@/app/images/organizers1.jpg";
-import InfoText from "@/app/_components/InfoText";
+import bgImg from "app/images/organizers1.jpg";
+import InfoText from "app/_components/InfoText";
 
 export const metadata = {
     title: metaTitle("Organizatorzy"),

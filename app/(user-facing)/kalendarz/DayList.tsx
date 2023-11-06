@@ -1,7 +1,7 @@
-import EventCard from "@/app/_components/EventCard";
+import EventCard from "app/_components/EventCard";
 import { CalenderedAppEvent } from "./EventsCalendar";
 import { DateTimeAdapter } from "schedulely";
-import InfoDiv from "@/app/_components/InfoDiv";
+import InfoDiv from "app/_components/InfoDiv";
 import Link from "next/link";
 import { nullable } from "zod";
 

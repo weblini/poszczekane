@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import bgImg from "@/app/images/sniffing1.jpg";
+import bgImg from "app/images/sniffing1.jpg";
 
 type Props = {};
 

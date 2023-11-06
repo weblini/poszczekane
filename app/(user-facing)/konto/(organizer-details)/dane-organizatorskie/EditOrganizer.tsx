@@ -1,11 +1,11 @@
 "use client";
 
-import FailedUpdateText from "@/app/_components/FailedUpdateText";
-import Input from "@/app/_components/form-components/Input";
-import SubmitButton from "@/app/_components/form-components/SubmitButton";
-import TextAreaInput from "@/app/_components/form-components/TextAreaInput";
-import { updateOrganizer } from "@/app/_utils/actions";
-import { OrgInfoSchema, toAccountNumber } from "@/app/_utils/zod-schemas";
+import FailedUpdateText from "app/_components/FailedUpdateText";
+import Input from "app/_components/form-components/Input";
+import SubmitButton from "app/_components/form-components/SubmitButton";
+import TextAreaInput from "app/_components/form-components/TextAreaInput";
+import { updateOrganizer } from "app/_utils/actions";
+import { OrgInfoSchema, toAccountNumber } from "app/_utils/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import type { ChangeEvent } from "react";

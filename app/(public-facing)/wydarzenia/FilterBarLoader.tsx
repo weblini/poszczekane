@@ -1,4 +1,4 @@
-import { supabaseAnon } from "@/app/_utils/supabase-clients";
+import { supabaseAnon } from "app/_utils/supabase-clients";
 import FilterBar from "./FilterBar";
 
 export default async function FilterBarLoader() {

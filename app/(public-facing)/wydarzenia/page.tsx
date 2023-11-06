@@ -1,10 +1,10 @@
-import EventSearchBar from "@/app/_components/EventSearchBar";
-import { metaTitle } from "@/app/_utils/metadata";
+import EventSearchBar from "app/_components/EventSearchBar";
+import { metaTitle } from "app/_utils/metadata";
 import Image from "next/image";
-import searchImg from "@/app/images/ball1.jpg";
+import searchImg from "app/images/ball1.jpg";
 import FilteredEventsList from "./FilteredEventsList";
 import { Suspense } from "react";
-import Loader from "@/app/_components/Loader";
+import Loader from "app/_components/Loader";
 import FilterBarLoader from "./FilterBarLoader";
 import FilterBar from "./FilterBar";
 

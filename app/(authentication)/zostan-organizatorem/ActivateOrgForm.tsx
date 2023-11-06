@@ -1,8 +1,8 @@
 "use client";
 
-import InfoDiv from "@/app/_components/InfoDiv";
-import SubmitButton from "@/app/_components/form-components/SubmitButton";
-import { upgradeToOrganizer } from "@/app/_utils/actions";
+import InfoDiv from "app/_components/InfoDiv";
+import SubmitButton from "app/_components/form-components/SubmitButton";
+import { upgradeToOrganizer } from "app/_utils/actions";
 import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
 

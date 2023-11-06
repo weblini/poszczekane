@@ -1,8 +1,8 @@
-import EventCard from "@/app/_components/EventCard";
-import InfoDiv from "@/app/_components/InfoDiv";
-import { getStartOfDayDate } from "@/app/_utils/date-helper";
-import { supabaseAnon } from "@/app/_utils/supabase-clients";
-import { getEventsUrl } from "@/app/_utils/url-query";
+import EventCard from "app/_components/EventCard";
+import InfoDiv from "app/_components/InfoDiv";
+import { getStartOfDayDate } from "app/_utils/date-helper";
+import { supabaseAnon } from "app/_utils/supabase-clients";
+import { getEventsUrl } from "app/_utils/url-query";
 import { count } from "console";
 import Link from "next/link";
 

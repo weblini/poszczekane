@@ -1,7 +1,7 @@
-import SignupForm from "@/app/_components/SignupForm";
+import SignupForm from "app/_components/SignupForm";
 import Link from "next/link";
 import Image from "next/image";
-import bgImg from "@/app/images/jointeam1.jpg";
+import bgImg from "app/images/jointeam1.jpg";
 import { cookies } from "next/headers";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";

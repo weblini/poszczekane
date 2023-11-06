@@ -1,8 +1,8 @@
-import EventCard from "@/app/_components/EventCard";
-import EventCardDisplay from "@/app/_components/EventCardDisplay";
-import InfoDiv from "@/app/_components/InfoDiv";
-import OnlyForOrganizers from "@/app/_components/OnlyForOrganizers";
-import { supabaseAnon } from "@/app/_utils/supabase-clients";
+import EventCard from "app/_components/EventCard";
+import EventCardDisplay from "app/_components/EventCardDisplay";
+import InfoDiv from "app/_components/InfoDiv";
+import OnlyForOrganizers from "app/_components/OnlyForOrganizers";
+import { supabaseAnon } from "app/_utils/supabase-clients";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 

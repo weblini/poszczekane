@@ -1,6 +1,6 @@
 "use client";
 
-import { isDateBetween, timeFormatter } from "@/app/_utils/date-helper";
+import { isDateBetween, timeFormatter } from "app/_utils/date-helper";
 
 type Props = {
     startStamp: string;

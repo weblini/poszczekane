@@ -1,4 +1,4 @@
-import OnlyForOrganizers from "@/app/_components/OnlyForOrganizers";
+import OnlyForOrganizers from "app/_components/OnlyForOrganizers";
 import Link from "next/link";
 import SettingWrapper from "./SettingWrapper";
 import EditUser from "./EditUser";

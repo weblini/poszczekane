@@ -5,7 +5,7 @@ import Markdown from "markdown-to-jsx";
 import React from "react";
 import { notFound } from "next/navigation";
 import type { Metadata, ResolvingMetadata } from "next";
-import { metaTitle } from "@/app/_utils/metadata";
+import { metaTitle } from "app/_utils/metadata";
 
 type FrontMatter = {
     title: string;

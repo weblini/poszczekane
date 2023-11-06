@@ -1,6 +1,6 @@
-import AddEventForm from "@/app/(user-facing)/konto/(organizer-details)/dodaj-wydarzenie/AddEventForm";
-import InfoDiv from "@/app/_components/InfoDiv";
-import { supabaseAnon } from "@/app/_utils/supabase-clients";
+import AddEventForm from "app/(user-facing)/konto/(organizer-details)/dodaj-wydarzenie/AddEventForm";
+import InfoDiv from "app/_components/InfoDiv";
+import { supabaseAnon } from "app/_utils/supabase-clients";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";

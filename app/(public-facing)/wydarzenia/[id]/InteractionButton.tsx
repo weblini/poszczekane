@@ -1,4 +1,4 @@
-import PrintLocalTime from "@/app/_components/time-components/PrintLocalTime";
+import PrintLocalTime from "app/_components/time-components/PrintLocalTime";
 import Link from "next/link";
 import AlreadySignedupButton from "./AlreadySignedupButton";
 import SignUpButton from "./SignupButton";

@@ -1,5 +1,5 @@
 import Image from "next/image";
-import bgImg from "@/app/images/recover1.jpg";
+import bgImg from "app/images/recover1.jpg";
 import RecoverPassForm from "./RecoverPassForm";
 
 export default function Page() {

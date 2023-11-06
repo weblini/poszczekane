@@ -1,4 +1,4 @@
-import type { Database as DB } from "@/app/_types/supabase";
+import type { Database as DB } from "app/_types/supabase";
 import { SupabaseClient } from "@supabase/supabase-js";
 
 declare global {

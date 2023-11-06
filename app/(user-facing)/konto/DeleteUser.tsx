@@ -1,7 +1,7 @@
 "use client";
 
-import InfoDiv from "@/app/_components/InfoDiv";
-import { deleteUser } from "@/app/_utils/actions";
+import InfoDiv from "app/_components/InfoDiv";
+import { deleteUser } from "app/_utils/actions";
 import { useState } from "react";
 
 const warningText = "Pamiętaj, że usunięcie konta jest nieodwracalne.";

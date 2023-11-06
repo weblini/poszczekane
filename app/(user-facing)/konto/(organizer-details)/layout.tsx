@@ -1,6 +1,6 @@
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
-import ActivateOrgForm from "@/app/(authentication)/zostan-organizatorem/ActivateOrgForm";
+import ActivateOrgForm from "app/(authentication)/zostan-organizatorem/ActivateOrgForm";
 
 export default async function Layout({
     children,

@@ -1,10 +1,10 @@
-import { supabaseAdmin } from "@/app/_utils/supabase-clients";
+import { supabaseAdmin } from "app/_utils/supabase-clients";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import InfoText from "@/app/_components/InfoText";
-import PrintDuration from "@/app/_components/time-components/PrintDuration";
+import InfoText from "app/_components/InfoText";
+import PrintDuration from "app/_components/time-components/PrintDuration";
 import InteractionButton from "./InteractionButton";
 import EventDescription from "./EventDescription";
 

@@ -1,13 +1,13 @@
 "use client";
 
-import BaseMap from "@/app/_components/BaseMap";
+import BaseMap from "app/_components/BaseMap";
 import { useMemo } from "react";
 import { Control} from "react-hook-form";
 import { Marker } from "react-map-gl/maplibre";
 import { NewEventInputs } from "./AddEventForm";
 import type { GeoLocation } from "./AddEventForm";
-import MapMarkerDiv from "@/app/_components/MapMarkerDiv";
-import InfoText from "@/app/_components/InfoText";
+import MapMarkerDiv from "app/_components/MapMarkerDiv";
+import InfoText from "app/_components/InfoText";
 import { useLocationSearch } from "./useLocationSearch";
 
 type Props = {
