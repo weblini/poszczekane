@@ -19,7 +19,7 @@ type Props = {
     params: { slug: string };
 };
 
-const contentDirectory = "@/app/_content/";
+const contentDirectory = "./app/_content/";
 
 export async function generateStaticParams() {
     // get all mk files
