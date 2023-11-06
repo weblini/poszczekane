@@ -1,5 +1,5 @@
-import EventCard from "app/_components/EventCard";
-import { supabaseAdmin } from "app/_utils/supabase-clients";
+import EventCard from "@/app/_components/EventCard";
+import { supabaseAdmin } from "@/app/_utils/supabase-clients";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import Link from "next/link";

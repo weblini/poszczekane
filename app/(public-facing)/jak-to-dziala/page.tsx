@@ -1,10 +1,10 @@
-import { metaTitle } from "app/_utils/metadata";
+import { metaTitle } from "@/app/_utils/metadata";
 import Link from "next/link";
-import UpcomingEvents from "app/_components/UpcomingEvents";
+import UpcomingEvents from "@/app/_components/UpcomingEvents";
 import { Suspense } from "react";
-import Loader from "app/_components/Loader";
+import Loader from "@/app/_components/Loader";
 import Image from "next/image";
-import bgImg from "app/images/letsgo1.jpg";
+import bgImg from "@/app/images/letsgo1.jpg";
 
 
 export const metadata = {

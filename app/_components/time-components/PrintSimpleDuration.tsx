@@ -1,6 +1,6 @@
 "use client";
 
-import { formatEventDate } from "app/_utils/date-helper";
+import { formatEventDate } from "@/app/_utils/date-helper";
 
 type Props = {
     startStamp: string;

@@ -1,8 +1,8 @@
 "use client";
 
-import InfoText from "app/_components/InfoText";
-import { todayDateString } from "app/_utils/date-helper";
-import { getEventsUrl } from "app/_utils/url-query";
+import InfoText from "@/app/_components/InfoText";
+import { todayDateString } from "@/app/_utils/date-helper";
+import { getEventsUrl } from "@/app/_utils/url-query";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ChangeEvent, FormEvent, useEffect, useState } from "react";

@@ -1,7 +1,7 @@
-import SignupForm from "app/_components/SignupForm";
+import SignupForm from "@/app/_components/SignupForm";
 import Link from "next/link";
 import Image from "next/image";
-import bgImg from "app/images/register1.jpg";
+import bgImg from "@/app/images/register1.jpg";
 
 export default function Page() {
     return (

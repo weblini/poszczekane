@@ -1,6 +1,6 @@
 "use client";
 
-import { timeFormatter } from "app/_utils/date-helper";
+import { timeFormatter } from "@/app/_utils/date-helper";
 
 type Props = {
     isoString: string;

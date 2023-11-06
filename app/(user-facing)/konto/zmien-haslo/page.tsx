@@ -1,9 +1,9 @@
 "use client";
 
-import InfoDiv from "app/_components/InfoDiv";
-import Input from "app/_components/form-components/Input";
-import SubmitButton from "app/_components/form-components/SubmitButton";
-import { LoginDataSchema } from "app/_utils/zod-schemas";
+import InfoDiv from "@/app/_components/InfoDiv";
+import Input from "@/app/_components/form-components/Input";
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { LoginDataSchema } from "@/app/_utils/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";

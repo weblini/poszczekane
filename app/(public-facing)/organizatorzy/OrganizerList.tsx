@@ -1,4 +1,4 @@
-import { supabaseAnon } from "app/_utils/supabase-clients";
+import { supabaseAnon } from "@/app/_utils/supabase-clients";
 import Link from "next/link";
 
 type Props = {};

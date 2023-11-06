@@ -1,10 +1,10 @@
 "use client";
 
-import InfoDiv from "app/_components/InfoDiv";
-import Input from "app/_components/form-components/Input";
-import SubmitButton from "app/_components/form-components/SubmitButton";
-import { supportEmail } from "app/_utils/metadata";
-import { EmailSchema } from "app/_utils/zod-schemas";
+import InfoDiv from "@/app/_components/InfoDiv";
+import Input from "@/app/_components/form-components/Input";
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { supportEmail } from "@/app/_utils/metadata";
+import { EmailSchema } from "@/app/_utils/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";

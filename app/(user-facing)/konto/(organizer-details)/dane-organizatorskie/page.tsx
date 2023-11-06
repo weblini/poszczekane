@@ -1,4 +1,4 @@
-import { supabaseAdmin } from "app/_utils/supabase-clients";
+import { supabaseAdmin } from "@/app/_utils/supabase-clients";
 import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import EditOrganizer from "./EditOrganizer";

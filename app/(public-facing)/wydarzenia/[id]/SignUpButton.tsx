@@ -1,16 +1,16 @@
 "use client";
 
-import SubmitButton from "app/_components/form-components/SubmitButton";
-import { signupUser } from "app/_utils/actions";
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { signupUser } from "@/app/_utils/actions";
 import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
 import AlreadySignedupButton from "./AlreadySignedupButton";
-import OnlyForUsers from "app/_components/OnlyForUsers";
+import OnlyForUsers from "@/app/_components/OnlyForUsers";
 import { useRef, useState } from "react";
 import Link from "next/link";
-import Modal from "app/_components/Modal";
-import LoginForm from "app/_components/login-components/LoginForm";
-import InfoText from "app/_components/InfoText";
+import Modal from "@/app/_components/Modal";
+import LoginForm from "@/app/_components/login-components/LoginForm";
+import InfoText from "@/app/_components/InfoText";
 
 const initialState = {
     message: null,

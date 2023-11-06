@@ -1,4 +1,4 @@
-import InfoText from "app/_components/InfoText";
+import InfoText from "@/app/_components/InfoText";
 import Link from "next/link";
 
 type Props = { className: string };

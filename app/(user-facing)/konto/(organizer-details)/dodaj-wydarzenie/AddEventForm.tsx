@@ -1,12 +1,12 @@
 "use client";
 
-import InfoDiv from "app/_components/InfoDiv";
-import Loader from "app/_components/Loader";
-import Input from "app/_components/form-components/Input";
-import SubmitButton from "app/_components/form-components/SubmitButton";
-import TextAreaInput from "app/_components/form-components/TextAreaInput";
-import { addEvent } from "app/_utils/actions";
-import { NewEventSchema } from "app/_utils/zod-schemas";
+import InfoDiv from "@/app/_components/InfoDiv";
+import Loader from "@/app/_components/Loader";
+import Input from "@/app/_components/form-components/Input";
+import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import TextAreaInput from "@/app/_components/form-components/TextAreaInput";
+import { addEvent } from "@/app/_utils/actions";
+import { NewEventSchema } from "@/app/_utils/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
 import dynamic from "next/dynamic";
 import { useState } from "react";

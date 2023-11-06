@@ -9,7 +9,7 @@ import { useState } from "react";
 import Link from "next/link";
 import InfoDiv from "../InfoDiv";
 import Input from "../form-components/Input";
-import { LoginDataSchema } from "app/_utils/zod-schemas";
+import { LoginDataSchema } from "@/app/_utils/zod-schemas";
 import SubmitButton from "../form-components/SubmitButton";
 
 type Props = {

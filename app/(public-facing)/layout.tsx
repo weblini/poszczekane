@@ -1,4 +1,4 @@
-import Footer from "app/_components/Footer";
+import Footer from "@/app/_components/Footer";
 
 export default function Layout({children}: {children: React.ReactNode}) {
   return (
