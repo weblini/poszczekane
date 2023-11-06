@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import './globals.css'
-import { pageTitle } from '@/app/_utils/metadata'
+import { pageTitle } from './_utils/metadata'
 import Image from 'next/image'
 import logo from './images/logo.svg'
 import UserProvider from './UserProvider'
