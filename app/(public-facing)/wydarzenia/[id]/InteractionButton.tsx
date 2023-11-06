@@ -1,7 +1,7 @@
 import PrintLocalTime from "@/app/_components/time-components/PrintLocalTime";
 import Link from "next/link";
 import AlreadySignedupButton from "./AlreadySignedupButton";
-import SignUpButton from "./SignupButton";
+import SignUpButton from "./SignUpButton";
 
 type Props = {
     eventId: number;
