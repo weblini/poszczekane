@@ -66,6 +66,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                                         src={logo}
                                         height={45}
                                         alt="logo poszczekane"
+                                        priority
                                     />
                                 </Link>
                             </div>
