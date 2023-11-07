@@ -7,6 +7,8 @@ type Props = {
     matchedTags: string[];
 };
 
+export const revalidate = 600
+
 export default async function MatchedEventsList({ matchedTags }: Props) {
 
     // grab future, not cancelled events that match tags

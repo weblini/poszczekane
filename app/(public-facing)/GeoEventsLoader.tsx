@@ -10,6 +10,8 @@ const ClientOnlyMap = dynamic(() => import("./EventsMap"), {
     ssr: false,
 });
 
+export const revalidate = 600
+
 export default async function GeoEventsLoader({}: Props) {
     // events to plot on map that are in the future and not cancelled
     const { data: geoEvents, error } = await supabaseAnon
