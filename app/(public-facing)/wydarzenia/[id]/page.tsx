@@ -160,11 +160,11 @@ type DetailProp = {
 function EventDetail({ label, children, dim }: DetailProp) {
     return (
         <p
-            className={`grid grid-cols-[65px_1fr] items-center ${
+            className={`grid grid-cols-[65px_1fr] items-baseline ${
                 dim ? "opacity-50" : ""
             }`}
         >
-            <span className="text-sm">{label}</span>{" "}
+            <span className="text-sm">{label}</span>
             <span className="font-semibold">{children}</span>
         </p>
     );
