@@ -27,14 +27,6 @@ export default function EventsMap({ events, mapKey }: Props) {
     const { sourceData, mapRef, mapProps, selectedEvents } = useEventMap({
         events,
     });
-    // const mapRef = useRef<MapRef>(null);
-
-    // const [selected, setSelected] = useState<number[]>([]);
-    // const [cursor, setCursor] = useState<string>("auto");
-
-    // const selectedEvents = events.filter((event) =>
-    //     selected.includes(event.id)
-    // );
 
     const onLoad = useCallback(() => {
         mapRef.current?.loadImage(pinImg.src, (error, img) => {
@@ -43,62 +35,6 @@ export default function EventsMap({ events, mapKey }: Props) {
             }
         });
     }, []);
-
-    // const onMouseEnter = useCallback(() => setCursor("pointer"), []);
-    // const onMouseLeave = useCallback(() => setCursor("auto"), []);
-
-    // const handleMapClick = useCallback((event: MapLayerMouseEvent) => {
-    //     if (event.features?.length) {
-    //         const feature = event.features[0];
-    //         if (!feature) {
-    //             return;
-    //         }
-
-    //         const source = mapRef.current?.getSource("events") as GeoJSONSource;
-
-    //         // get all features from cluster
-    //         if (feature.properties.cluster_id) {
-    //             source.getClusterLeaves(
-    //                 feature.properties.cluster_id,
-    //                 10,
-    //                 0,
-    //                 (error, features) => {
-    //                     if (!features) {
-    //                         return;
-    //                     }
-
-    //                     let selectedIds = [];
-    //                     for (const nestedFeature of features) {
-    //                         selectedIds.push(
-    //                             nestedFeature.properties?.event_id
-    //                         );
-    //                     }
-
-    //                     setSelected(selectedIds.filter((id) => id));
-    //                 }
-    //             );
-    //         } else {
-    //             if (feature.properties.event_id) {
-    //                 setSelected([feature.properties.event_id]);
-    //             }
-    //         }
-    //     }
-    // }, []);
-
-    // const geojson = useMemo(
-    //     () => ({
-    //         type: "FeatureCollection",
-    //         features: events.map((event) => ({
-    //             type: "Feature",
-    //             properties: { event_id: event.id },
-    //             geometry: {
-    //                 type: "Point",
-    //                 coordinates: [event.longitude, event.latitude],
-    //             },
-    //         })),
-    //     }),
-    //     [events]
-    // );
 
     return (
         <div className="grid lg:grid-cols-5 gap-4">

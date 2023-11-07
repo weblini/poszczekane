@@ -22,13 +22,13 @@ export default async function GeoEventsLoader({}: Props) {
         .order('starts_at', { ascending: true })
         .limit(12);
 
-    if (!geoEvents?.length) {
-        return null;
-    }
+    // if (!geoEvents?.length) {
+    //     return null;
+    // }
 
     return (
         <ClientOnlyMap
-            events={geoEvents}
+            events={geoEvents || []}
             mapKey={process.env.NEXT_PUBLIC_MAPTILER_KEY || ""}
         />
     );
