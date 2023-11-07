@@ -258,6 +258,8 @@ export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
         return { message: "Nie udało się dodać wydarzenia." };
     }
 
+    revalidatePath("/");
+
     return { message: "success" };
 }
 
