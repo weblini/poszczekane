@@ -1,6 +1,6 @@
 import { CapapPointSchema } from "@/app/_utils/zod-schemas";
-import { useState, useEffect, useRef, useCallback } from "react";
-import { useWatch, useFormState, Control } from "react-hook-form";
+import { useState, useCallback } from "react";
+import { useWatch, Control } from "react-hook-form";
 import { GeoLocation, NewEventInputs } from "./AddEventForm";
 
 type Props = {
@@ -103,7 +103,7 @@ async function fetchCAPAP(query: string): Promise<any> {
             method: "POST",
             cache: "force-cache",
             headers: {
-                "Content-Type": "@/application/json",
+                "Content-Type": "application/json",
             },
             referrerPolicy: "no-referrer",
             body: body,
