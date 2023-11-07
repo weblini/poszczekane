@@ -10,5 +10,5 @@ type Props = {
 export default function PrintLocalTime({ isoString, withTime }: Props) {
     const date = new Date(isoString);
 
-    return <>{withTime && `${timeFormatter.format(date)} `}{date.toLocaleDateString()}</>;
+    return <span suppressHydrationWarning>{withTime && `${timeFormatter.format(date)} `}{date.toLocaleDateString()}</span>;
 }

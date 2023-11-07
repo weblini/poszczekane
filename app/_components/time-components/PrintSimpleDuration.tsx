@@ -9,7 +9,7 @@ type Props = {
 
 export default function PrintSimpleDuration({ startStamp, endStamp }: Props) {
     return (
-        <span aria-label="Data wydarzenia">
+        <span aria-label="Data wydarzenia" suppressHydrationWarning>
             {formatEventDate(startStamp, endStamp)}
         </span>
     );

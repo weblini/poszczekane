@@ -17,5 +17,9 @@ export default function PrintDuration({ startStamp, endStamp }: Props) {
         )} - ${timeFormatter.format(endDate)}`;
     }
 
-    return `${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}`;
+    return (
+        <span suppressHydrationWarning>
+            ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}
+        </span>
+    );
 }
