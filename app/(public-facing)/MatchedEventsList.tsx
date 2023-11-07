@@ -18,6 +18,7 @@ export default async function MatchedEventsList({ matchedTags }: Props) {
         .neq("is_cancelled", true)
         .gte("starts_at", new Date().toISOString())
         .in("filter_tags.name", matchedTags)
+        .order('starts_at', { ascending: true })
         .limit(3);
 
     if (error) {

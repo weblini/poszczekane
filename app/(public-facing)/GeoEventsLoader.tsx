@@ -19,6 +19,7 @@ export default async function GeoEventsLoader({}: Props) {
         )
         .neq("is_cancelled", true)
         .gte("ends_at", new Date().toISOString())
+        .order('starts_at', { ascending: true })
         .limit(12);
 
     if (!geoEvents?.length) {
