@@ -135,7 +135,7 @@ export default function AddEventForm({ tags, mapKey }: Props) {
                         </p>
                         <Input
                             label="Adres"
-                            placeholder="np. ul. Wielkiej Łapy 10, Psiakowo"
+                            placeholder="np. Psiakowo, ul. Wielkiej Łapy 10"
                             register={register("location")}
                             error={errors.location?.message}
                         />

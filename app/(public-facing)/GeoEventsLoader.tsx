@@ -15,7 +15,7 @@ export default async function GeoEventsLoader({}: Props) {
     const { data: geoEvents, error } = await supabaseAnon
         .from("events")
         .select(
-            "id, name, starts_at, ends_at, latitude, longitude, organizers ( name, slug ), tags ( name )"
+            "id, name, starts_at, ends_at, latitude, longitude, location, organizers ( name, slug ), tags ( name )"
         )
         .neq("is_cancelled", true)
         .gte("ends_at", new Date().toISOString())

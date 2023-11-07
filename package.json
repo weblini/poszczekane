@@ -7,11 +7,11 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
-    "@maptiler/sdk": "^1.1.2",
+    "@maptiler/sdk": "^1.2.0",
     "@supabase/auth-helpers-nextjs": "latest",
     "@supabase/supabase-js": "latest",
-    "@types/node": "^20.8.9",
-    "@types/react": "^18.2.33",
+    "@types/node": "^20.8.10",
+    "@types/react": "^18.2.35",
     "@types/react-dom": "^18.2.14",
     "autoprefixer": "10.4.14",
     "gray-matter": "^4.0.3",
@@ -20,7 +20,7 @@
     "postcss": "8.4.24",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-hook-form": "^7.47.0",
+    "react-hook-form": "^7.48.2",
     "react-map-gl": "^7.1.6",
     "schedulely": "^0.3.5",
     "server-only": "^0.0.1",
@@ -32,6 +32,6 @@
     "@tailwindcss/typography": "^0.5.10",
     "daisyui": "^3.9.4",
     "encoding": "^0.1.13",
-    "supabase": "^1.106.1"
+    "supabase": "^1.110.1"
   }
 }

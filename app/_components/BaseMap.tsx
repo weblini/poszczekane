@@ -1,46 +1,26 @@
 "use client";
 
-import Map, { NavigationControl, useControl } from "react-map-gl/maplibre";
+import Map from "react-map-gl/maplibre";
 import "maplibre-gl/dist/maplibre-gl.css";
-import { MaptilerLogoControl } from "@maptiler/sdk";
+import MapControls from "./MapControls";
+import { baseMapProps, mapStyle } from "../_utils/map-data";
 
 type Props = {
     children: React.ReactNode;
     height?: string | number;
-    mapKey: string
+    mapKey: string;
 };
 
-const mapTilerMapId = "30d1bbf8-6e86-4004-96db-52701a6efe5d";
-
-// GeoPoint is [longitude, latitude], same as CAPAP
-const plCenter: GeoPoint = [19.424, 52.114];
 
 export default function BaseMap({ children, height = 400, mapKey }: Props) {
     return (
         <Map
-            initialViewState={{
-                longitude: plCenter[0],
-                latitude: plCenter[1],
-                zoom: 4.8,
-            }}
+            {...baseMapProps}
             style={{ width: "100%", height: height }}
-            mapStyle={`https://api.maptiler.com/maps/${mapTilerMapId}/style.json?key=${mapKey}`}
-            minZoom={4}
-            maxPitch={0}
-            touchPitch={false}
-            dragRotate={false}
+            mapStyle={`${mapStyle}${mapKey}`}
         >
             {children}
-            <DrawControl/>
-            <NavigationControl visualizePitch={false} showCompass={false} />
+            <MapControls/>
         </Map>
     );
-}
-
-function DrawControl() {
-    useControl(() => new MaptilerLogoControl(), {
-        position: "bottom-left",
-    });
-
-    return null;
 }

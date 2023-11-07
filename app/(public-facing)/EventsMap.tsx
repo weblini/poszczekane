@@ -1,10 +1,17 @@
 "use client";
 
-import { useMemo, useState } from "react";
-import { Marker } from "react-map-gl/maplibre";
+import { useCallback } from "react";
+import { Layer, Source } from "react-map-gl/maplibre";
 import EventCard from "../_components/EventCard";
-import BaseMap from "../_components/BaseMap";
 import MapMarkerDiv from "../_components/MapMarkerDiv";
+import type { LayerProps } from "react-map-gl/maplibre";
+import MapControls from "../_components/MapControls";
+import { baseMapProps, mapStyle } from "../_utils/map-data";
+import "maplibre-gl/dist/maplibre-gl.css";
+import Map from "react-map-gl/maplibre";
+
+import pinImg from "@/app/images/pin.png";
+import { useEventMap } from "./useEventMap";
 
 type Props = {
     events: (Partial<AppEvent> & {
@@ -17,71 +24,116 @@ type Props = {
 };
 
 export default function EventsMap({ events, mapKey }: Props) {
-    if (!events?.length) {
-        return null;
-    }
+    const { sourceData, mapRef, mapProps, selectedEvents } = useEventMap({
+        events,
+    });
+    // const mapRef = useRef<MapRef>(null);
 
-    const [selected, setSelected] = useState<AppEvent["id"] | null>(null);
+    // const [selected, setSelected] = useState<number[]>([]);
+    // const [cursor, setCursor] = useState<string>("auto");
 
-    const selectedEvent = events.find((event) => event.id == selected);
+    // const selectedEvents = events.filter((event) =>
+    //     selected.includes(event.id)
+    // );
 
-    const markers = useMemo(
-        () =>
-            events.map((event) => (
-                <Marker
-                    longitude={event.longitude}
-                    latitude={event.latitude}
-                    key={event.id}
-                    offset={[0, -25]}
-                >
-                    <div
-                        className="lg:tooltip tooltip-primary"
-                        data-tip={event.name}
-                    >
-                        <svg height="50" viewBox="0 0 61 71" fill="none">
-                            <g
-                                className="cursor-pointer lg:tooltip lg:tooltip-primary"
-                                onClick={() => setSelected(event.id)}
-                                data-tip={event.name}
-                            >
-                                <path
-                                    className="fill-primary stroke-white"
-                                    d="M52 31.5C52 36.8395 49.18 42.314 45.0107 47.6094C40.8672 52.872 35.619 57.678 31.1763 61.6922C30.7916 62.0398 30.2084 62.0398 29.8237 61.6922C25.381 57.678 20.1328 52.872 15.9893 47.6094C11.82 42.314 9 36.8395 9 31.5C9 18.5709 18.6801 9 30.5 9C42.3199 9 52 18.5709 52 31.5Z"
-                                    strokeWidth="4"
-                                />
-                                <circle
-                                    className={`transition-colors ${
-                                        event.id === selected
-                                            ? ""
-                                            : "opacity-30"
-                                    }`}
-                                    cx="30.5"
-                                    cy="30.5"
-                                    r="8.5"
-                                    fill="white"
-                                />
-                            </g>
-                        </svg>
-                    </div>
-                </Marker>
-            )),
-        [setSelected, events, selected]
-    );
+    const onLoad = useCallback(() => {
+        mapRef.current?.loadImage(pinImg.src, (error, img) => {
+            if (img) {
+                mapRef.current?.addImage("pin", img);
+            }
+        });
+    }, []);
 
-    // ! manage clusters?
-    // ! highlight selected and sync with side list
+    // const onMouseEnter = useCallback(() => setCursor("pointer"), []);
+    // const onMouseLeave = useCallback(() => setCursor("auto"), []);
+
+    // const handleMapClick = useCallback((event: MapLayerMouseEvent) => {
+    //     if (event.features?.length) {
+    //         const feature = event.features[0];
+    //         if (!feature) {
+    //             return;
+    //         }
+
+    //         const source = mapRef.current?.getSource("events") as GeoJSONSource;
+
+    //         // get all features from cluster
+    //         if (feature.properties.cluster_id) {
+    //             source.getClusterLeaves(
+    //                 feature.properties.cluster_id,
+    //                 10,
+    //                 0,
+    //                 (error, features) => {
+    //                     if (!features) {
+    //                         return;
+    //                     }
+
+    //                     let selectedIds = [];
+    //                     for (const nestedFeature of features) {
+    //                         selectedIds.push(
+    //                             nestedFeature.properties?.event_id
+    //                         );
+    //                     }
+
+    //                     setSelected(selectedIds.filter((id) => id));
+    //                 }
+    //             );
+    //         } else {
+    //             if (feature.properties.event_id) {
+    //                 setSelected([feature.properties.event_id]);
+    //             }
+    //         }
+    //     }
+    // }, []);
+
+    // const geojson = useMemo(
+    //     () => ({
+    //         type: "FeatureCollection",
+    //         features: events.map((event) => ({
+    //             type: "Feature",
+    //             properties: { event_id: event.id },
+    //             geometry: {
+    //                 type: "Point",
+    //                 coordinates: [event.longitude, event.latitude],
+    //             },
+    //         })),
+    //     }),
+    //     [events]
+    // );
 
     return (
         <div className="grid lg:grid-cols-5 gap-4">
             <div className="lg:col-span-3 h-[400px] lg:h-full lg:rounded-box overflow-hidden">
-                <BaseMap height="100%" mapKey={mapKey}>
-                    {markers}
-                </BaseMap>
+                <Map
+                    {...baseMapProps}
+                    style={{ width: "100%", height: "100%" }}
+                    mapStyle={`${mapStyle}${mapKey}`}
+                    interactiveLayerIds={["clusters", "markers"]}
+                    ref={mapRef}
+                    onLoad={onLoad}
+                    {...mapProps}
+                >
+                    <Source
+                        id="events"
+                        type="geojson"
+                        data={sourceData}
+                        cluster={true}
+                        // clusterMaxZoom={9}
+                        clusterRadius={40}
+                    >
+                        <Layer {...clusterLayer} />
+                        <Layer {...clusterCountLayer} />
+                        <Layer {...unclusteredMarkerLayer} />
+                    </Source>
+                    <MapControls />
+                </Map>
             </div>
-
-            <div className="lg:col-span-2 lg:h-[500px] px-[5vw] lg:p-0">
-                {selectedEvent ? (
-                    <EventCard event={selectedEvent} />
+            <div className="lg:col-span-2 lg:h-[500px] px-[5vw] lg:p-0 lg:overflow-auto">
+                {selectedEvents.length ? (
+                    <div className="flex flex-col gap-4 pb-4">
+                        {selectedEvents.map((event) => (
+                            <EventCard event={event} key={event.id} />
+                        ))}
+                    </div>
                 ) : (
                     <MapMarkerDiv>
                         <p>
@@ -94,3 +146,42 @@ export default function EventsMap({ events, mapKey }: Props) {
         </div>
     );
 }
+
+const clusterLayer: LayerProps = {
+    id: "clusters",
+    type: "circle",
+    source: "events",
+    filter: ["has", "point_count"],
+    paint: {
+        "circle-color": "#ffb238",
+        "circle-radius": 25,
+    },
+};
+
+const clusterCountLayer: LayerProps = {
+    id: "cluster-count",
+    type: "symbol",
+    source: "events",
+    filter: ["has", "point_count"],
+    paint: {
+        "text-color": "#ffffff",
+    },
+    layout: {
+        "text-field": "{point_count_abbreviated}",
+        "text-font": ["Noto Sans Bold"],
+        "text-size": 16,
+    },
+};
+
+const unclusteredMarkerLayer: LayerProps = {
+    id: "markers",
+    type: "symbol",
+    source: "events",
+    filter: ["!", ["has", "point_count"]],
+    layout: {
+        "icon-image": "pin",
+        "icon-anchor": "bottom",
+        "icon-size": 0.75,
+        "icon-allow-overlap": true,
+    },
+};
