@@ -12,7 +12,7 @@ import LoginForm from "@/app/_components/login-components/LoginForm";
 import InfoText from "@/app/_components/InfoText";
 
 const initialState = {
-    message: null,
+    message: "",
 };
 
 type Props = {
@@ -53,8 +53,8 @@ export default function SignUpButton({
             </Modal>
 
             <form className={wrapperClasses} action={formAction}>
-                {state.message && (
-                    <InfoText category="error" className="pb-2">{state.message}</InfoText>
+                {state?.message && (
+                    <InfoText category="error" className="pb-2">{state?.message}</InfoText>
                 )}
                 <input hidden name="id" value={eventId} readOnly />
 

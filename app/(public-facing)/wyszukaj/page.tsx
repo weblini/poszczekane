@@ -1,4 +1,3 @@
-import EventCard from "@/app/_components/EventCard";
 import EventCardDisplay from "@/app/_components/EventCardDisplay";
 import EventSearchBar from "@/app/_components/EventSearchBar";
 import InfoDiv from "@/app/_components/InfoDiv";
