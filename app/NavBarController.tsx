@@ -26,6 +26,7 @@ export default function NavBarController({ toggleId }: Props) {
             ref={checkboxRef}
             type="checkbox" 
             className="drawer-toggle" 
+            aria-label="menu"
         />
     )
 }

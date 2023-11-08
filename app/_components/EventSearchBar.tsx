@@ -32,7 +32,7 @@ export default function EventSearchBar({ fieldId }: Props) {
                     Szukaj wydarzeń
                 </label>
 
-                <button className="btn btn-ghost btn-square absolute top-0 left-0 rounded-r-none">
+                <button className="btn btn-ghost btn-square absolute top-0 left-0 rounded-r-none" title="szukaj">
                     <svg
                         className="pointer-events-none stroke-current opacity-60"
                         width="16"
