@@ -1,48 +1,44 @@
-# Supabase Starter
+# Poszczekane.pl
 
-This starter configures Supabase Auth to use cookies, making the user's session available throughout the entire Next.js app - Client Components, Server Components, Route Handlers, Server Actions and Middleware.
+Welcome to the repository for [poszczekane.pl](https://wwww.poszczekane.pl) – the premier dog event website!
 
-## Deploy your own
+This repository contains all the files powering the website, which serves as a connection hub for dog event organizers, including breed clubs, sport clubs, and individuals, with dog owners and enthusiasts.
 
-The Vercel deployment will guide you through creating a Supabase account and project. After installation of the Supabase integration, all relevant environment variables will be set up so that the project is usable immediately after deployment 🚀
+## Core Technologies
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/vercel/next.js/tree/canary/examples/with-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&integration-ids=oac_jUduyjQgOyzev1fjrW83NYOv)
+This project is a cutting-edge **NextJS** website utilizing the latest React features. It incorporates a mix of **React Server Components**, **SSR** and purely client-rendered components, strategically using the new **Server Actions** to handle mutations on the NodeJS backend.
 
-## How to use
+User authentication is seamlessly implemented through **Supabase** with cookies, enabling authenticated actions on both the front and backend.
 
-1. Create a [new Supabase project](https://database.new)
-1. Run `npx create-next-app -e with-supabase` to create a Next.js app using the Supabase Starter template
-1. Use `cd` to change into the app's directory
-1. Run `npm install` to install dependencies
-1. Rename `.env.local.example` to `.env.local` and update the values for `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` from [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
-1. Run `npm run dev` to start the local development server
+## Functionality Highlights
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+To deliver a captivating experience for all users, we've implemented the following features:
 
-### Create a Supabase client
+### 1. Interactive Event Map
 
-Check out the [`/app/_examples`](./app/_examples/) folder for an example of creating a Supabase client in:
+Users can explore our interactive WebGL vector-based map showcasing upcoming events with precision. The map utilizes **clustering** for a clean visual experience. Event locations are stored in the **PostgreSQL** database as both a string and a geographical point, enhancing user convenience.
 
-- [Client Components](./app/_examples/client-component/page.tsx)
-- [Server Components](./app/_examples/server-component/page.tsx)
-- [Route Handlers](./app/_examples/route-handler/route.ts)
-- [Server Actions](./app/_examples/server-action/page.tsx)
+Organizers benefit from a form powered by a **geocoding API** that matches entered addresses to exact geographical locations. They can further fine-tune the location by dragging a marker on the displayed map.
 
-### Create `todo` table and seed with data (optional)
+### 2. Full Text Search & Filtering
 
-Navigate to [your project's SQL Editor](https://app.supabase.com/project/_/sql), click `New query`, paste the contents of the [init.sql](./supabase/migrations/20230618024722_init.sql) file and click `RUN`.
+Users can enjoy a full-text search form strategically placed throughout the website. Leveraging the database's native capabilities, it generates a results URL with the exact search query for easy sharing.
 
-This will create a basic `todos` table, enable Row Level Security (RLS), and write RLS policies enabling `select` and `insert` actions for `authenticated` users.
+Additionally, users can browse events using filters, with **parameters embedded in the URL** for straightforward sharing, storage, and browser navigation.
 
-To seed your `todos` table with some dummy data, run the contents of the [seed.sql](./supabase/seed.sql) file.
+### 3. Events Calendar
 
-## Feedback and issues
+Each user has access to a private calendar displaying all the events they've signed up for. This lightweight component is client-side rendered, with detailed information about scheduled events appearing when a date is selected.
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+### 4. Exciting Visuals
 
-## More Supabase examples
+Large, expressive images serve as backdrops for various UI elements. These visuals engage users and set the tone for a diverse audience.
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
-- [Next.js Auth Helpers Docs](https://supabase.com/docs/guides/auth/auth-helpers/nextjs)
+For optimal performance, all images are handled using NextJS's Image optimization features and some manual adjustments.
+
+### 5. User-Friendly Forms
+
+Our website's forms incorporate modern solutions to enhance user experience. These include client-side validation, dynamically fetched confirmation messages, and an intuitive design.
+
+
+Join us on [poszczekane.pl](https://wwww.poszczekane.pl)!
