@@ -26,6 +26,10 @@ export async function generateStaticParams() {
     const files = fs.readdirSync(contentDirectory, "utf8");
     const markdownFiles = files.filter((file) => file.endsWith(".md"));
 
+    console.log(__dirname)
+
+    console.log("files found:", markdownFiles)
+
     // return the slugs (filenames)
     return markdownFiles.map((fileName) => fileName.replace(".md", ""));
 }
@@ -87,10 +91,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
 }
 
 function tryToLoadFile(slug: string): string | null {
-    try {
+    // try {
         const fullPath = path.join(contentDirectory, `${slug}.md`);
         return fs.readFileSync(fullPath, "utf8");
-    } catch {
-        return null;
-    }
+    // } catch {
+    //     return null;
+    // }
 }

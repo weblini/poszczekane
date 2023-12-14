@@ -19,7 +19,7 @@ export default function PrintDuration({ startStamp, endStamp }: Props) {
 
     return (
         <span suppressHydrationWarning>
-            ${startDate.toLocaleDateString()} - ${endDate.toLocaleDateString()}
+            {startDate.toLocaleDateString()} - {endDate.toLocaleDateString()}
         </span>
     );
 }
