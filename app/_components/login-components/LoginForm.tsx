@@ -59,7 +59,7 @@ export default function LoginForm({ className = "", onSuccess }: Props) {
                         Niestety, podane dane logowania są błędne. Spróbuj
                         ponownie lub skorzystaj z{" "}
                         <Link
-                            href="/resetuj_haslo"
+                            href="/resetuj-haslo"
                             className="link link-hover font-semibold"
                         >
                             opcji resetowania hasła
@@ -87,7 +87,7 @@ export default function LoginForm({ className = "", onSuccess }: Props) {
             </div>
 
             <Link
-                href="/resetuj_haslo"
+                href="/resetuj-haslo"
                 className="link link-hover text-xs self-end"
             >
                 Nie pamiętasz hasła?

@@ -21,17 +21,12 @@ type Props = {
 
 const contentDirectory = "./app/_content/";
 
-export async function generateStaticParams() {
-    // get all mk files
+export async function generateStaticParams(): Promise<Array<{slug: string}>> {
+    // get all (and only those) .md files
     const files = fs.readdirSync(contentDirectory, "utf8");
     const markdownFiles = files.filter((file) => file.endsWith(".md"));
 
-    console.log(__dirname)
-
-    console.log("files found:", markdownFiles)
-
-    // return the slugs (filenames)
-    return markdownFiles.map((fileName) => fileName.replace(".md", ""));
+    return markdownFiles.map((fileName) => ({ slug: fileName.replace(".md", "")}) );
 }
 
 export async function generateMetadata(
@@ -44,9 +39,7 @@ export async function generateMetadata(
         return {};
     }
 
-    // Use gray-matter to parse the markdown file
     const matterResult = matter(fileContents);
-
     const frontMatter = matterResult.data as FrontMatter;
 
     if (!frontMatter.shortTitle) {

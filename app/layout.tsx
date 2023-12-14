@@ -11,9 +11,6 @@ import NavBarController from './NavBarController'
 import { Noto_Sans } from 'next/font/google'
 import LogoutButton from './LogoutButton'
 
-// Readex Pro is nice! But maybe too loose
-
-// If loading a variable font, you don't need to specify the font weight
 const mainFont = Noto_Sans({
     subsets: ['latin-ext'],
     display: 'swap',
