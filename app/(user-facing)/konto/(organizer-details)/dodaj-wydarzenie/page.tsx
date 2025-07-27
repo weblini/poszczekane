@@ -1,8 +1,7 @@
 import AddEventForm from "@/app/(user-facing)/konto/(organizer-details)/dodaj-wydarzenie/AddEventForm";
 import InfoDiv from "@/app/_components/InfoDiv";
 import { supabaseAnon } from "@/app/_utils/supabase-clients";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@/app/_utils/supabase/server";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
@@ -15,7 +14,7 @@ export default async function Page() {
 
     // ! check if user has active account, if not show different screen
 
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },

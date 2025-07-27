@@ -47,7 +47,7 @@ export default async function Page() {
                     </p>
                     <p>
                         <Link
-                            href="/wspolpraca"
+                            href="/info/wspolpraca"
                             className="link link-hover text-sm font-semibold"
                         >
                             Zobacz dlaczego warto korzystać z serwisu jako
@@ -56,7 +56,7 @@ export default async function Page() {
                     </p>
                     <p className="pt-2">
                         <Link
-                            href="/jak-dodac-wydarzenie"
+                            href="/info/jak-dodac-wydarzenie"
                             className="link link-hover text-sm font-semibold"
                         >
                             Zobacz jak dodać wydarzenie.

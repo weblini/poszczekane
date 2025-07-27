@@ -1,12 +1,11 @@
 import { supabaseAdmin } from "@/app/_utils/supabase-clients";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import InfoText from "@/app/_components/InfoText";
 import PrintDuration from "@/app/_components/time-components/PrintDuration";
 import InteractionButton from "./InteractionButton";
 import EventDescription from "./EventDescription";
+import { createClient } from "@/app/_utils/supabase/server";
 
 type Props = {
     params: Promise<{ id: number }>;
@@ -18,7 +17,7 @@ export const dynamic = 'force-dynamic'
 export default async function Page(props: Props) {
     const searchParams = await props.searchParams;
     const params = await props.params;
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
     const {
         data: { user },
     } = await supabase.auth.getUser();

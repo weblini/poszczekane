@@ -5,8 +5,7 @@ import InfoText from "@/app/_components/InfoText";
 import TagLinks from "@/app/_components/TagLinks";
 import UpcomingEvents from "@/app/_components/UpcomingEvents";
 import { metaTitle } from "@/app/_utils/metadata";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@/app/_utils/supabase/server";
 import Link from "next/link";
 
 type Props = {
@@ -38,7 +37,7 @@ export default async function Page(props: Props) {
     }
 
     // grab search query and perform textSearch with supabase
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const { data: matchingEvents, error } = await supabase
         .from("events")

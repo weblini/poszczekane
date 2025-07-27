@@ -3,9 +3,9 @@
 import InfoDiv from "@/app/_components/InfoDiv";
 import Input from "@/app/_components/form-components/Input";
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
+import { createClient } from "@/app/_utils/supabase/client";
 import { LoginDataSchema } from "@/app/_utils/zod-schemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { z } from "zod";
@@ -22,7 +22,7 @@ const PasswordSchema = LoginDataSchema.pick({ password: true })
 type Inputs = z.infer<typeof PasswordSchema>;
 
 export default function page() {
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
 
     const [hasUpdated, setHasUpdated] = useState(false);
 

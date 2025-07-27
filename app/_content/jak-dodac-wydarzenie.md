@@ -57,4 +57,4 @@ Możesz też stworzyć wydarzenie prywatne. W tym celu zaznacz odpowiednie pole 
 
 To wszystko! Teraz możesz wygodnie śledzić zapisy i skupić się na organizacji udanego wydarzenia.
 
-Jeśli masz pytania lub potrzebujesz pomocy, [skontaktuj się z nami](/kontakt). Jesteśmy tu, aby pomóc Ci w organizacji niezapomnianych wydarzeń dla miłośników psów i ich pupili!
+Jeśli masz pytania lub potrzebujesz pomocy, [skontaktuj się z nami](/info/kontakt). Jesteśmy tu, aby pomóc Ci w organizacji niezapomnianych wydarzeń dla miłośników psów i ich pupili!

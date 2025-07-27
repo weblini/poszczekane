@@ -76,20 +76,20 @@ export default function Page() {
                 >
                     <div className="flex max-md:flex-col gap-2 gap-x-4 pt-2 lg:pt-3">
                         <Link
-                            href="/prywatnosc"
+                            href="/info/prywatnosc"
                             className="link link-hover font-semibold"
                         >
                             Polityka prywatności
                         </Link>
                         <Link
-                            href="/regulamin"
+                            href="/info/regulamin"
                             className="link link-hover font-semibold"
                         >
                             Regulamin serwisu
                         </Link>
                         <OnlyForOrganizers>
                             <Link
-                                href="/wspolpraca"
+                                href="/info/wspolpraca"
                                 className="link link-hover font-semibold"
                             >
                                 Regulamin współpracy

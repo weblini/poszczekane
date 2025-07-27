@@ -1,10 +1,9 @@
 import { supabaseAdmin } from "@/app/_utils/supabase-clients";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import EditOrganizer from "./EditOrganizer";
+import { createClient } from "@/app/_utils/supabase/server";
 
 export default async function Page() {
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },

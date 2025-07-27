@@ -91,8 +91,8 @@ export default async function RootLayout({ children }: { children: React.ReactNo
                                         <div className='mt-auto flex flex-col gap-3'>
                                             <ul className="menu p-0">
                                                 <li><Link href="/jak-to-dziala">Jak to działa</Link></li>
-                                                <li><Link href="/wspolpraca">Współpraca</Link></li>
-                                                <li><Link href="/kontakt">Kontakt</Link></li>
+                                                <li><Link href="/info/wspolpraca">Współpraca</Link></li>
+                                                <li><Link href="/info/kontakt">Kontakt</Link></li>
                                             </ul>
                                             {navButton}
                                         </div>

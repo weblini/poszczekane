@@ -1,11 +1,10 @@
 import EventCard from "@/app/_components/EventCard";
 import { supabaseAdmin } from "@/app/_utils/supabase-clients";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
+import { createClient } from "@/app/_utils/supabase/server";
 import Link from "next/link";
 
 export default async function Page() {
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },

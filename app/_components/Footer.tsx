@@ -33,13 +33,13 @@ export default function Footer() {
                     <Link href="/jak-to-dziala" className="link link-hover">
                         Jak to działa
                     </Link>
-                    <Link href="/regulamin" className="link link-hover">
+                    <Link href="/info/regulamin" className="link link-hover">
                         Regulamin
                     </Link>
-                    <Link href="/kontakt" className="link link-hover">
+                    <Link href="/info/kontakt" className="link link-hover">
                         Kontakt
                     </Link>
-                    <Link href="/prywatnosc" className="link link-hover">
+                    <Link href="/info/prywatnosc" className="link link-hover">
                         Prywatność
                     </Link>
                 </div>
@@ -53,11 +53,11 @@ export default function Footer() {
                             Zarządzaj danymi
                         </Link>
                     </OnlyForOrganizers>
-                    <Link href="/wspolpraca" className="link link-hover">
+                    <Link href="/info/wspolpraca" className="link link-hover">
                         Współpraca
                     </Link>
                     <Link
-                        href="/jak-dodac-wydarzenie"
+                        href="/info/jak-dodac-wydarzenie"
                         className="link link-hover"
                     >
                         Jak dodać wydarzenie

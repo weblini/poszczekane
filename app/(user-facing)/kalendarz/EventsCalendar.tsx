@@ -1,6 +1,5 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { createContext, useEffect, useMemo, useState } from "react";
 import { Schedulely, createDefaultAdapter, WeekDay } from "schedulely";
 import NewEventsPopup from "./NewEventsPopup";
@@ -8,6 +7,7 @@ import DayList from "./DayList";
 import CalendarDay from "./CalendarDay";
 import CalendarHeader from "./CalendarHeader";
 import CalendarEvent from "./CalendarEvent";
+import { createClient } from "@/app/_utils/supabase/client";
 
 export type CalenderedAppEvent = Partial<AppEvent> & {
     id: number;
@@ -27,7 +27,7 @@ export default function EventsCalendar() {
 
     useEffect(() => {
         async function fetchSignups() {
-            const supabase = createClientComponentClient<Database>();
+            const supabase = createClient();
 
             const { data: signups, error } = await supabase
                 .from("signups")

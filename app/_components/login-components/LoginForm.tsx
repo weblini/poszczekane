@@ -1,6 +1,5 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useRouter } from "next/navigation";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -11,6 +10,7 @@ import InfoDiv from "../InfoDiv";
 import Input from "../form-components/Input";
 import { LoginDataSchema } from "@/app/_utils/zod-schemas";
 import SubmitButton from "../form-components/SubmitButton";
+import { createClient } from "@/app/_utils/supabase/client";
 
 type Props = {
     className?: string;
@@ -21,7 +21,7 @@ type Inputs = z.infer<typeof LoginDataSchema>;
 
 export default function LoginForm({ className = "", onSuccess }: Props) {
     const router = useRouter();
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
 
     const [authFailed, setAuthFailed] = useState(false);
 

@@ -1,6 +1,5 @@
 "use server";
 
-import { createServerActionClient } from "@supabase/auth-helpers-nextjs";
 import { cookies } from "next/headers";
 import {
     EventSignupSchema,
@@ -13,6 +12,7 @@ import { isDatePast } from "./date-helper";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { createClient } from "./supabase/server";
 
 export async function upgradeToOrganizer(prevState: any, formData: FormData) {
     const parsed = OrgNameSchema.parse({
@@ -21,7 +21,7 @@ export async function upgradeToOrganizer(prevState: any, formData: FormData) {
 
     const generatedSlug = createSlug(parsed.name);
 
-    const supabase = createServerActionClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },
@@ -60,7 +60,7 @@ export async function signupUser(prevState: any, formData: FormData) {
         id: Number(formData.get("id")),
     });
 
-    const supabase = createServerActionClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },
@@ -122,7 +122,7 @@ export async function signupUser(prevState: any, formData: FormData) {
 }
 
 export async function deleteUser() {
-    const supabase = createServerActionClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },
@@ -147,7 +147,7 @@ export async function deleteUser() {
 }
 
 export async function updateOrganizer(formData: z.infer<typeof OrgInfoSchema>) {
-    const supabase = createServerActionClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },
@@ -194,7 +194,7 @@ export async function updateOrganizer(formData: z.infer<typeof OrgInfoSchema>) {
 }
 
 export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
-    const supabase = createServerActionClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { user },

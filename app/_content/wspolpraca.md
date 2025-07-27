@@ -43,11 +43,11 @@ Prosimy o dokładne zapoznanie się z nimi i przestrzeganie podczas organizacji 
 
 ## Zgłaszanie problemów
 
-1. Organizatorzy mogą skontaktować się z [administracją Platformy](/kontakt) w razie pytań, problemów lub potrzeby uzyskania wsparcia.
+1. Organizatorzy mogą skontaktować się z [administracją Platformy](/info/kontakt) w razie pytań, problemów lub potrzeby uzyskania wsparcia.
 
 ## Przestrzeganie Regulaminu
 
-1. Organizatorzy są zobowiązani do przestrzegania [Regulaminu Platformy](/regulamin) oraz postanowień niniejszych Zasad Współpracy. Naruszenie zasad może skutkować ograniczeniem dostępu do Platformy lub usunięciem konta.
+1. Organizatorzy są zobowiązani do przestrzegania [Regulaminu Platformy](/info/regulamin) oraz postanowień niniejszych Zasad Współpracy. Naruszenie zasad może skutkować ograniczeniem dostępu do Platformy lub usunięciem konta.
 
 ## Zmiany w Regulaminie
 

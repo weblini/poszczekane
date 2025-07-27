@@ -12,7 +12,7 @@ export default function BecomeOrganizer({ }: Props) {
             <div className="flex flex-col w-full lg:flex-row">
                 <div className="grid flex-grow items-center">
 
-                    <p>Jeśli jesteś organizatorem i chcesz dołączyć do naszej społeczności, zapoznaj się z <Link href='/wspolpraca' className="link link-hover font-semibold">warunkami współpracy</Link>, aby dowiedzieć się jak możemy Ci pomóc w promocji Twoich wydarzeń.</p>
+                    <p>Jeśli jesteś organizatorem i chcesz dołączyć do naszej społeczności, zapoznaj się z <Link href='/info/wspolpraca' className="link link-hover font-semibold">warunkami współpracy</Link>, aby dowiedzieć się jak możemy Ci pomóc w promocji Twoich wydarzeń.</p>
                 </div>
                 <div className="divider lg:divider-horizontal" />
                 <div className="grid flex-grow items-center">

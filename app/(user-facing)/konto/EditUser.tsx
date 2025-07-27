@@ -2,12 +2,11 @@
 
 import { useState } from "react";
 import SettingWrapper from "./SettingWrapper";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import Input from "@/app/_components/form-components/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
-import InfoText from "@/app/_components/InfoText";
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
 import FailedUpdateText from "@/app/_components/FailedUpdateText";
+import { createClient } from "@/app/_utils/supabase/client";
 
 type UserInfo = {
     name: string | null;
@@ -16,7 +15,7 @@ type UserInfo = {
 };
 
 export default function EditUser() {
-    const supabase = createClientComponentClient<Database>();
+    const supabase = createClient();
 
     const [editMode, setEditMode] = useState(false);
     const [failed, setFailed] = useState(false);

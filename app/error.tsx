@@ -51,7 +51,7 @@ export default function Error({ error, reset }: ErrorProps) {
                     <div className="card-body text-center">
                         <p className="text-sm py-2">
                             Jeśli problem będzie się powtarzał, skontaktuj się z
-                            nami, używając <Link href='/formularz' className="link link-hover font-semibold">formularza kontaktowego</Link> lub <Link href='/kontakt' className="link link-hover font-semibold">informacji</Link> dostępnych na naszej stronie.
+                            nami, używając <Link href='/formularz' className="link link-hover font-semibold">formularza kontaktowego</Link> lub <Link href='/info/kontakt' className="link link-hover font-semibold">informacji</Link> dostępnych na naszej stronie.
                         </p>
                         <p>Dziękujemy za cierpliwość i wyrozumiałość.</p>
                     </div>

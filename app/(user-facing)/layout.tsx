@@ -1,16 +1,15 @@
 import LoginWall from "@/app/_components/login-components/LoginWall";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-import { cookies } from "next/headers";
 import { contactEmail } from "../_utils/metadata";
 import InfoText from "../_components/InfoText";
 import OnlyForOrganizers from "../_components/OnlyForOrganizers";
+import { createClient } from "../_utils/supabase/server";
 
 export default async function Layout({
     children,
 }: {
     children: React.ReactNode;
 }) {
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
 
     const {
         data: { session },
