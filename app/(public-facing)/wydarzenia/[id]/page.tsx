@@ -9,13 +9,15 @@ import InteractionButton from "./InteractionButton";
 import EventDescription from "./EventDescription";
 
 type Props = {
-    params: { id: string };
-    searchParams: { shcode?: string };
+    params: Promise<{ id: number }>;
+    searchParams: Promise<{ shcode?: string }>;
 };
 
 export const dynamic = 'force-dynamic'
 
-export default async function Page({ params, searchParams }: Props) {
+export default async function Page(props: Props) {
+    const searchParams = await props.searchParams;
+    const params = await props.params;
     const supabase = createServerComponentClient<Database>({ cookies });
     const {
         data: { user },

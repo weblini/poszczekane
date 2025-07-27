@@ -6,7 +6,8 @@ import { supabaseAnon } from "@/app/_utils/supabase-clients";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-export default async function Page({ params }: { params: { slug: string } }) {
+export default async function Page(props: { params: Promise<{ slug: string }> }) {
+    const params = await props.params;
     const { data: organizer } = await supabaseAnon
         .from("organizers")
         .select("name, description, id, events (name, id, location, starts_at, ends_at, tags (name))")

@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 
 type Props = {
-    searchParams: { q?: string };
+    searchParams: Promise<{ q?: string }>;
 };
 
 export const metadata = {
@@ -19,7 +19,8 @@ export const metadata = {
         "Wprowadź interesujące Cię słowo kluczowe i znajdź idealne wydarzenie dla siebie i swojego pupila. Nasza strona umożliwia Ci błyskawiczne dostosowanie wyników, dzięki czemu znajdziesz dokładnie to, czego szukasz.",
 };
 
-export default async function Page({ searchParams }: Props) {
+export default async function Page(props: Props) {
+    const searchParams = await props.searchParams;
     // show only searchbar if no query string
     if (!searchParams.q) {
         return (

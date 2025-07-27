@@ -2,10 +2,9 @@
 
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
 import { signupUser } from "@/app/_utils/actions";
-import { useFormState } from "react-dom";
 import { useFormStatus } from "react-dom";
 import OnlyForUsers from "@/app/_components/OnlyForUsers";
-import { useRef } from "react";
+import { useRef, useActionState } from "react";
 import Link from "next/link";
 import Modal from "@/app/_components/Modal";
 import LoginForm from "@/app/_components/login-components/LoginForm";
@@ -30,7 +29,7 @@ export default function SignUpButton({
     bottomHint,
     btnText,
 }: Props) {
-    const [state, formAction] = useFormState(signupUser, initialState);
+    const [state, formAction] = useActionState(signupUser, initialState);
     const loginModal = useRef<HTMLDialogElement | null>(null);
 
     return (

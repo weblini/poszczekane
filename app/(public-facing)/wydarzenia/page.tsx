@@ -9,7 +9,7 @@ import FilterBarLoader from "./FilterBarLoader";
 import FilterBar from "./FilterBar";
 
 type Props = {
-    searchParams: { tag?: SearchParam; data?: string; strona?: string };
+    searchParams: Promise<{ tag?: SearchParam; data?: string; strona?: string }>;
 };
 
 type SearchParam = string | string[];
@@ -20,7 +20,8 @@ export const metadata = {
         "Wybieraj spośród dziesiątek wydarzeń i doświadcz niezapomnianych chwil z Twoim pupilem. Niezależnie od tego, czy jesteś doświadczonym właścicielem psa czy dopiero zaczynasz swoją przygodę, nasza platforma ma coś dla każdego.",
 };
 
-export default function Page({ searchParams }: Props) {
+export default async function Page(props: Props) {
+    const searchParams = await props.searchParams;
     let tags: string[] = [];
 
     if (Array.isArray(searchParams.tag)) {

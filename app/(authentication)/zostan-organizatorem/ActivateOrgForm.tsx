@@ -3,7 +3,7 @@
 import InfoDiv from "@/app/_components/InfoDiv";
 import SubmitButton from "@/app/_components/form-components/SubmitButton";
 import { upgradeToOrganizer } from "@/app/_utils/actions";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 
 const initialState = {
@@ -29,7 +29,7 @@ function ErrorBox({ children }: { children: React.ReactNode }) {
 }
 
 export default function ActivateOrgForm() {
-    const [state, formAction] = useFormState(upgradeToOrganizer, initialState);
+    const [state, formAction] = useActionState(upgradeToOrganizer, initialState);
 
     if (state.message === "success") {
         return (

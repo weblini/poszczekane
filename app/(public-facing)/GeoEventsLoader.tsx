@@ -5,9 +5,8 @@ import Loader from "../_components/Loader";
 type Props = {};
 
 // lazy load event map
-const ClientOnlyMap = dynamic(() => import("./EventsMap"), {
+const ClientOnlyMap = dynamic(() => import("./ClientOnlyEventMap"), {
     loading: () => <Loader />,
-    ssr: false,
 });
 
 export const revalidate = 600
