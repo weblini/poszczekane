@@ -1,7 +1,7 @@
 "use client";
 
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { useState, useEffect, createContext } from "react";
+import { createClient } from "./_utils/supabase/client";
 
 type UserDetails = {
     userId: string | null;
@@ -18,7 +18,7 @@ export default function UserProvider({
 }: {
     children: React.ReactNode;
 }) {
-    const supabase = createClientComponentClient<Database>();
+    const supabase = createClient();
 
     const [userId, setUserId] = useState<UserDetails["userId"]>(null);
     const [isOrganizer, setIsOrganizer] = useState(false);

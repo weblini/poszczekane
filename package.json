@@ -9,7 +9,7 @@
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
     "@maptiler/sdk": "^3.6.1",
-    "@supabase/auth-helpers-nextjs": "latest",
+    "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "latest",
     "@types/node": "^20.9.0",
     "@types/react": "19.1.8",

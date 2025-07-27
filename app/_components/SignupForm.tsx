@@ -7,11 +7,11 @@ import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import InfoDiv from "./InfoDiv";
 import Input from "./form-components/Input";
 import { supportEmail } from "../_utils/metadata";
 import { usePathname } from "next/navigation";
+import { createClient } from "../_utils/supabase/client";
 
 type Inputs = z.infer<typeof SignupDataSchema>;
 
@@ -20,7 +20,7 @@ type Props = {
 }
 
 export default function SignupForm({returnBack}:Props) {
-    const supabase = createClientComponentClient();
+    const supabase = createClient();
     const pathname = usePathname()
 
     const [isDone, setIsDone] = useState(false);

@@ -2,14 +2,13 @@ import SignupForm from "@/app/_components/SignupForm";
 import Link from "next/link";
 import Image from "next/image";
 import bgImg from "@/app/images/jointeam1.jpg";
-import { cookies } from "next/headers";
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { redirect } from "next/navigation";
 import ActivateOrgForm from "./ActivateOrgForm";
+import { createClient } from "@/app/_utils/supabase/server";
 
 export default async function Page() {
     // check for logged in user
-    const supabase = createServerComponentClient<Database>({ cookies });
+    const supabase = await createClient();
     const {
         data: { user },
     } = await supabase.auth.getUser();
