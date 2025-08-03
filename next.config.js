@@ -2,10 +2,15 @@
 const nextConfig = {
     // distDir: 'build',
     // output: 'standalone',
+    // turbopack: {
+    //     resolveAlias: {
+    //         'mapbox-gl': 'maplibre-gl',
+    //     },
+    // },
     async headers() {
         return [
             {
-                source: '/(.*)',
+                source: "/(.*)",
                 headers: [
                     // Enforce HTTPS
                     // {
@@ -13,28 +18,28 @@ const nextConfig = {
                     //     value: 'max-age=63072000; includeSubDomains; preload'
                     // },
                     {
-                        key: 'Referrer-Policy',
-                        value: 'strict-origin-when-cross-origin'
+                        key: "Referrer-Policy",
+                        value: "strict-origin-when-cross-origin",
                     },
                     {
-                        key: 'X-Content-Type-Options',
-                        value: 'nosniff'
+                        key: "X-Content-Type-Options",
+                        value: "nosniff",
                     },
                     {
-                        key: 'Permissions-Policy',
-                        value: 'camera=(), microphone=(), geolocation=(), browsing-topics=()'
+                        key: "Permissions-Policy",
+                        value: "camera=(), microphone=(), geolocation=(), browsing-topics=()",
                     },
                     {
-                        key: 'X-Frame-Options',
-                        value: 'DENY'
+                        key: "X-Frame-Options",
+                        value: "DENY",
                     },
                 ],
             },
-        ]
+        ];
     },
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
 //     enabled: process.env.ANALYZE === 'true',

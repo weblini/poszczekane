@@ -11,6 +11,7 @@
     "@maptiler/sdk": "^3.6.1",
     "@supabase/ssr": "^0.6.1",
     "@supabase/supabase-js": "latest",
+    "@types/geojson": "^7946.0.16",
     "@types/node": "^20.9.0",
     "@types/react": "19.1.8",
     "@types/react-dom": "19.1.6",

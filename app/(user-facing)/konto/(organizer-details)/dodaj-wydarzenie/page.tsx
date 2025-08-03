@@ -26,8 +26,8 @@ export default async function Page() {
 
     const { data: organizer } = await supabase
         .from("organizers")
-        .select("id, is_approved")
-        .eq("id", user?.id)
+        .select("user_id, is_approved")
+        .eq("user_id", user?.id)
         .maybeSingle();
 
     if (!organizer) {

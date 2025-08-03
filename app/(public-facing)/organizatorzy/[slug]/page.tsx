@@ -10,7 +10,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     const params = await props.params;
     const { data: organizer } = await supabaseAnon
         .from("organizers")
-        .select("name, description, id, events (name, id, location, starts_at, ends_at, tags (name))")
+        .select("name, description, user_id, events (name, id, location, starts_at, ends_at, tags (name))")
         .eq("slug", params.slug)
         .maybeSingle();
 
@@ -24,7 +24,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                 {organizer.name}
             </h1>
 
-            <OnlyForOrganizers matchingId={organizer.id}>
+            <OnlyForOrganizers matchingId={organizer.user_id}>
                 <Link href="/konto/dane-organizatorskie" className="btn btn-sm">
                     Edytuj dane
                 </Link>

@@ -1,10 +1,12 @@
 "use client";
 
 import { useCallback } from "react";
+
 import { Layer, Source, Map } from "react-map-gl/maplibre";
+import type { LayerProps } from "react-map-gl/maplibre";
+
 import EventCard from "../_components/EventCard";
 import MapMarkerDiv from "../_components/MapMarkerDiv";
-import type { LayerProps } from "react-map-gl/maplibre";
 import MapControls from "../_components/MapControls";
 import { baseMapProps, mapStyle } from "../_utils/map-data";
 import "maplibre-gl/dist/maplibre-gl.css";
@@ -27,12 +29,13 @@ export default function EventsMap({ events, mapKey }: Props) {
         events,
     });
 
-    const onLoad = useCallback(() => {
-        mapRef.current?.loadImage(pinImg.src, (error, img) => {
-            if (img) {
-                mapRef.current?.addImage("pin", img);
-            }
-        });
+    const onLoad = useCallback(async () => {
+        const map = mapRef.current;
+        if (!map) {
+            return;
+        }
+        const response = await map.loadImage(pinImg.src);
+        map.addImage("pin", response.data);
     }, []);
 
     return (

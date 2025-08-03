@@ -26,7 +26,7 @@ export default async function Page(props: Props) {
     const { data: event, error } = await supabaseAdmin
         .from("events")
         .select(
-            "*, signups ( attendee_id ), organizers ( name, slug, id ), tags( name )"
+            "*, signups ( attendee_id ), organizers ( name, slug, user_id ), tags( name )"
         )
         .eq("id", params.id)
         .maybeSingle();
@@ -39,7 +39,7 @@ export default async function Page(props: Props) {
     }
 
     const isSignedUp = !!event.signups.find((signup) => signup.attendee_id === user?.id);
-    const isOrganizer = event.organizers?.id === user?.id;
+    const isOrganizer = event.organizers?.user_id === user?.id;
 
     //  handle private event check
     if (event.share_code) {

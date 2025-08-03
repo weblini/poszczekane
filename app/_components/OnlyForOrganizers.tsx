@@ -6,7 +6,7 @@ import { UserContext } from "../UserProvider";
 type Props = {
     children: React.ReactNode;
     fallback?: React.ReactNode;
-    matchingId?: string;
+    matchingId: string | null;
 };
 
 export default function OnlyForOrganizers({ children, fallback, matchingId }: Props) {

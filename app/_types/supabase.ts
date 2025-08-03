@@ -42,124 +42,116 @@ export interface Database {
       events: {
         Row: {
           created_at: string
-          description: string
+          description: string | null
           ends_at: string
           external_url: string | null
           fee_pln: number | null
           id: number
           is_cancelled: boolean
-          latitude: number
-          location: string
-          longitude: number
+          latitude: number | null
+          location: string | null
+          longitude: number | null
           max_attendees: number | null
           name: string
-          organizer_id: string
+          organizer_slug: string
           share_code: string | null
           signups_end_at: string | null
           starts_at: string
         }
         Insert: {
           created_at?: string
-          description: string
-          ends_at: string
+          description?: string | null
+          ends_at?: string | null
           external_url?: string | null
           fee_pln?: number | null
           id?: number
           is_cancelled?: boolean
-          latitude: number
-          location: string
-          longitude: number
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
           max_attendees?: number | null
           name: string
-          organizer_id: string
+          organizer_slug: string
           share_code?: string | null
           signups_end_at?: string | null
           starts_at: string
         }
         Update: {
           created_at?: string
-          description?: string
-          ends_at?: string
+          description?: string | null
+          ends_at?: string | null
           external_url?: string | null
           fee_pln?: number | null
           id?: number
           is_cancelled?: boolean
-          latitude?: number
-          location?: string
-          longitude?: number
+          latitude?: number | null
+          location?: string | null
+          longitude?: number | null
           max_attendees?: number | null
           name?: string
-          organizer_id?: string
+          organizer_slug?: string
           share_code?: string | null
           signups_end_at?: string | null
           starts_at?: string
         }
         Relationships: [
           {
-            foreignKeyName: "events_organizer_id_fkey"
-            columns: ["organizer_id"]
+            foreignKeyName: "events_organizer_slug_fkey"
+            columns: ["organizer_slug"]
             isOneToOne: false
             referencedRelation: "organizers"
-            referencedColumns: ["id"]
-          }
+            referencedColumns: ["slug"]
+          },
         ]
       }
       organizers: {
         Row: {
           contact_email: string | null
           description: string | null
-          id: string
           is_approved: boolean
           name: string
           slug: string
+          user_id: string | null
         }
         Insert: {
           contact_email?: string | null
           description?: string | null
-          id: string
           is_approved?: boolean
           name: string
           slug: string
+          user_id?: string | null
         }
         Update: {
           contact_email?: string | null
           description?: string | null
-          id?: string
           is_approved?: boolean
           name?: string
           slug?: string
+          user_id?: string | null
         }
-        Relationships: [
-          {
-            foreignKeyName: "organizers_id_fkey"
-            columns: ["id"]
-            isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
-        ]
+        Relationships: []
       }
       organizers_protected: {
         Row: {
           account_number: string | null
-          id: string
+          organizer_slug: string
         }
         Insert: {
           account_number?: string | null
-          id: string
+          organizer_slug: string
         }
         Update: {
           account_number?: string | null
-          id?: string
+          organizer_slug?: string
         }
         Relationships: [
           {
-            foreignKeyName: "organizers_protected_id_fkey"
-            columns: ["id"]
+            foreignKeyName: "organizers_protected_organizer_slug_fkey"
+            columns: ["organizer_slug"]
             isOneToOne: true
-            referencedRelation: "users"
-            referencedColumns: ["id"]
-          }
+            referencedRelation: "organizers"
+            referencedColumns: ["slug"]
+          },
         ]
       }
       signups: {
