@@ -107,6 +107,7 @@ export interface Database {
       organizers: {
         Row: {
           contact_email: string | null
+          official_url: string | null
           description: string | null
           is_approved: boolean
           name: string
@@ -115,6 +116,7 @@ export interface Database {
         }
         Insert: {
           contact_email?: string | null
+          official_url?: string | null
           description?: string | null
           is_approved?: boolean
           name: string
@@ -123,6 +125,7 @@ export interface Database {
         }
         Update: {
           contact_email?: string | null
+          official_url?: string | null
           description?: string | null
           is_approved?: boolean
           name?: string

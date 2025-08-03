@@ -1,4 +1,3 @@
-import EventCard from "@/app/_components/EventCard";
 import EventCardDisplay from "@/app/_components/EventCardDisplay";
 import InfoDiv from "@/app/_components/InfoDiv";
 import OnlyForOrganizers from "@/app/_components/OnlyForOrganizers";
@@ -10,13 +9,18 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
     const params = await props.params;
     const { data: organizer } = await supabaseAnon
         .from("organizers")
-        .select("name, description, user_id, events (name, id, location, starts_at, ends_at, tags (name))")
+        .select("name, description, user_id, contact_email, official_url ,events (name, id, location, starts_at, ends_at, tags (name))")
         .eq("slug", params.slug)
         .maybeSingle();
 
     if (!organizer) {
         notFound();
     }
+
+    const url = organizer.official_url;
+    const email = organizer.contact_email
+    
+    const hasContactInfo = !!email || !!url;
 
     return (
         <main className="wrapper w-full max-w-7xl">
@@ -35,8 +39,14 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                 <p>{organizer.description}</p>
             </div>
 
+            {hasContactInfo && <div className="pt-8 lg:pt-12">
+                <h2 className="title-base pb-2">Kontakt</h2>
+                {!!url && <p>Oficialna strona: <a href={url} className="link">{url}</a></p>}
+                {!!email && <p>Email: {email}</p>}
+            </div>}
+
             <div className="pt-8 lg:pt-12">
-                <h2 className="pb-4">
+                <h2 className="pb-4 title-base">
                     Nadchodzące wydarzenia organizowane przez {organizer.name}:
                 </h2>
                 <div>
