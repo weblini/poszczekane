@@ -28,7 +28,7 @@ export default async function Page(props: { params: Promise<{ slug: string }> })
                 {organizer.name}
             </h1>
 
-            <OnlyForOrganizers matchingId={organizer.user_id}>
+            <OnlyForOrganizers>
                 <Link href="/konto/dane-organizatorskie" className="btn btn-sm">
                     Edytuj dane
                 </Link>

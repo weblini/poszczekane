@@ -89,7 +89,11 @@ export async function signupUser(prevState: any, formData: FormData) {
     }
 
     // no spots available and is not external
-    if (!event.external_url && event.max_attendees && event.max_attendees <= event.signups.length) {
+    if (
+        !event.external_url &&
+        event.max_attendees &&
+        event.max_attendees <= event.signups.length
+    ) {
         return { message: "Brak wolnych miejsc" };
     }
 
@@ -118,7 +122,7 @@ export async function signupUser(prevState: any, formData: FormData) {
         return { message: "Coś poszło nie tak" };
     }
 
-    revalidatePath(`/wydarzenia/${parsed.id}`)
+    revalidatePath(`/wydarzenia/${parsed.id}`);
 }
 
 export async function deleteUser() {
@@ -160,28 +164,32 @@ export async function updateOrganizer(formData: z.infer<typeof OrgInfoSchema>) {
     // parse formData
     const parsed = OrgInfoSchema.parse(formData);
 
-    const newSlug = createSlug(parsed.name);
-
     // try to update organizers and organizers_protected
 
-    const { error: publicError } = await supabaseAdmin
+    const { data, error: publicError } = await supabaseAdmin
         .from("organizers")
         .update({
             name: parsed.name,
-            slug: newSlug,
             description: parsed.description,
             contact_email: parsed.contact_email,
         })
-        .eq("id", user.id)
-        .select();
+        .eq("user_id", user.id)
+        .select()
+        .maybeSingle();
 
     if (publicError) {
         return { message: "failed" };
     }
 
+    const slug = data?.slug;
+
+    if (!slug) {
+        return { message: "failed" };
+    }
+
     const { error: privateError } = await supabaseAdmin
         .from("organizers_protected")
-        .upsert({ account_number: parsed.account_number, id: user.id })
+        .upsert({ account_number: parsed.account_number, organizer_slug: slug })
         .select();
 
     if (privateError) {
@@ -207,8 +215,8 @@ export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
     // ! check that user is organizer & is active
     const { data: organizer } = await supabase
         .from("organizers")
-        .select("id, is_approved")
-        .eq("id", user?.id)
+        .select("user_id, is_approved, slug")
+        .eq("user_id", user?.id)
         .maybeSingle();
 
     if (!organizer?.is_approved) {
@@ -221,7 +229,7 @@ export async function addEvent(formData: z.infer<typeof NewEventSchema>) {
 
     const newEvent = {
         ...event,
-        organizer_id: user.id,
+        organizer_slug: organizer.slug,
         starts_at: starts.toISOString(),
         ends_at: ends.toISOString(),
         signups_end_at: signupsClose.toISOString(),

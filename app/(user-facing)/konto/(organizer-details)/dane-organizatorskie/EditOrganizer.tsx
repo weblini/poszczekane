@@ -40,7 +40,7 @@ export default function EditOrganizer({ organizerInfo }: Props) {
     }
 
     function normalizeAccountNumber(e: ChangeEvent<HTMLInputElement>) {
-        let value = e.target.value;
+        const value = e.target.value;
         setValue("account_number", toAccountNumber(value));
     }
 

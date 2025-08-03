@@ -4,6 +4,6 @@ export async function getLoggedInOrganizerName(supabaseClient: SupaClient): Prom
         return null
     }
     
-    const { data: organizer } = await supabaseClient.from('organizers').select('name, id').eq('id', user.id).maybeSingle()
+    const { data: organizer } = await supabaseClient.from('organizers').select('name, user_id').eq('user_id', user.id).maybeSingle()
     return organizer?.name || null
 }

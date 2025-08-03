@@ -11,7 +11,6 @@ export default function MapControls() {
 }
 
 function DrawControl() {
-    //@ts-expect-error
     useControl(() => new MaptilerLogoControl(), {
         position: "bottom-left",
     });

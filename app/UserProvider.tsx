@@ -27,8 +27,8 @@ export default function UserProvider({
         async function checkForOrganizer(userId: string) {
             const { data: organizer } = await supabase
                 .from("organizers")
-                .select("id")
-                .eq("id", userId)
+                .select("user_id")
+                .eq("user_id", userId)
                 .maybeSingle();
             setIsOrganizer(organizer ? true : false);
         }

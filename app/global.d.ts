@@ -10,4 +10,11 @@ declare global {
     type PartialAppEvent = Partial<AppEvent> & {name: string, id: number}
     type GeoPoint = [number, number];
     type UserInfo = Partial<DB['public']['Tables']['user_profiles']['Row']>;
+
+    type AppEventWithLocation = Partial<AppEvent> & {
+        id: number;
+        name: string;
+        longitude: number;
+        latitude: number;
+    }
 }

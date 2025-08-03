@@ -15,18 +15,18 @@ import pinImg from "@/app/images/pin.png";
 import { useEventMap } from "./useEventMap";
 
 type Props = {
-    events: (Partial<AppEvent> & {
-        name: string;
-        id: number;
-        longitude: number;
-        latitude: number;
-    })[];
+    events: Array<
+        Partial<AppEvent> & {
+            id: number;
+            name: string;
+        }
+    >;
     mapKey: string;
 };
 
 export default function EventsMap({ events, mapKey }: Props) {
     const { sourceData, mapRef, mapProps, selectedEvents } = useEventMap({
-        events,
+        events: events.filter(event => event.latitude && event.longitude) as AppEventWithLocation[],
     });
 
     const onLoad = useCallback(async () => {

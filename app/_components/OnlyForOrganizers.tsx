@@ -6,13 +6,12 @@ import { UserContext } from "../UserProvider";
 type Props = {
     children: React.ReactNode;
     fallback?: React.ReactNode;
-    matchingId: string | null;
 };
 
-export default function OnlyForOrganizers({ children, fallback, matchingId }: Props) {
+export default function OnlyForOrganizers({ children, fallback }: Props) {
     const userDetails = useContext(UserContext);
 
-    if (!userDetails.isOrganizer || (matchingId && userDetails.userId !== matchingId)) {
+    if (!userDetails.isOrganizer) {
         if (fallback) {
             return fallback;
         } else {

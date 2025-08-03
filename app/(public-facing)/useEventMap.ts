@@ -5,12 +5,7 @@ import { GeoJSONSource } from "@maptiler/sdk";
 import type { FeatureCollection } from "geojson";
 
 type Props = {
-    events: (Partial<AppEvent> & {
-        name: string;
-        id: number;
-        longitude: number;
-        latitude: number;
-    })[];
+    events: AppEventWithLocation[];
 };
 
 export function useEventMap({ events }: Props) {
@@ -45,7 +40,7 @@ export function useEventMap({ events }: Props) {
                 if (!features) {
                     return;
                 }
-                let selectedIds = [];
+                const selectedIds = [];
                 for (const nestedFeature of features) {
                     selectedIds.push(nestedFeature.properties?.event_id);
                 }

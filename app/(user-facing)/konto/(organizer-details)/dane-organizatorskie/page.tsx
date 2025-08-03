@@ -15,8 +15,8 @@ export default async function Page() {
 
     const { data: publicData } = await supabase
         .from("organizers")
-        .select("name, description, contact_email, id")
-        .eq("id", user.id)
+        .select("name, description, slug, contact_email, user_id")
+        .eq("user_id", user.id)
         .maybeSingle();
 
     if (!publicData) {
@@ -25,8 +25,8 @@ export default async function Page() {
 
     const { data: privateData } = await supabaseAdmin
         .from("organizers_protected")
-        .select("id, account_number")
-        .eq("id", user.id)
+        .select("account_number")
+        .eq("organizer_slug", publicData.slug)
         .maybeSingle();
 
     return (
