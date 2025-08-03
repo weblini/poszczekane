@@ -2,9 +2,8 @@ import dynamic from "next/dynamic";
 import Loader from "@/app/_components/Loader";
 
 // seperate calendar and render only client side
-const Calendar = dynamic(() => import("./EventsCalendar"), {
+const Calendar = dynamic(() => import("./ClientOnlyCalendar"), {
     loading: () => <Loader />,
-    ssr: false,
 });
 
 export default function Page() {
