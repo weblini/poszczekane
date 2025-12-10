@@ -28,7 +28,7 @@ export function useEventMap({ events }: Props) {
                 return;
             }
 
-            const source = mapRef.current?.getSource("events") as GeoJSONSource;
+            const source = mapRef.current?.getSource("events") as unknown as GeoJSONSource;
 
             // get all features from cluster
             if (feature.properties.cluster_id) {
