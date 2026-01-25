@@ -37,8 +37,7 @@
         "cross-env": "^7.0.3",
         "daisyui": "^3.9.4",
         "encoding": "^0.1.13",
-        "eslint-config-next": "15.4.4",
-        "supabase": "^1.110.1"
+        "eslint-config-next": "15.4.4"
     },
     "pnpm": {
         "overrides": {
